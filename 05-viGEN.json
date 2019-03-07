@@ -1,0 +1,4171 @@
+{
+  "inputs": [
+    {
+      "label": "reference_file",
+      "sbg:x": -66.2499186197915,
+      "sbg:y": 96.24995930989597,
+      "type": [
+        "null",
+        "File"
+      ],
+      "id": "#reference_file",
+      "sbg:fileTypes": "FASTA, FA, TAR"
+    },
+    {
+      "label": "input_archive_file",
+      "sbg:x": -63.7499999999998,
+      "sbg:y": 382.49999999999943,
+      "type": [
+        "File"
+      ],
+      "id": "#input_archive_file",
+      "sbg:fileTypes": "TAR, TAR.GZ, TGZ, TAR.BZ2, TBZ2,  GZ, BZ2, ZIP"
+    },
+    {
+      "sbg:suggestedValue": null,
+      "label": "Seed substring length",
+      "description": "Sets the length of the seed substrings to align during multiseed alignment. Smaller values make alignment slower but more senstive. Must be > 3 and < 32. The \"Sensitive\" preset is used by default, which sets this option to 22 in \"End-to-end\" mode and to 20 in \"Local\" mode.",
+      "sbg:category": "Alignment",
+      "sbg:toolDefaultValue": "22 or 20 (depending on preset type and alignment mode)",
+      "id": "#seed_substring_length",
+      "type": [
+        "null",
+        "int"
+      ]
+    },
+    {
+      "sbg:toolDefaultValue": "False",
+      "label": "Report all alignments",
+      "id": "#report_all_alignments",
+      "sbg:suggestedValue": false,
+      "description": "Like \"Report k alignments\" but with no upper limit on number of alignments to search for. \"Report all alignments\" is mutually exclusive with \"Report k alignments\".",
+      "sbg:category": "Reporting",
+      "sbg:altPrefix": "-a",
+      "type": [
+        "null",
+        "boolean"
+      ]
+    },
+    {
+      "sbg:suggestedValue": null,
+      "label": "Quality scale",
+      "description": "Set quality scale.",
+      "sbg:category": "Input",
+      "sbg:toolDefaultValue": "Phred+33",
+      "id": "#quality_scale",
+      "type": [
+        "null",
+        {
+          "symbols": [
+            "Auto-detect",
+            "Phred+33",
+            "Phred+64",
+            "Solexa"
+          ],
+          "name": "quality_scale",
+          "type": "enum"
+        }
+      ]
+    },
+    {
+      "sbg:suggestedValue": "Sensitive",
+      "label": "Preset",
+      "description": "Preset options for \"Seed extension attempts\" (-D), \"Max number of re-seed\" (-R), \"Allowed mismatch number\" (-N), \"Seed substring length\" (-L) and \"Interval function\" (-i) parameters. Values for these options vary depending on whether the \"Local\" or \"End-to-end\" mode is selected under \"Alignment mode\".",
+      "sbg:category": "Presets",
+      "sbg:toolDefaultValue": "Sensitive",
+      "id": "#preset_option",
+      "type": [
+        "null",
+        {
+          "symbols": [
+            "Very fast",
+            "Fast",
+            "Sensitive",
+            "Very sensitive"
+          ],
+          "name": "preset_option",
+          "type": "enum"
+        }
+      ]
+    },
+    {
+      "sbg:suggestedValue": "alignment.metrics",
+      "label": "Alignment metrics",
+      "description": "Alignment metrics filename",
+      "sbg:toolDefaultValue": "False",
+      "id": "#metrics",
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    {
+      "sbg:toolDefaultValue": "False",
+      "label": "Ignore qualities",
+      "description": "When calculating a mismatch penalty, always consider the quality value at the mismatched position to be the highest possible, regardless of the actual value. I.e. treat all quality values as 30 on Phred scale. This is also the default behavior when the input doesn't specify quality values (e.g. when processing .fasta reads).",
+      "sbg:category": "Alignment",
+      "id": "#ignore_qualities",
+      "type": [
+        "null",
+        "boolean"
+      ]
+    },
+    {
+      "sbg:toolDefaultValue": "0",
+      "label": "Allowed mismatch number",
+      "sbg:suggestedValue": null,
+      "description": "Sets the number of mismatches to allowed in a seed alignment during multiseed alignment. Can be set to 0 or 1. Setting this higher makes alignment slower (often much slower) but increases sensitivity.",
+      "sbg:category": "Alignment",
+      "sbg:stageInput": null,
+      "id": "#allowed_mismatch_number",
+      "type": [
+        "null",
+        {
+          "symbols": [
+            "0",
+            "1"
+          ],
+          "name": "allowed_mismatch_number",
+          "type": "enum"
+        }
+      ]
+    },
+    {
+      "sbg:suggestedValue": "Local",
+      "label": "Alignment mode",
+      "description": "Alignment mode. End-to-end: entire read must align; no clipping. Local: local alignment; ends might be soft clipped.",
+      "sbg:category": "Alignment",
+      "sbg:toolDefaultValue": "End-to-end",
+      "id": "#alignment_mode",
+      "type": [
+        "null",
+        {
+          "symbols": [
+            "End-to-end",
+            "Local"
+          ],
+          "name": "alignment_mode",
+          "type": "enum"
+        }
+      ]
+    }
+  ],
+  "outputs": [
+    {
+      "label": "idxstats_metrics",
+      "sbg:x": 1437.4999999999964,
+      "sbg:y": 44.99999999999973,
+      "source": [
+        "#Samtools_idxstats_1.idxstats_metrics"
+      ],
+      "sbg:fileTypes": "TXT",
+      "sbg:includeInPorts": true,
+      "id": "#idxstats_metrics",
+      "required": false,
+      "type": [
+        "null",
+        "File"
+      ]
+    },
+    {
+      "label": "output_indexed_file",
+      "sbg:x": 1278.7499376945188,
+      "sbg:y": 493.7255576636376,
+      "source": [
+        "#SAMtools_Index_BAM_CRAM.output_indexed_file"
+      ],
+      "type": [
+        "File"
+      ],
+      "sbg:includeInPorts": true,
+      "id": "#output_indexed_file",
+      "sbg:fileTypes": "BAM"
+    }
+  ],
+  "sbg:canvas_zoom": 0.7999999999999998,
+  "description": "For comparison with Centrifuge and Kraken",
+  "sbg:projectName": "Viral_cervival_Cancer",
+  "label": "Viral alignment-FINAL-with-decompressor-FOR-COMPARISON",
+  "class": "Workflow",
+  "sbg:image_url": "https://cgc.sbgenomics.com/ns/brood/images/kb472/viral-cervival-cancer/viral-alignment2/4.png",
+  "requirements": [],
+  "sbg:canvas_x": 146,
+  "steps": [
+    {
+      "inputs": [
+        {
+          "id": "#SAMtools_Index_BAM_CRAM.output_indexed_data"
+        },
+        {
+          "id": "#SAMtools_Index_BAM_CRAM.input_index_file"
+        },
+        {
+          "source": [
+            "#Sambamba_Sort.sorted"
+          ],
+          "id": "#SAMtools_Index_BAM_CRAM.input_bam_or_cram_file"
+        },
+        {
+          "id": "#SAMtools_Index_BAM_CRAM.bai_index",
+          "default": true
+        }
+      ],
+      "outputs": [
+        {
+          "id": "#SAMtools_Index_BAM_CRAM.output_indexed_file"
+        },
+        {
+          "id": "#SAMtools_Index_BAM_CRAM.generated_index"
+        }
+      ],
+      "sbg:x": 1041.2498372395808,
+      "run": {
+        "sbg:modifiedBy": "admin",
+        "inputs": [
+          {
+            "label": "output indexed data file",
+            "description": "Don't output indexed data file. The default value is [FALSE].",
+            "sbg:category": "Input & Output",
+            "id": "#output_indexed_data",
+            "required": false,
+            "type": [
+              "null",
+              "boolean"
+            ]
+          },
+          {
+            "label": "Input index file",
+            "description": "Input index file (CSI, CRI, or BAI).",
+            "sbg:category": "File input",
+            "sbg:fileTypes": "BAI,CSI,CRI",
+            "sbg:stageInput": "link",
+            "id": "#input_index_file",
+            "required": false,
+            "type": [
+              "null",
+              "File"
+            ]
+          },
+          {
+            "label": "BAM/ Cram input file",
+            "description": "BAM/ Cram input file.",
+            "sbg:category": "File input",
+            "sbg:fileTypes": "BAM,CRAM",
+            "sbg:stageInput": "copy",
+            "id": "#input_bam_or_cram_file",
+            "required": true,
+            "type": [
+              "File"
+            ]
+          },
+          {
+            "label": "Create a BAI index",
+            "description": "Create a BAI index. This is currently the default when no format options are used.",
+            "sbg:category": "configuration",
+            "inputBinding": {
+              "separate": true,
+              "sbg:cmdInclude": true,
+              "valueFrom": {
+                "class": "Expression",
+                "engine": "#cwl-js-engine",
+                "script": "{\n  if ($job.inputs.bai_index)\n  {\n    if ($job.inputs.input_index_file)\n    {\n      index_exe = $job.inputs.input_index_file.path.substr($job.inputs.input_index_file.path.lastIndexOf('.')+1)\n\n      inp_exe = $job.inputs.input_bam_or_cram_file.path.substr($job.inputs.input_bam_or_cram_file.path.lastIndexOf('.')+1)\n\n      if (!((index_exe.toUpperCase() === 'CRAI' && inp_exe.toUpperCase() === 'CRAM') ||\n            (index_exe.toUpperCase() === 'BAI' && inp_exe.toUpperCase() === 'BAM' ) ))\n        {\n          return \"-b\"\n        }\n    }\n    else\n    {\n      return \"-b\"\n    }\n\n  }\n}"
+              }
+            },
+            "id": "#bai_index",
+            "required": false,
+            "type": [
+              "null",
+              "boolean"
+            ]
+          }
+        ],
+        "sbg:modifiedOn": 1476440186,
+        "stdout": "",
+        "requirements": [
+          {
+            "class": "ExpressionEngineRequirement",
+            "id": "#cwl-js-engine",
+            "requirements": [
+              {
+                "class": "DockerRequirement",
+                "dockerPull": "rabix/js-engine"
+              }
+            ]
+          }
+        ],
+        "x": 1041.2498372395808,
+        "sbg:revisionNotes": "Add common issue.",
+        "arguments": [],
+        "sbg:toolkitVersion": "v1.3",
+        "sbg:validationErrors": [],
+        "cwlVersion": "sbg:draft-2",
+        "sbg:createdBy": "djordje_klisic",
+        "label": "SAMtools Index BAM/CRAM",
+        "sbg:revision": 17,
+        "temporaryFailCodes": [],
+        "sbg:id": "admin/sbg-public-data/samtools-index-bam-1-3/17",
+        "sbg:latestRevision": 17,
+        "y": 207.01558430989527,
+        "id": "admin/sbg-public-data/samtools-index-bam-1-3/17",
+        "sbg:job": {
+          "inputs": {
+            "bai_index": false,
+            "output_indexed_data": true,
+            "input_bam_or_cram_file": {
+              "class": "File",
+              "secondaryFiles": [],
+              "size": 0,
+              "path": "input2.cram"
+            }
+          },
+          "allocatedResources": {
+            "cpu": 1,
+            "mem": 1000
+          }
+        },
+        "sbg:sbgMaintained": false,
+        "outputs": [
+          {
+            "label": "Output indexed  File",
+            "description": "Output BAM, CRAM, along with index as secondary file.",
+            "outputBinding": {
+              "glob": {
+                "class": "Expression",
+                "engine": "#cwl-js-engine",
+                "script": "{\n  if ($job.inputs.output_indexed_data === true)\n  {\n\treturn ''\n  } \n  else \n    \n  {\n    return $job.inputs.input_bam_or_cram_file.path.split(\"/\").pop()\n  }\n}\n\n\n"
+              },
+              "secondaryFiles": [
+                ".bai",
+                ".crai",
+                "^.bai",
+                "^.crai"
+              ],
+              "loadContents": false,
+              "sbg:inheritMetadataFrom": "#input_bam_or_cram_file"
+            },
+            "type": [
+              "File"
+            ],
+            "id": "#output_indexed_file",
+            "sbg:fileTypes": "BAM"
+          },
+          {
+            "label": "Generated index",
+            "description": "Generated index file (without the indexed data).",
+            "outputBinding": {
+              "glob": "{*.crai,*.bai}",
+              "sbg:inheritMetadataFrom": "#input_bam_or_cram_file"
+            },
+            "type": [
+              "null",
+              "File"
+            ],
+            "id": "#generated_index",
+            "sbg:fileTypes": "BAI,CRAI"
+          }
+        ],
+        "sbg:links": [
+          {
+            "label": "Homepage",
+            "id": "http://samtools.sourceforge.net/"
+          },
+          {
+            "label": "Source code",
+            "id": "https://github.com/samtools/samtools"
+          },
+          {
+            "label": "Wiki",
+            "id": "http://sourceforge.net/p/samtools/wiki/Home/"
+          },
+          {
+            "label": "Download",
+            "id": "http://sourceforge.net/projects/samtools/files/"
+          },
+          {
+            "label": "Publication",
+            "id": "http://www.ncbi.nlm.nih.gov/pubmed/19505943"
+          },
+          {
+            "label": "Documentation",
+            "id": "http://www.htslib.org/doc/samtools.html"
+          }
+        ],
+        "baseCommand": [
+          {
+            "class": "Expression",
+            "engine": "#cwl-js-engine",
+            "script": "{\n  \n  if ($job.inputs.input_index_file)\n  {\n    index_exe = $job.inputs.input_index_file.path.substr($job.inputs.input_index_file.path.lastIndexOf('.')+1)\n    \n    inp_exe = $job.inputs.input_bam_or_cram_file.path.substr($job.inputs.input_bam_or_cram_file.path.lastIndexOf('.')+1)\n    \n    if(index_exe.toUpperCase() === 'CRAI' && inp_exe.toUpperCase() === 'CRAM')\n    {\n      return\"echo Skipping index step because BAI file is provided on the input.\"\n    }  \n    else if(index_exe.toUpperCase() === 'BAI' && inp_exe.toUpperCase() === 'BAM' ) \n    {\n      return\"echo Skipping index step because BAI file is provided on the input.\" \n    }\n \telse\n    {\n      return \"/opt/samtools-1.3/samtools index\" +\" \" + $job.inputs.input_bam_or_cram_file.path\n    }\n  }\n  else\n  {\n    return \"/opt/samtools-1.3/samtools index\"  +\" \" + $job.inputs.input_bam_or_cram_file.path\n  } \n}"
+          }
+        ],
+        "sbg:cmdPreview": "/opt/samtools-1.3/samtools index input2.cram",
+        "description": "SAMtools Index BAM indexes sorted alignments for fast random access. Index file <aln.bam>.bai is created.\n\n###Common issue:\nFiles should be sorted by coordinates not by name, otherwise the tool output will be empty since SAMtools exits without returning error code.",
+        "sbg:projectName": "SBG Public data",
+        "class": "CommandLineTool",
+        "sbg:image_url": null,
+        "successCodes": [],
+        "sbg:contributors": [
+          "djordje_klisic",
+          "admin"
+        ],
+        "sbg:categories": [
+          "SAM/BAM-Processing",
+          "Indexing"
+        ],
+        "sbg:revisionsInfo": [
+          {
+            "sbg:modifiedBy": "djordje_klisic",
+            "sbg:revisionNotes": null,
+            "sbg:modifiedOn": 1460640126,
+            "sbg:revision": 0
+          },
+          {
+            "sbg:modifiedBy": "djordje_klisic",
+            "sbg:revisionNotes": null,
+            "sbg:modifiedOn": 1460640126,
+            "sbg:revision": 1
+          },
+          {
+            "sbg:modifiedBy": "djordje_klisic",
+            "sbg:revisionNotes": null,
+            "sbg:modifiedOn": 1460640126,
+            "sbg:revision": 2
+          },
+          {
+            "sbg:modifiedBy": "djordje_klisic",
+            "sbg:revisionNotes": null,
+            "sbg:modifiedOn": 1460640126,
+            "sbg:revision": 3
+          },
+          {
+            "sbg:modifiedBy": "djordje_klisic",
+            "sbg:revisionNotes": null,
+            "sbg:modifiedOn": 1461762512,
+            "sbg:revision": 4
+          },
+          {
+            "sbg:modifiedBy": "djordje_klisic",
+            "sbg:revisionNotes": null,
+            "sbg:modifiedOn": 1462904351,
+            "sbg:revision": 5
+          },
+          {
+            "sbg:modifiedBy": "djordje_klisic",
+            "sbg:revisionNotes": null,
+            "sbg:modifiedOn": 1462904351,
+            "sbg:revision": 6
+          },
+          {
+            "sbg:modifiedBy": "djordje_klisic",
+            "sbg:revisionNotes": null,
+            "sbg:modifiedOn": 1462904351,
+            "sbg:revision": 7
+          },
+          {
+            "sbg:modifiedBy": "djordje_klisic",
+            "sbg:revisionNotes": null,
+            "sbg:modifiedOn": 1462904351,
+            "sbg:revision": 8
+          },
+          {
+            "sbg:modifiedBy": "djordje_klisic",
+            "sbg:revisionNotes": null,
+            "sbg:modifiedOn": 1462904351,
+            "sbg:revision": 9
+          },
+          {
+            "sbg:modifiedBy": "djordje_klisic",
+            "sbg:revisionNotes": null,
+            "sbg:modifiedOn": 1462904351,
+            "sbg:revision": 10
+          },
+          {
+            "sbg:modifiedBy": "djordje_klisic",
+            "sbg:revisionNotes": null,
+            "sbg:modifiedOn": 1462904351,
+            "sbg:revision": 11
+          },
+          {
+            "sbg:modifiedBy": "djordje_klisic",
+            "sbg:revisionNotes": null,
+            "sbg:modifiedOn": 1462904351,
+            "sbg:revision": 12
+          },
+          {
+            "sbg:modifiedBy": "djordje_klisic",
+            "sbg:revisionNotes": null,
+            "sbg:modifiedOn": 1463578054,
+            "sbg:revision": 13
+          },
+          {
+            "sbg:modifiedBy": "admin",
+            "sbg:revisionNotes": null,
+            "sbg:modifiedOn": 1471953009,
+            "sbg:revision": 14
+          },
+          {
+            "sbg:modifiedBy": "admin",
+            "sbg:revisionNotes": "peer review",
+            "sbg:modifiedOn": 1473947365,
+            "sbg:revision": 15
+          },
+          {
+            "sbg:modifiedBy": "admin",
+            "sbg:revisionNotes": "Change the globe of secondary files on output",
+            "sbg:modifiedOn": 1476440186,
+            "sbg:revision": 16
+          },
+          {
+            "sbg:modifiedBy": "admin",
+            "sbg:revisionNotes": "Add common issue.",
+            "sbg:modifiedOn": 1476440186,
+            "sbg:revision": 17
+          }
+        ],
+        "sbg:project": "admin/sbg-public-data",
+        "appUrl": "/public/apps/#tool/admin/sbg-public-data/samtools-index-bam-1-3/17",
+        "sbg:appVersion": [
+          "sbg:draft-2"
+        ],
+        "sbg:toolAuthor": "Heng Li, Sanger Institute",
+        "sbg:license": "The MIT License",
+        "sbg:toolkit": "SAMtools",
+        "stdin": "",
+        "sbg:createdOn": 1460640126,
+        "hints": [
+          {
+            "class": "DockerRequirement",
+            "dockerPull": "images.sbgenomics.com/marouf/samtools:1.3",
+            "dockerImageId": "2fb927277493"
+          },
+          {
+            "value": 1,
+            "class": "sbg:CPURequirement"
+          },
+          {
+            "value": 1000,
+            "class": "sbg:MemRequirement"
+          }
+        ]
+      },
+      "sbg:y": 207.01558430989527,
+      "id": "#SAMtools_Index_BAM_CRAM"
+    },
+    {
+      "inputs": [
+        {
+          "id": "#Bowtie2_Aligner.unpaired_unaligned_reads"
+        },
+        {
+          "id": "#Bowtie2_Aligner.unpaired_aligned_reads"
+        },
+        {
+          "id": "#Bowtie2_Aligner.trim_from_5"
+        },
+        {
+          "id": "#Bowtie2_Aligner.trim_from_3"
+        },
+        {
+          "id": "#Bowtie2_Aligner.suppress_sq_header_lines"
+        },
+        {
+          "id": "#Bowtie2_Aligner.suppress_sam_records"
+        },
+        {
+          "id": "#Bowtie2_Aligner.suppress_header_lines"
+        },
+        {
+          "id": "#Bowtie2_Aligner.skip_reads"
+        },
+        {
+          "id": "#Bowtie2_Aligner.set_seed"
+        },
+        {
+          "id": "#Bowtie2_Aligner.set_match_bonus"
+        },
+        {
+          "id": "#Bowtie2_Aligner.sequencing_center"
+        },
+        {
+          "source": [
+            "#seed_substring_length"
+          ],
+          "id": "#Bowtie2_Aligner.seed_substring_length"
+        },
+        {
+          "id": "#Bowtie2_Aligner.seed_extension_attempts"
+        },
+        {
+          "id": "#Bowtie2_Aligner.sample_id"
+        },
+        {
+          "id": "#Bowtie2_Aligner.report_k_alignments"
+        },
+        {
+          "source": [
+            "#report_all_alignments"
+          ],
+          "id": "#Bowtie2_Aligner.report_all_alignments"
+        },
+        {
+          "id": "#Bowtie2_Aligner.reorder_output"
+        },
+        {
+          "id": "#Bowtie2_Aligner.reference_gap_penalties"
+        },
+        {
+          "source": [
+            "#SBG_Unpack_FASTQs.output_fastq_files"
+          ],
+          "id": "#Bowtie2_Aligner.read_sequence"
+        },
+        {
+          "id": "#Bowtie2_Aligner.read_group_id"
+        },
+        {
+          "id": "#Bowtie2_Aligner.read_gap_penalties"
+        },
+        {
+          "source": [
+            "#quality_scale"
+          ],
+          "id": "#Bowtie2_Aligner.quality_scale"
+        },
+        {
+          "source": [
+            "#preset_option"
+          ],
+          "id": "#Bowtie2_Aligner.preset_option",
+          "default": "Sensitive"
+        },
+        {
+          "id": "#Bowtie2_Aligner.platform_unit_id"
+        },
+        {
+          "id": "#Bowtie2_Aligner.platform"
+        },
+        {
+          "id": "#Bowtie2_Aligner.paired_unaligned_reads"
+        },
+        {
+          "id": "#Bowtie2_Aligner.paired_aligned_reads"
+        },
+        {
+          "id": "#Bowtie2_Aligner.omit_seq_and_qual"
+        },
+        {
+          "id": "#Bowtie2_Aligner.non_deterministic"
+        },
+        {
+          "id": "#Bowtie2_Aligner.minimum_fragment_length"
+        },
+        {
+          "source": [
+            "#metrics"
+          ],
+          "id": "#Bowtie2_Aligner.metrics",
+          "default": "alignment.metrics"
+        },
+        {
+          "id": "#Bowtie2_Aligner.median_fragment_length"
+        },
+        {
+          "id": "#Bowtie2_Aligner.maximum_mismatch_penalty"
+        },
+        {
+          "id": "#Bowtie2_Aligner.maximum_fragment_length"
+        },
+        {
+          "id": "#Bowtie2_Aligner.max_number_of_re_seed"
+        },
+        {
+          "id": "#Bowtie2_Aligner.mates_alignment_orientation"
+        },
+        {
+          "id": "#Bowtie2_Aligner.library_id"
+        },
+        {
+          "id": "#Bowtie2_Aligner.integer_qualities"
+        },
+        {
+          "source": [
+            "#ignore_qualities"
+          ],
+          "id": "#Bowtie2_Aligner.ignore_qualities"
+        },
+        {
+          "id": "#Bowtie2_Aligner.function_score_min"
+        },
+        {
+          "id": "#Bowtie2_Aligner.function_n_ceil"
+        },
+        {
+          "id": "#Bowtie2_Aligner.function_i"
+        },
+        {
+          "id": "#Bowtie2_Aligner.dynamic_padding"
+        },
+        {
+          "id": "#Bowtie2_Aligner.dont_align_reverse_complement"
+        },
+        {
+          "id": "#Bowtie2_Aligner.dont_align_forward"
+        },
+        {
+          "id": "#Bowtie2_Aligner.disallow_gaps"
+        },
+        {
+          "id": "#Bowtie2_Aligner.disable_unpaired_alignments"
+        },
+        {
+          "id": "#Bowtie2_Aligner.disable_overlapping_alignments"
+        },
+        {
+          "id": "#Bowtie2_Aligner.disable_dovetail_alignments"
+        },
+        {
+          "id": "#Bowtie2_Aligner.disable_discordant_alignments"
+        },
+        {
+          "id": "#Bowtie2_Aligner.disable_containing_alignments"
+        },
+        {
+          "id": "#Bowtie2_Aligner.disable_1_mismatch_alignments"
+        },
+        {
+          "id": "#Bowtie2_Aligner.constant_scoremin_a"
+        },
+        {
+          "id": "#Bowtie2_Aligner.constant_nceil_a"
+        },
+        {
+          "id": "#Bowtie2_Aligner.constant_i_a"
+        },
+        {
+          "id": "#Bowtie2_Aligner.coefficient_scoremin_b"
+        },
+        {
+          "id": "#Bowtie2_Aligner.coefficient_nceil_b"
+        },
+        {
+          "id": "#Bowtie2_Aligner.coefficient_i_b"
+        },
+        {
+          "source": [
+            "#Bowtie2_Indexer.bowtie_index_archive"
+          ],
+          "id": "#Bowtie2_Aligner.bowtie_index_archive"
+        },
+        {
+          "id": "#Bowtie2_Aligner.ambiguous_character_penalty"
+        },
+        {
+          "source": [
+            "#allowed_mismatch_number"
+          ],
+          "id": "#Bowtie2_Aligner.allowed_mismatch_number"
+        },
+        {
+          "source": [
+            "#alignment_mode"
+          ],
+          "id": "#Bowtie2_Aligner.alignment_mode",
+          "default": "Local"
+        },
+        {
+          "id": "#Bowtie2_Aligner.align_next_n_reads"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "#Bowtie2_Aligner.unaligned_reads_only"
+        },
+        {
+          "id": "#Bowtie2_Aligner.result_sam_file"
+        },
+        {
+          "id": "#Bowtie2_Aligner.metrics_file"
+        },
+        {
+          "id": "#Bowtie2_Aligner.log_file"
+        },
+        {
+          "id": "#Bowtie2_Aligner.aligned_reads_only"
+        }
+      ],
+      "sbg:x": 506.2499186197904,
+      "run": {
+        "sbg:modifiedBy": "dusan_randjelovic",
+        "inputs": [
+          {
+            "sbg:toolDefaultValue": "None",
+            "label": "Unpaired unaligned reads",
+            "description": "Output unpaired reads that fail to align. These reads correspond to the SAM records with the FLAGS 0x4 bit set and neither the 0x40 nor 0x80 bits set. If \"gzip compressed\" is specified, output will be gzip compressed. If \"bzip2 compressed\" is specified, output will be bzip2 compressed. Reads written in this way will appear exactly as they did in the input file, without any modification (same sequence, same name, same quality string, same quality encoding). Reads will not necessarily appear in the same order as they did in the input.",
+            "sbg:category": "Output",
+            "id": "#unpaired_unaligned_reads",
+            "type": [
+              "null",
+              {
+                "symbols": [
+                  "raw",
+                  "gzip compressed",
+                  "bzip2 compressed",
+                  "None"
+                ],
+                "name": "unpaired_unaligned_reads",
+                "type": "enum"
+              }
+            ]
+          },
+          {
+            "sbg:toolDefaultValue": "None",
+            "label": "Unpaired aligned reads",
+            "description": "Output unpaired reads that align at least once. These reads correspond to the SAM records with the FLAGS 0x4, 0x40, and 0x80 bits unset. If \"gzip compressed\" is specified, output will be gzip compressed. If \"bzip2 compressed\" is specified, output will be bzip2 compressed. Reads written in this way will appear exactly as they did in the input file, without any modification (same sequence, same name, same quality string, same quality encoding). Reads will not necessarily appear in the same order as they did in the input.",
+            "sbg:category": "Output",
+            "id": "#unpaired_aligned_reads",
+            "type": [
+              "null",
+              {
+                "symbols": [
+                  "raw",
+                  "gzip compressed",
+                  "bzip2 compressed",
+                  "None"
+                ],
+                "name": "unpaired_aligned_reads",
+                "type": "enum"
+              }
+            ]
+          },
+          {
+            "sbg:toolDefaultValue": "0",
+            "label": "Trim from 5'",
+            "id": "#trim_from_5",
+            "description": "Trim given number of bases from 5' (left) end of each read before alignment.",
+            "sbg:category": "Input",
+            "inputBinding": {
+              "separate": true,
+              "sbg:cmdInclude": true,
+              "prefix": "--trim5"
+            },
+            "sbg:altPrefix": "-5",
+            "type": [
+              "null",
+              "int"
+            ]
+          },
+          {
+            "sbg:toolDefaultValue": "0",
+            "label": "Trim from 3'",
+            "id": "#trim_from_3",
+            "description": "Trim given number of bases from 3' (right) end of each read before alignment.",
+            "sbg:category": "Input",
+            "inputBinding": {
+              "separate": true,
+              "sbg:cmdInclude": true,
+              "prefix": "--trim3"
+            },
+            "sbg:altPrefix": "-3",
+            "type": [
+              "null",
+              "int"
+            ]
+          },
+          {
+            "sbg:toolDefaultValue": "False",
+            "label": "Suppress SQ header lines",
+            "description": "Suppress @SQ SAM header lines.",
+            "sbg:category": "Output",
+            "inputBinding": {
+              "separate": true,
+              "sbg:cmdInclude": true,
+              "prefix": "--no-sq"
+            },
+            "id": "#suppress_sq_header_lines",
+            "type": [
+              "null",
+              "boolean"
+            ]
+          },
+          {
+            "sbg:toolDefaultValue": "False",
+            "label": "Suppress SAM records for unaligned reads",
+            "description": "Suppress SAM records for reads that failed to align.",
+            "sbg:category": "Output",
+            "inputBinding": {
+              "separate": true,
+              "sbg:cmdInclude": true,
+              "prefix": "--no-unal"
+            },
+            "id": "#suppress_sam_records",
+            "type": [
+              "null",
+              "boolean"
+            ]
+          },
+          {
+            "sbg:toolDefaultValue": "False",
+            "label": "Suppress header lines",
+            "description": "Suppress SAM header lines (starting with @).",
+            "sbg:category": "Output",
+            "inputBinding": {
+              "separate": true,
+              "sbg:cmdInclude": true,
+              "prefix": "--no-head"
+            },
+            "id": "#suppress_header_lines",
+            "type": [
+              "null",
+              "boolean"
+            ]
+          },
+          {
+            "sbg:toolDefaultValue": "-",
+            "label": "Skip reads",
+            "id": "#skip_reads",
+            "description": "Skip (i.e. do not align) the first given number of reads or pairs in the input.",
+            "sbg:category": "Input",
+            "inputBinding": {
+              "separate": true,
+              "sbg:cmdInclude": true,
+              "prefix": "--skip"
+            },
+            "sbg:altPrefix": "-s",
+            "type": [
+              "null",
+              "int"
+            ]
+          },
+          {
+            "sbg:toolDefaultValue": "0",
+            "label": "Set seed",
+            "description": "Set the seed for pseudo-random number generator.",
+            "sbg:category": "Other",
+            "inputBinding": {
+              "separate": true,
+              "sbg:cmdInclude": true,
+              "prefix": "--seed"
+            },
+            "id": "#set_seed",
+            "type": [
+              "null",
+              "int"
+            ]
+          },
+          {
+            "sbg:toolDefaultValue": "0 for \"End-to-end\" mode, 2 for \"Local\" mode",
+            "label": "Set match bonus",
+            "description": "Sets the match bonus. The given number is added to the alignment score for each position where a read character aligns to a reference character and the characters match.",
+            "sbg:category": "Scoring",
+            "inputBinding": {
+              "separate": true,
+              "sbg:cmdInclude": true,
+              "prefix": "--ma"
+            },
+            "id": "#set_match_bonus",
+            "type": [
+              "null",
+              "int"
+            ]
+          },
+          {
+            "sbg:toolDefaultValue": "Infered from metadata",
+            "label": "Sequencing center",
+            "description": "Specify the sequencing center for RG line.",
+            "sbg:category": "Read group",
+            "inputBinding": {
+              "separate": true,
+              "sbg:cmdInclude": true,
+              "valueFrom": {
+                "class": "Expression",
+                "engine": "#cwl-js-engine",
+                "script": "{\n  if($job.inputs.sequencing_center)\n    return \"--rg CN:\" +$job.inputs.sequencing_center\n    else if($job.inputs.read_sequence[0].metadata){\n      if($job.inputs.read_sequence[0].metadata.seq_center)\n  \t\treturn \"--rg CN:\" +$job.inputs.read_sequence[0].metadata.seq_center\n    }\n  else\n    return \"\"\n}"
+              }
+            },
+            "id": "#sequencing_center",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          {
+            "sbg:toolDefaultValue": "22 or 20 (depending on preset type and alignment mode)",
+            "label": "Seed substring length",
+            "description": "Sets the length of the seed substrings to align during multiseed alignment. Smaller values make alignment slower but more senstive. Must be > 3 and < 32. The \"Sensitive\" preset is used by default, which sets this option to 22 in \"End-to-end\" mode and to 20 in \"Local\" mode.",
+            "sbg:category": "Alignment",
+            "inputBinding": {
+              "separate": true,
+              "sbg:cmdInclude": true,
+              "prefix": "-L"
+            },
+            "id": "#seed_substring_length",
+            "type": [
+              "null",
+              "int"
+            ]
+          },
+          {
+            "sbg:toolDefaultValue": "15",
+            "label": "Seed extension attempts",
+            "description": "Maximum number of to consecutive seed extension attempts that can \"fail\" before Bowtie2 moves on, using the alignments found so far. A seed extension \"fails\" if it does not yield a new best or a new second-best alignment.",
+            "sbg:category": "Effort",
+            "inputBinding": {
+              "separate": true,
+              "sbg:cmdInclude": true,
+              "prefix": "-D"
+            },
+            "id": "#seed_extension_attempts",
+            "type": [
+              "null",
+              "int"
+            ]
+          },
+          {
+            "sbg:toolDefaultValue": "Infered from metadata",
+            "label": "Sample",
+            "description": "Specify the sample ID for RG line.",
+            "sbg:category": "Read group",
+            "inputBinding": {
+              "separate": true,
+              "sbg:cmdInclude": true,
+              "valueFrom": {
+                "class": "Expression",
+                "engine": "#cwl-js-engine",
+                "script": "{\n  if($job.inputs.sample_id)\n    return \"--rg SM:\" +$job.inputs.sample_id\n  else if($job.inputs.read_sequence[0].metadata){\n      if($job.inputs.read_sequence[0].metadata.sample_id)\n  \t\treturn \"--rg SM:\" +$job.inputs.read_sequence[0].metadata.sample_id\n      else return \"\"\n    }\n  else\n    return \"\"\n}"
+              }
+            },
+            "id": "#sample_id",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          {
+            "sbg:toolDefaultValue": "-",
+            "label": "Report k alignments",
+            "description": "By default, Bowtie2 searches for distinct, valid alignments for each read. When it finds a valid alignment, it continues looking for alignments that are nearly as good or better. The best alignment found is reported (randomly selected from among best if tied). Information about the best alignments is used to estimate mapping quality and to set SAM optional fields, such as AS:i and XS:i. When \"Report k alignments\" is specified, however, Bowtie2 behaves differently. Instead, it searches for at most <given-number> distinct, valid alignments for each read. The search terminates when it can't find more distinct valid alignments, or when it finds <given-number>, whichever happens first. All alignments found are reported in descending order by alignment score. The alignment score for a paired-end alignment equals the sum of the alignment scores of the individual mates. Each reported read or pair alignment beyond the first has the SAM 'secondary' bit (which equals 256) set in its FLAGS field. For reads that have more than <given-number> distinct, valid alignments, Bowtie2 does not gaurantee that the <given-number> alignments reported are the best possible in terms of alignment score. \"Report k alignments\" is mutually exclusive with \"Report all alignments\". Note: Bowtie 2 is not designed with large values for \"Report k alignments\" in mind, and when aligning reads to long, repetitive genomes alignment can be very, very slow.",
+            "sbg:category": "Reporting",
+            "inputBinding": {
+              "separate": true,
+              "sbg:cmdInclude": true,
+              "prefix": "-k"
+            },
+            "id": "#report_k_alignments",
+            "type": [
+              "null",
+              "int"
+            ]
+          },
+          {
+            "sbg:toolDefaultValue": "False",
+            "label": "Report all alignments",
+            "id": "#report_all_alignments",
+            "description": "Like \"Report k alignments\" but with no upper limit on number of alignments to search for. \"Report all alignments\" is mutually exclusive with \"Report k alignments\".",
+            "sbg:category": "Reporting",
+            "inputBinding": {
+              "separate": true,
+              "sbg:cmdInclude": true,
+              "prefix": "--all"
+            },
+            "sbg:altPrefix": "-a",
+            "type": [
+              "null",
+              "boolean"
+            ]
+          },
+          {
+            "sbg:toolDefaultValue": "False",
+            "label": "Reorder output",
+            "description": "Guarantees that output SAM records are printed in an order corresponding to the order of the reads in the original input file. Specifying \"Reorder output\" causes Bowtie2 to run somewhat slower and use somewhat more memory.",
+            "sbg:category": "Performance",
+            "inputBinding": {
+              "separate": true,
+              "sbg:cmdInclude": true,
+              "prefix": "--reorder"
+            },
+            "id": "#reorder_output",
+            "type": [
+              "null",
+              "boolean"
+            ]
+          },
+          {
+            "sbg:toolDefaultValue": "5,3",
+            "label": "Reference gap penalties",
+            "description": "Sets the reference gap open (first value) and extend (second value) penalty, respectively. A reference gap of length N gets a penalty of <gap-open-penalty> + N * <gap-extend-penalty>.",
+            "sbg:category": "Scoring",
+            "inputBinding": {
+              "separate": true,
+              "sbg:cmdInclude": true,
+              "prefix": "--rfg",
+              "itemSeparator": ","
+            },
+            "id": "#reference_gap_penalties",
+            "type": [
+              "null",
+              {
+                "items": "int",
+                "type": "array"
+              }
+            ]
+          },
+          {
+            "label": "Read sequence",
+            "description": "Read sequence in FASTQ or FASTA format. COuld be also gzip'ed (extension .gz) or bzip2'ed (extension .bz2). In case of paired-end alignment it is crucial to set metadata 'paired-end' field to 1/2.",
+            "sbg:category": "Input files",
+            "sbg:fileTypes": "FASTA, FASTA.GZ, FASTA.BZ2, FA.GZ, FA.BZ2, FASTQ, FA, FQ, FASTQ.GZ, FQ.GZ, FASTQ.BZ2, FQ.BZ2",
+            "id": "#read_sequence",
+            "required": true,
+            "type": [
+              {
+                "items": "File",
+                "name": "read_sequence",
+                "type": "array"
+              }
+            ]
+          },
+          {
+            "sbg:toolDefaultValue": "id",
+            "label": "Set the read group ID",
+            "description": "Set the read group ID text. This causes the SAM @RG header line to be printed, with the given text as the value associated with the ID: tag. It also causes the RG:Z: extra field to be attached to each SAM output record, with value set to this text.",
+            "sbg:category": "Read group",
+            "inputBinding": {
+              "separate": true,
+              "sbg:cmdInclude": true,
+              "prefix": "--rg-id",
+              "valueFrom": {
+                "class": "Expression",
+                "engine": "#cwl-js-engine",
+                "script": "{\n  return ($job.inputs.read_group_id || \"id\") \n}"
+              }
+            },
+            "id": "#read_group_id",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          {
+            "sbg:toolDefaultValue": "5,3",
+            "label": "Read gap penalties",
+            "description": "Sets the read gap open (first value) and extend (second value) penalty, respectively. A read gap of length N gets a penalty of <gap-open-penalty> + N * <gap-extend-penalty>.",
+            "sbg:category": "Scoring",
+            "inputBinding": {
+              "separate": true,
+              "sbg:cmdInclude": true,
+              "prefix": "--rdg",
+              "itemSeparator": ","
+            },
+            "id": "#read_gap_penalties",
+            "type": [
+              "null",
+              {
+                "items": "int",
+                "type": "array"
+              }
+            ]
+          },
+          {
+            "sbg:toolDefaultValue": "Phred+33",
+            "label": "Quality scale",
+            "description": "Set quality scale.",
+            "sbg:category": "Input",
+            "id": "#quality_scale",
+            "type": [
+              "null",
+              {
+                "symbols": [
+                  "Auto-detect",
+                  "Phred+33",
+                  "Phred+64",
+                  "Solexa"
+                ],
+                "name": "quality_scale",
+                "type": "enum"
+              }
+            ]
+          },
+          {
+            "sbg:toolDefaultValue": "Sensitive",
+            "label": "Preset",
+            "description": "Preset options for \"Seed extension attempts\" (-D), \"Max number of re-seed\" (-R), \"Allowed mismatch number\" (-N), \"Seed substring length\" (-L) and \"Interval function\" (-i) parameters. Values for these options vary depending on whether the \"Local\" or \"End-to-end\" mode is selected under \"Alignment mode\".",
+            "sbg:category": "Presets",
+            "inputBinding": {
+              "separate": true,
+              "sbg:cmdInclude": true,
+              "valueFrom": {
+                "class": "Expression",
+                "engine": "#cwl-js-engine",
+                "script": "{\n  var preset_option = $job.inputs.preset_option\n  var alignment_mode = $job.inputs.alignment_mode\n  \n  var presets = {\n    \"Very fast\": \"--very-fast\",\n    \"Fast\": \"--fast\",\n    \"Sensitive\": \"--sensitive\",\n    \"Very sensitive\": \"--very-sensitive\"\n  }\n  if (alignment_mode == \"Local\" && preset_option) {\n    return presets[preset_option].concat(\"-local\")\n  }\n  else if (preset_option){\n    return presets[preset_option]\n  }\n}"
+              }
+            },
+            "id": "#preset_option",
+            "type": [
+              "null",
+              {
+                "symbols": [
+                  "Very fast",
+                  "Fast",
+                  "Sensitive",
+                  "Very sensitive"
+                ],
+                "name": "preset_option",
+                "type": "enum"
+              }
+            ]
+          },
+          {
+            "sbg:toolDefaultValue": "Infered from metadata",
+            "label": "Platform unit",
+            "description": "Specify the platform unit ID for RG line.",
+            "sbg:category": "Read group",
+            "inputBinding": {
+              "separate": true,
+              "sbg:cmdInclude": true,
+              "valueFrom": {
+                "class": "Expression",
+                "engine": "#cwl-js-engine",
+                "script": "{\n  if($job.inputs.platform_unit_id)\n    return \"--rg PU:\" +$job.inputs.platform_unit_id\n  else if($job.inputs.read_sequence[0].metadata){\n      if($job.inputs.read_sequence[0].metadata.platform_unit_id)\n  \t\treturn \"--rg PU:\" +$job.inputs.read_sequence[0].metadata.platform_unit_id\n      else return \"\"\n    }\n  else\n    return \"\"\n}"
+              }
+            },
+            "id": "#platform_unit_id",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          {
+            "sbg:toolDefaultValue": "Infered from metadata",
+            "label": "Platform",
+            "description": "Specify the version of the technology that was used for sequencing or assaying. Default: inferred from metadata.",
+            "sbg:category": "Read group",
+            "inputBinding": {
+              "separate": true,
+              "sbg:cmdInclude": true,
+              "valueFrom": {
+                "class": "Expression",
+                "engine": "#cwl-js-engine",
+                "script": "{\n  if($job.inputs.platform)\n    return \"--rg PL:\" +$job.inputs.platform.replace(/ /g,\"_\")\n  else if($job.inputs.read_sequence[0].metadata){\n    if ($job.inputs.read_sequence[0].metadata.platform) {\n      return \"--rg PL:\" +$job.inputs.read_sequence[0].metadata.platform.replace(/ /g,\"_\")\n    }\n  }\n  else {\n    return \"\"\n  }\n}"
+              }
+            },
+            "id": "#platform",
+            "type": [
+              "null",
+              {
+                "symbols": [
+                  "LS 454",
+                  "Helicos",
+                  "Illumina",
+                  "ABI SOLiD",
+                  "Ion Torrent PGM",
+                  "PacBio"
+                ],
+                "name": "platform",
+                "type": "enum"
+              }
+            ]
+          },
+          {
+            "sbg:toolDefaultValue": "None",
+            "label": "Paired unaligned reads",
+            "description": "Output paired-end reads that fail to align concordantly. These reads correspond to the SAM records with the FLAGS 0x4 bit set and either the 0x40 or 0x80 bit set (depending on whether it's mate #1 or #2). .1 and .2 strings are added to the filename to distinguish which file contains mate #1 and mate #2. If \"gzip compressed\" is specified, output will be gzip compressed. If \"bzip2 compressed\" is specified, output will be bzip2 compressed. Reads written in this way will appear exactly as they did in the input file, without any modification (same sequence, same name, same quality string, same quality encoding). Reads will not necessarily appear in the same order as they did in the input.",
+            "sbg:category": "Output",
+            "id": "#paired_unaligned_reads",
+            "type": [
+              "null",
+              {
+                "symbols": [
+                  "raw",
+                  "gzip compressed",
+                  "bzip2 compressed",
+                  "None"
+                ],
+                "name": "paired_unaligned_reads",
+                "type": "enum"
+              }
+            ]
+          },
+          {
+            "sbg:toolDefaultValue": "None",
+            "label": "Paired aligned reads",
+            "description": "Output paired-end reads that align concordantly at least once. These reads correspond to the SAM records with the FLAGS 0x4 bit unset and either the 0x40 or 0x80 bit set (depending on whether it's mate #1 or #2). .1 and .2 strings are added to the filename to distinguish which file contains mate #1 and mate #2. If \"gzip compressed\" is specified, output will be gzip compressed. If \"bzip2 compressed\" is specified, output will be bzip2 compressed. Reads written in this way will appear exactly as they did in the input file, without any modification (same sequence, same name, same quality string, same quality encoding). Reads will not necessarily appear in the same order as they did in the input.",
+            "sbg:category": "Output",
+            "id": "#paired_aligned_reads",
+            "type": [
+              "null",
+              {
+                "symbols": [
+                  "raw",
+                  "gzip compressed",
+                  "bzip2 compressed",
+                  "None"
+                ],
+                "name": "paired_aligned_reads",
+                "type": "enum"
+              }
+            ]
+          },
+          {
+            "sbg:toolDefaultValue": "False",
+            "label": "Omit SEQ and QUAL",
+            "description": "When printing secondary alignments, Bowtie 2 by default will write out the SEQ and QUAL strings. Specifying this option causes Bowtie 2 to print an asterisk ('*') in those fields instead.",
+            "sbg:category": "Output",
+            "inputBinding": {
+              "separate": true,
+              "sbg:cmdInclude": true,
+              "prefix": "--omit-sec-seq"
+            },
+            "id": "#omit_seq_and_qual",
+            "type": [
+              "null",
+              "boolean"
+            ]
+          },
+          {
+            "sbg:toolDefaultValue": "False",
+            "label": "Non deterministic",
+            "description": "Normally, Bowtie2 re-initializes its pseudo-random generator for each read. It seeds the generator with a number derived from (a) the read name, (b) the nucleotide sequence, (c) the quality sequence, (d) the value of the \"Set seed\" option. This means that if two reads are identical (same name, same nucleotides, same qualities) Bowtie2 will find and report the same alignment(s) for both, even if there was ambiguity. When \"Non deterministic\" is specified, Bowtie2 re-initializes its pseudo-random generator for each read using the current time. This means that Bowtie2 will not necessarily report the same alignment for two identical reads. This is counter-intuitive for some users, but might be more appropriate in situations where the input consists of many identical reads.",
+            "sbg:category": "Other",
+            "inputBinding": {
+              "separate": true,
+              "sbg:cmdInclude": true,
+              "prefix": "--non-deterministic"
+            },
+            "id": "#non_deterministic",
+            "type": [
+              "null",
+              "boolean"
+            ]
+          },
+          {
+            "sbg:toolDefaultValue": "0",
+            "label": "Minimum fragment length",
+            "id": "#minimum_fragment_length",
+            "description": "The minimum fragment length for valid paired-end alignments. E.g. if 60 is specified for \"Minimum fragment length\" (-I) and a paired-end alignment consists of two 20-bp alignments in the appropriate orientation with a 20-bp gap between them, that alignment is considered valid (as long as \"Maximum fragment length\" (-X) is also satisfied). A 19-bp gap would not be valid in that case. If trimming options -3 or -5 are also used, the \"Minimum fragment length\" constraint is applied with respect to the untrimmed mates. The larger the difference between \"Minimum fragment length\" and \"Maximum fragment length\", the slower Bowtie2 will run. This is because larger differences bewteen those two require that Bowtie2 scan a larger window to determine if a concordant alignment exists. For typical fragment length ranges (200 to 400 nucleotides), Bowtie2 is very efficient.",
+            "sbg:category": "Paired-end",
+            "inputBinding": {
+              "separate": true,
+              "sbg:cmdInclude": true,
+              "prefix": "--minins"
+            },
+            "sbg:altPrefix": "-I",
+            "type": [
+              "null",
+              "int"
+            ]
+          },
+          {
+            "sbg:toolDefaultValue": "False",
+            "label": "Alignment metrics",
+            "description": "Alignment metrics filename",
+            "inputBinding": {
+              "separate": true,
+              "sbg:cmdInclude": true,
+              "prefix": "--met-file"
+            },
+            "id": "#metrics",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          {
+            "sbg:toolDefaultValue": "Infered from metadata",
+            "label": "Median fragment length",
+            "description": "Specify the median fragment length for RG line.",
+            "sbg:category": "Read group",
+            "inputBinding": {
+              "separate": true,
+              "sbg:cmdInclude": true,
+              "valueFrom": {
+                "class": "Expression",
+                "engine": "#cwl-js-engine",
+                "script": "{\n  if($job.inputs.median_fragment_length)\n    return \"--rg PI:\" +$job.inputs.median_fragment_length\n  else if($job.inputs.read_sequence[0].metadata){\n      if($job.inputs.read_sequence[0].metadata.median_fragment_length)\n  \t\treturn \"--rg PI:\" +$job.inputs.read_sequence[0].metadata.median_fragment_length\n      else return \"\"\n    }\n  else\n    return \"\"\n}"
+              }
+            },
+            "id": "#median_fragment_length",
+            "type": [
+              "null",
+              "int"
+            ]
+          },
+          {
+            "sbg:toolDefaultValue": "6",
+            "label": "Maximum mismatch penalty",
+            "description": "Sets the maximum penalty for mismatch. Lower quality = lower penalty.",
+            "sbg:category": "Scoring",
+            "inputBinding": {
+              "separate": true,
+              "sbg:cmdInclude": true,
+              "prefix": "--mp"
+            },
+            "id": "#maximum_mismatch_penalty",
+            "type": [
+              "null",
+              "int"
+            ]
+          },
+          {
+            "sbg:toolDefaultValue": "500",
+            "label": "Maximum fragment length",
+            "id": "#maximum_fragment_length",
+            "description": "The maximum fragment length for valid paired-end alignments. E.g. if \"Maximum fragment length\" (-X) 100 is specified and a paired-end alignment consists of two 20-bp alignments in the proper orientation with a 60-bp gap between them, that alignment is considered valid (as long as \"Minimum fragment length\" (-I) is also satisfied). A 61-bp gap would not be valid in that case. If trimming options -3 or -5 are also used, the \"Maximum fragment length\" constraint is applied with respect to the untrimmed mates, not the trimmed mates. The larger the difference between \"Minimum fragment length\" and \"Maximum fragment length\", the slower Bowtie2 will run. This is because larger differences bewteen those two require that Bowtie2 scan a larger window to determine if a concordant alignment exists. For typical fragment length ranges (200 to 400 nucleotides), Bowtie2 is very efficient.",
+            "sbg:category": "Paired-end",
+            "inputBinding": {
+              "separate": true,
+              "sbg:cmdInclude": true,
+              "prefix": "--maxins"
+            },
+            "sbg:altPrefix": "-X",
+            "type": [
+              "null",
+              "int"
+            ]
+          },
+          {
+            "sbg:toolDefaultValue": "2",
+            "label": "Max number of re-seed",
+            "description": "Given number is the maximum number of times Bowtie2 will 're-seed' reads with repetitive seeds. When 're-seeding', Bowtie2 simply chooses a new set of reads (same length, same number of mismatches allowed) at different offsets and searches for more alignments. A read is considered to have repetitive seeds if the total number of seed hits divided by the number of seeds that aligned at least once is greater than 300.",
+            "sbg:category": "Effort",
+            "inputBinding": {
+              "separate": true,
+              "sbg:cmdInclude": true,
+              "prefix": "-R"
+            },
+            "id": "#max_number_of_re_seed",
+            "type": [
+              "null",
+              "int"
+            ]
+          },
+          {
+            "sbg:toolDefaultValue": "--fr",
+            "label": "Mates alignment orientation",
+            "description": "The upstream/downstream mate orientations for a valid paired-end alignment against the forward reference strand. E.g., if --fr is specified and there is a candidate paired-end alignment where mate 1 appears upstream of the reverse complement of mate 2 and the fragment length constraints (\"Minimum fragment length\" (-I) and \"Maximum fragment length\" (-X)) are met, that alignment is valid. Also, if mate 2 appears upstream of the reverse complement of mate 1 and all other constraints are met, that too is valid. --rf likewise requires that an upstream mate1 be reverse-complemented and a downstream mate2 be forward-oriented. --ff requires both an upstream mate 1 and a downstream mate 2 to be forward-oriented. Default orientation --fr is appropriate for Illumina's Paired-end Sequencing Assay.",
+            "sbg:category": "Paired-end",
+            "inputBinding": {
+              "separate": true,
+              "sbg:cmdInclude": true
+            },
+            "id": "#mates_alignment_orientation",
+            "type": [
+              "null",
+              {
+                "symbols": [
+                  "--fr",
+                  "--rf",
+                  "--ff"
+                ],
+                "name": "mates_alignment_orientation",
+                "type": "enum"
+              }
+            ]
+          },
+          {
+            "sbg:toolDefaultValue": "Infered from metadata",
+            "label": "Library",
+            "description": "Specify the library ID for RG line.",
+            "sbg:category": "Read group",
+            "inputBinding": {
+              "separate": true,
+              "sbg:cmdInclude": true,
+              "valueFrom": {
+                "class": "Expression",
+                "engine": "#cwl-js-engine",
+                "script": "{\n  if($job.inputs.library_id)\n    return \"--rg LB:\" +$job.inputs.library_id\n  else if($job.inputs.read_sequence[0].metadata){\n      if($job.inputs.read_sequence[0].metadata.library_id)\n  \t\treturn \"--rg LB:\" +$job.inputs.read_sequence[0].metadata.library_id\n      else return \"\"\n    }\n  else\n    return \"\"\n}"
+              }
+            },
+            "id": "#library_id",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          {
+            "sbg:toolDefaultValue": "False",
+            "label": "Integer qualities",
+            "description": "Quality values are represented in the read input file as space-separated ASCII integers, e.g., 40 40 30 40..., rather than ASCII characters, e.g., II?I....",
+            "sbg:category": "Input",
+            "inputBinding": {
+              "separate": true,
+              "sbg:cmdInclude": true,
+              "prefix": "--int-quals"
+            },
+            "id": "#integer_qualities",
+            "type": [
+              "null",
+              "boolean"
+            ]
+          },
+          {
+            "sbg:toolDefaultValue": "False",
+            "label": "Ignore qualities",
+            "description": "When calculating a mismatch penalty, always consider the quality value at the mismatched position to be the highest possible, regardless of the actual value. I.e. treat all quality values as 30 on Phred scale. This is also the default behavior when the input doesn't specify quality values (e.g. when processing .fasta reads).",
+            "sbg:category": "Alignment",
+            "inputBinding": {
+              "separate": true,
+              "sbg:cmdInclude": true,
+              "prefix": "--ignore-quals"
+            },
+            "id": "#ignore_qualities",
+            "type": [
+              "null",
+              "boolean"
+            ]
+          },
+          {
+            "sbg:toolDefaultValue": "Natural log or Linear (depending on \"Alignment mode\")",
+            "label": "Function type",
+            "description": "Sets a function type F in function governing the minimum alignment score needed for an alignment to be considered \"valid\" (i.e. good enough to report). This is a function of read length. The minimum-score function f is f(x) = A + B * F(x), where x is the read length. By default, function F is set to \"Natural log\" or \"Linear\", Constant A to 20 or -0.6 and Coefficient B to 8 or -0.6 depending on the \"Alignment mode\": \"End-to-end\" or \"Local\" respectively.",
+            "sbg:category": "Alignment score function",
+            "id": "#function_score_min",
+            "type": [
+              "null",
+              {
+                "symbols": [
+                  "Constant",
+                  "Linear",
+                  "Square-root",
+                  "Natural log"
+                ],
+                "name": "function_score_min",
+                "type": "enum"
+              }
+            ]
+          },
+          {
+            "sbg:toolDefaultValue": "Linear",
+            "label": "Function type",
+            "description": "Sets a function type F in function governing the maximum number of ambiguous characters (usually Ns and/or .s) allowed in a read as a function of read length. The N-ceiling function f is f(x) = A + B * F(x), where x is the read length. Reads exceeding this ceiling are filtered out.",
+            "sbg:category": "Ambiguous chars function",
+            "id": "#function_n_ceil",
+            "type": [
+              "null",
+              {
+                "symbols": [
+                  "Constant",
+                  "Linear",
+                  "Square-root",
+                  "Natural log"
+                ],
+                "name": "function_n_ceil",
+                "type": "enum"
+              }
+            ]
+          },
+          {
+            "sbg:toolDefaultValue": "Square-root",
+            "label": "Function type",
+            "description": "Sets a function type F in function f governing the interval between seed substrings, to use during multiseed alignment. The interval function f is f(x) = A + B * F(x), where x is the read length. By default, function F is set to 'Square-root', Constant A to 1 and Coefficient B to 1.15 or 0.75 for \"End-to-end\" and \"Local\" mode respectively.",
+            "sbg:category": "Interval function",
+            "id": "#function_i",
+            "type": [
+              "null",
+              {
+                "symbols": [
+                  "Constant",
+                  "Linear",
+                  "Square-root",
+                  "Natural log"
+                ],
+                "name": "function_i",
+                "type": "enum"
+              }
+            ]
+          },
+          {
+            "sbg:toolDefaultValue": "15",
+            "label": "Dynamic padding",
+            "description": "\"Pads\" dynamic programming problems by the given number of columns on either side to allow gaps.",
+            "sbg:category": "Alignment",
+            "inputBinding": {
+              "separate": true,
+              "sbg:cmdInclude": true,
+              "prefix": "--dpad"
+            },
+            "id": "#dynamic_padding",
+            "type": [
+              "null",
+              "int"
+            ]
+          },
+          {
+            "sbg:toolDefaultValue": "False",
+            "label": "Don't align reverse complement",
+            "description": "If this option is specified, Bowtie2 will not attempt to align unpaired reads against the reverse-complement (Crick) reference strand. In paired-end mode, \"Don't align forward\" and \"Don't align reverse complement\" pertain to the fragments; i.e. specifying \"Don't align forward\" causes Bowtie2 to explore only those paired-end configurations corresponding to fragments from the reverse-complement (Crick) strand. Default: both strands enabled.",
+            "sbg:category": "Alignment",
+            "inputBinding": {
+              "separate": true,
+              "sbg:cmdInclude": true,
+              "prefix": "--norc"
+            },
+            "id": "#dont_align_reverse_complement",
+            "type": [
+              "null",
+              "boolean"
+            ]
+          },
+          {
+            "sbg:toolDefaultValue": "False",
+            "label": "Don't align forward",
+            "description": "If this option is specified, Bowtie2 will not attempt to align unpaired reads to the forward (Watson) reference strand. In paired-end mode, \"Don't align forward\" and \"Don't align reverse complement\" pertain to the fragments; i.e. specifying \"Don't align forward\" causes Bowtie2 to explore only those paired-end configurations corresponding to fragments from the reverse-complement (Crick) strand. Default: both strands enabled.",
+            "sbg:category": "Alignment",
+            "inputBinding": {
+              "separate": true,
+              "sbg:cmdInclude": true,
+              "prefix": "--nofw"
+            },
+            "id": "#dont_align_forward",
+            "type": [
+              "null",
+              "boolean"
+            ]
+          },
+          {
+            "sbg:toolDefaultValue": "4",
+            "label": "Disallow gaps",
+            "description": "Disallow gaps within the given number of positions of the beginning or end of the read.",
+            "sbg:category": "Alignment",
+            "inputBinding": {
+              "separate": true,
+              "sbg:cmdInclude": true,
+              "prefix": "--gbar"
+            },
+            "id": "#disallow_gaps",
+            "type": [
+              "null",
+              "int"
+            ]
+          },
+          {
+            "sbg:toolDefaultValue": "False",
+            "label": "Disable unpaired alignments",
+            "description": "By default, when Bowtie2 cannot find a concordant or discordant alignment for a pair, it then tries to find alignments for the individual mates. This option disables that behavior.",
+            "sbg:category": "Paired-end",
+            "inputBinding": {
+              "separate": true,
+              "sbg:cmdInclude": true,
+              "prefix": "--no-mixed"
+            },
+            "id": "#disable_unpaired_alignments",
+            "type": [
+              "null",
+              "boolean"
+            ]
+          },
+          {
+            "sbg:toolDefaultValue": "False",
+            "label": "Disable overlapping alignments",
+            "description": "If one mate alignment overlaps the other at all, consider that to be non-concordant.",
+            "sbg:category": "Paired-end",
+            "inputBinding": {
+              "separate": true,
+              "sbg:cmdInclude": true,
+              "prefix": "--no-overlap"
+            },
+            "id": "#disable_overlapping_alignments",
+            "type": [
+              "null",
+              "boolean"
+            ]
+          },
+          {
+            "sbg:toolDefaultValue": "False",
+            "label": "Disable dovetail alignments",
+            "description": "If the mates \"dovetail\", that is if one mate alignment extends past the beginning of the other such that the wrong mate begins upstream, consider that to be non-concordant.",
+            "sbg:category": "Paired-end",
+            "inputBinding": {
+              "separate": true,
+              "sbg:cmdInclude": true,
+              "prefix": "--no-dovetail"
+            },
+            "id": "#disable_dovetail_alignments",
+            "type": [
+              "null",
+              "boolean"
+            ]
+          },
+          {
+            "sbg:toolDefaultValue": "False",
+            "label": "Disable discordant alignments",
+            "description": "By default, Bowtie2 looks for discordant alignments if it cannot find any concordant alignments. A discordant alignment is an alignment where both mates align uniquely, but that does not satisfy the paired-end constraints (--fr/--rf/--ff, -I, -X). This option disables that behavior.",
+            "sbg:category": "Paired-end",
+            "inputBinding": {
+              "separate": true,
+              "sbg:cmdInclude": true,
+              "prefix": "--no-discordant"
+            },
+            "id": "#disable_discordant_alignments",
+            "type": [
+              "null",
+              "boolean"
+            ]
+          },
+          {
+            "sbg:toolDefaultValue": "False",
+            "label": "Disable containing alignments",
+            "description": "If one mate alignment contains the other, consider that to be non-concordant.",
+            "sbg:category": "Paired-end",
+            "inputBinding": {
+              "separate": true,
+              "sbg:cmdInclude": true,
+              "prefix": "--no-contain"
+            },
+            "id": "#disable_containing_alignments",
+            "type": [
+              "null",
+              "boolean"
+            ]
+          },
+          {
+            "sbg:toolDefaultValue": "False",
+            "label": "Disable 1 mismatch alignments",
+            "description": "By default, Bowtie2 will attempt to find either an exact or a 1-mismatch end-to-end alignment for the read before trying the multiseed heuristic. Such alignments can be found very quickly, and many short read alignments have exact or near-exact end-to-end alignments. However, this can lead to unexpected alignments when the user also sets options governing the multiseed heuristic, like \"Seed substring length\" (-L) and \"Allowed mismatch number\" (-N). For instance, if the user specifies 0 for \"Allowed mismatch number\" and \"Seed substring length\" equal to the length of the read, the user will be surprised to find 1-mismatch alignments reported. This option prevents Bowtie2 from searching for 1-mismatch end-to-end alignments before using the multiseed heuristic, which leads to the expected behavior when combined with options such as \"Seed substring length\" and \"Allowed mismatch number\". This comes at the expense of speed.",
+            "sbg:category": "Alignment",
+            "inputBinding": {
+              "separate": true,
+              "sbg:cmdInclude": true,
+              "prefix": "--no-1mm-upfront"
+            },
+            "id": "#disable_1_mismatch_alignments",
+            "type": [
+              "null",
+              "boolean"
+            ]
+          },
+          {
+            "sbg:toolDefaultValue": "20 or -0.6 (depending on \"Alignment mode\")",
+            "label": "Constant A",
+            "description": "Sets a constant A in function governing the minimum alignment score needed for an alignment to be considered 'valid' (i.e. good enough to report). This is a function of read length. The minimum-score function f is f(x) = A + B * F(x), where x is the read length. Default: 20 in \"End-to-end\" mode and -0.6 in \"Local\" mode.",
+            "sbg:category": "Alignment score function",
+            "id": "#constant_scoremin_a",
+            "type": [
+              "null",
+              "float"
+            ]
+          },
+          {
+            "sbg:toolDefaultValue": "0",
+            "label": "Constant A",
+            "description": "Sets a constant A in function governing the maximum number of ambiguous characters (usually Ns and/or .s) allowed in a read as a function of read length. The N-ceiling function f is f(x) = A + B * F(x), where x is the read length. Reads exceeding this ceiling are filtered out.",
+            "sbg:category": "Ambiguous chars function",
+            "id": "#constant_nceil_a",
+            "type": [
+              "null",
+              "float"
+            ]
+          },
+          {
+            "sbg:toolDefaultValue": "1",
+            "label": "Constant A",
+            "description": "Sets a constant A in function governing the interval between seed substrings to use during multiseed alignment. The interval function f is f(x) = A + B * F(x), where x is the read length.",
+            "sbg:category": "Interval function",
+            "id": "#constant_i_a",
+            "type": [
+              "null",
+              "float"
+            ]
+          },
+          {
+            "sbg:toolDefaultValue": "8 or -0.6 (depending on \"Alignment mode\")",
+            "label": "Coefficient B",
+            "description": "Sets a coefficient B in function governing the minimum alignment score needed for an alignment to be considered 'valid' (i.e. good enough to report). This is a function of read length. The minimum-score function f is f(x) = A + B * F(x), where x is the read length. Default: 8 in \"End-to-end\" mode and -0.6 in \"Local\" mode.",
+            "sbg:category": "Alignment score function",
+            "id": "#coefficient_scoremin_b",
+            "type": [
+              "null",
+              "float"
+            ]
+          },
+          {
+            "sbg:toolDefaultValue": "0.15",
+            "label": "Coefficient B",
+            "description": "Sets a coefficient B in function governing the maximum number of ambiguous characters (usually Ns and/or .s) allowed in a read as a function of read length. The N-ceiling function f is f(x) = A + B * F(x), where x is the read length. Reads exceeding this ceiling are filtered out.",
+            "sbg:category": "Ambiguous chars function",
+            "id": "#coefficient_nceil_b",
+            "type": [
+              "null",
+              "int"
+            ]
+          },
+          {
+            "sbg:toolDefaultValue": "1.15 or 0.75 (depending on \"Alignment mode\")",
+            "label": "Coefficient B",
+            "description": "Sets a coefficient B in function governing the interval between seed substrings to use during multiseed alignment. The interval function f is f(x) = A + B * F(x), where x is the read length. Default: 1.15 in \"End-to-end\" mode and 0.75 in \"Local\" mode.",
+            "sbg:category": "Interval function",
+            "id": "#coefficient_i_b",
+            "type": [
+              "null",
+              "float"
+            ]
+          },
+          {
+            "label": "Bowtie index archive",
+            "description": "Archive file produced by Bowtie2 Indexer.",
+            "sbg:category": "Input files",
+            "sbg:fileTypes": "TAR",
+            "sbg:stageInput": "link",
+            "id": "#bowtie_index_archive",
+            "required": true,
+            "type": [
+              "File"
+            ]
+          },
+          {
+            "sbg:toolDefaultValue": "1",
+            "label": "Ambiguous character penalty",
+            "description": "Sets penalty for positions where the read, reference, or both, contain an ambiguous character such as N.",
+            "sbg:category": "Scoring",
+            "inputBinding": {
+              "separate": true,
+              "sbg:cmdInclude": true,
+              "prefix": "--np"
+            },
+            "id": "#ambiguous_character_penalty",
+            "type": [
+              "null",
+              "int"
+            ]
+          },
+          {
+            "sbg:toolDefaultValue": "0",
+            "label": "Allowed mismatch number",
+            "description": "Sets the number of mismatches to allowed in a seed alignment during multiseed alignment. Can be set to 0 or 1. Setting this higher makes alignment slower (often much slower) but increases sensitivity.",
+            "sbg:category": "Alignment",
+            "sbg:stageInput": null,
+            "inputBinding": {
+              "separate": true,
+              "sbg:cmdInclude": true,
+              "prefix": "-N"
+            },
+            "id": "#allowed_mismatch_number",
+            "type": [
+              "null",
+              {
+                "symbols": [
+                  "0",
+                  "1"
+                ],
+                "name": "allowed_mismatch_number",
+                "type": "enum"
+              }
+            ]
+          },
+          {
+            "sbg:toolDefaultValue": "End-to-end",
+            "label": "Alignment mode",
+            "description": "Alignment mode. End-to-end: entire read must align; no clipping. Local: local alignment; ends might be soft clipped.",
+            "sbg:category": "Alignment",
+            "inputBinding": {
+              "separate": true,
+              "sbg:cmdInclude": true,
+              "valueFrom": {
+                "class": "Expression",
+                "engine": "#cwl-js-engine",
+                "script": "{\n  if ($job.inputs.alignment_mode == \"Local\") {\n    return \"--local\"\n  }\n}"
+              }
+            },
+            "id": "#alignment_mode",
+            "type": [
+              "null",
+              {
+                "symbols": [
+                  "End-to-end",
+                  "Local"
+                ],
+                "name": "alignment_mode",
+                "type": "enum"
+              }
+            ]
+          },
+          {
+            "sbg:toolDefaultValue": "No limit",
+            "label": "Align next n reads",
+            "id": "#align_next_n_reads",
+            "description": "Align the first given number of reads or read pairs from the input (after the <int> reads or pairs have been skipped with \"Skip reads\"), then stop.",
+            "sbg:category": "Input",
+            "inputBinding": {
+              "separate": true,
+              "sbg:cmdInclude": true,
+              "prefix": "--upto"
+            },
+            "sbg:altPrefix": "-u",
+            "type": [
+              "null",
+              "int"
+            ]
+          }
+        ],
+        "sbg:modifiedOn": 1494405938,
+        "stdout": "",
+        "cwlVersion": "sbg:draft-2",
+        "x": 506.2499186197904,
+        "requirements": [
+          {
+            "class": "ExpressionEngineRequirement",
+            "engineCommand": "cwl-engine.js",
+            "id": "#cwl-js-engine",
+            "requirements": [
+              {
+                "class": "DockerRequirement",
+                "dockerPull": "rabix/js-engine"
+              }
+            ]
+          }
+        ],
+        "arguments": [
+          {
+            "position": 100,
+            "separate": true,
+            "prefix": "",
+            "valueFrom": {
+              "class": "Expression",
+              "engine": "#cwl-js-engine",
+              "script": "cmd = \"\"\nreads = [].concat($job.inputs.read_sequence)\nreads1 = [];\nreads2 = [];\nu_reads = [];\nfor (var i = 0; i < reads.length; i++){\n    if (reads[i].metadata != null && reads[i].metadata.paired_end == 1){\n      reads1.push(reads[i].path);\n    }\n    else if (reads[i].metadata != null && reads[i].metadata.paired_end == 2){\n      reads2.push(reads[i].path);\n    }\n  else {\n  \tu_reads.push(reads[i].path);\n   }\n  }\nif (reads1.length > 0 & reads1.length == reads2.length){\n\tcmd = \"-1 \" + reads1.join(\",\") + \" -2 \" + reads2.join(\",\");\n}\nif (u_reads.length > 0){\n\tcmd = \" -U \" + u_reads.join(\",\");\n}\ncmd\n"
+            }
+          },
+          {
+            "position": 101,
+            "separate": true,
+            "prefix": "-S",
+            "valueFrom": {
+              "class": "Expression",
+              "engine": "#cwl-js-engine",
+              "script": "{\n  function sharedStart(array){\n  var A= array.concat().sort(), \n      a1= A[0], a2= A[A.length-1], L= a1.length, i= 0;\n  while(i<L && a1.charAt(i)=== a2.charAt(i)) i++;\n  return a1.substring(0, i);\n  }\n  path_list = []\n  $job.inputs.read_sequence.forEach(function(f){return path_list.push(f.path.replace(/\\\\/g,'/').replace( /.*\\//, '' ))})\n  common_prefix = sharedStart(path_list)\n  return \"./\".concat(common_prefix.replace( /\\-$|\\_$|\\.$/, '' ), \".\", \"sam\")\n}"
+            }
+          },
+          {
+            "separate": true,
+            "prefix": "-x",
+            "valueFrom": {
+              "class": "Expression",
+              "engine": "#cwl-js-engine",
+              "script": "{\n  var index_prefix = $job.inputs.bowtie_index_archive.metadata.reference_genome\n  return index_prefix\n}\n"
+            }
+          },
+          {
+            "separate": true,
+            "valueFrom": {
+              "class": "Expression",
+              "engine": "#cwl-js-engine",
+              "script": "{\n  function sharedStart(array){\n    var A= array.concat().sort(), \n        a1= A[0], a2= A[A.length-1], L= a1.length, i= 0;\n    while(i<L && a1.charAt(i)=== a2.charAt(i)) i++;\n    return a1.substring(0, i);\n  }\n  path_list = []\n  $job.inputs.read_sequence.forEach(function(f){return path_list.push(f.path.replace(/\\\\/g,'/').replace( /.*\\//, '' ))})\n  common_prefix = sharedStart(path_list)\n  \n  if ($job.inputs.unpaired_unaligned_reads && $job.inputs.unpaired_unaligned_reads != \"None\") {\n    if ($job.inputs.unpaired_unaligned_reads == \"raw\") {\n      return \"--un \".concat(common_prefix, \".unpaired_unaligned.fastq\")\n    }\n    else if ($job.inputs.unpaired_unaligned_reads == \"gzip compressed\") {\n      return \"--un \".concat(common_prefix, \".unpaired_unaligned.fastq.gz\")\n    }\n    else if ($job.inputs.unpaired_unaligned_reads == \"bzip2 compressed\") {\n      return \"--un \".concat(common_prefix, \".unpaired_unaligned.fastq.bz2\")\n    }\n  }\n}"
+            }
+          },
+          {
+            "separate": true,
+            "valueFrom": {
+              "class": "Expression",
+              "engine": "#cwl-js-engine",
+              "script": "{\n  function sharedStart(array){\n    var A= array.concat().sort(), \n        a1= A[0], a2= A[A.length-1], L= a1.length, i= 0;\n    while(i<L && a1.charAt(i)=== a2.charAt(i)) i++;\n    return a1.substring(0, i);\n  }\n  path_list = []\n  $job.inputs.read_sequence.forEach(function(f){return path_list.push(f.path.replace(/\\\\/g,'/').replace( /.*\\//, '' ))})\n  common_prefix = sharedStart(path_list)\n  \n  if ($job.inputs.unpaired_aligned_reads && $job.inputs.unpaired_aligned_reads != \"None\") {\n    if ($job.inputs.unpaired_aligned_reads == \"raw\") {\n      return \"--al \".concat(common_prefix, \".unpaired_aligned.fastq\")\n    }\n    else if ($job.inputs.unpaired_aligned_reads == \"gzip compressed\") {\n      return \"--al \".concat(common_prefix, \".unpaired_aligned.fastq.gz\")\n    }\n    else if ($job.inputs.unpaired_aligned_reads == \"bzip2 compressed\") {\n      return \"--al \".concat(common_prefix, \".unpaired_aligned.fastq.bz2\")\n    }\n  }\n}"
+            }
+          },
+          {
+            "separate": true,
+            "valueFrom": {
+              "class": "Expression",
+              "engine": "#cwl-js-engine",
+              "script": "{\n  function sharedStart(array){\n    var A= array.concat().sort(), \n        a1= A[0], a2= A[A.length-1], L= a1.length, i= 0;\n    while(i<L && a1.charAt(i)=== a2.charAt(i)) i++;\n    return a1.substring(0, i);\n  }\n  path_list = []\n  $job.inputs.read_sequence.forEach(function(f){return path_list.push(f.path.replace(/\\\\/g,'/').replace( /.*\\//, '' ))})\n  common_prefix = sharedStart(path_list)\n  \n  if ($job.inputs.paired_unaligned_reads && $job.inputs.paired_unaligned_reads != \"None\") {\n    if ($job.inputs.paired_unaligned_reads == \"raw\") {\n      return \"--un-conc \".concat(common_prefix, \".paired_unaligned.fastq\")\n    }\n    else if ($job.inputs.paired_unaligned_reads == \"gzip compressed\") {\n      return \"--un-conc \".concat(common_prefix, \".paired_unaligned.fastq.gz\")\n    }\n    else if ($job.inputs.paired_unaligned_reads == \"bzip2 compressed\") {\n      return \"--un-conc \".concat(common_prefix, \".paired_unaligned.fastq.bz2\")\n    }\n  }\n}"
+            }
+          },
+          {
+            "separate": true,
+            "valueFrom": {
+              "class": "Expression",
+              "engine": "#cwl-js-engine",
+              "script": "{\n  function sharedStart(array){\n    var A= array.concat().sort(), \n        a1= A[0], a2= A[A.length-1], L= a1.length, i= 0;\n    while(i<L && a1.charAt(i)=== a2.charAt(i)) i++;\n    return a1.substring(0, i);\n  }\n  path_list = []\n  $job.inputs.read_sequence.forEach(function(f){return path_list.push(f.path.replace(/\\\\/g,'/').replace( /.*\\//, '' ))})\n  common_prefix = sharedStart(path_list)\n  \n  if ($job.inputs.paired_aligned_reads && $job.inputs.paired_aligned_reads != \"None\") {\n    if ($job.inputs.paired_aligned_reads == \"raw\") {\n      return \"--al-conc \".concat(common_prefix, \".paired_aligned.fastq\")\n    }\n    else if ($job.inputs.paired_aligned_reads == \"gzip compressed\") {\n      return \"--al-conc \".concat(common_prefix, \".paired_aligned.fastq.gz\")\n    }\n    else if ($job.inputs.paired_aligned_reads == \"bzip2 compressed\") {\n      return \"--al-conc \".concat(common_prefix, \".paired_aligned.fastq.bz2\")\n    }\n  }\n}"
+            }
+          },
+          {
+            "separate": true,
+            "prefix": "",
+            "valueFrom": {
+              "class": "Expression",
+              "engine": "#cwl-js-engine",
+              "script": "{\n  var functions = {\n    \"Constant\": \"C\",\n    \"Linear\": \"L\",\n    \"Square-root\": \"S\",\n    \"Natural log\": \"G\"\n  }\n  function_type = $job.inputs.function_i\n  value_list = [functions[function_type], $job.inputs.constant_i_a, $job.inputs.coefficient_i_b]\n  if (functions[function_type] && $job.inputs.constant_i_a && $job.inputs.coefficient_i_b) {\n    return \"-i \".concat(value_list.join(\",\"))\n  }\n}"
+            }
+          },
+          {
+            "separate": true,
+            "prefix": "",
+            "valueFrom": {
+              "class": "Expression",
+              "engine": "#cwl-js-engine",
+              "script": "{\n  var functions = {\n    \"Constant\": \"C\",\n    \"Linear\": \"L\",\n    \"Square-root\": \"S\",\n    \"Natural log\": \"G\"\n  }\n  function_type = $job.inputs.function_n_ceil\n  value_list = [functions[function_type], $job.inputs.constant_nceil_a, $job.inputs.coefficient_nceil_b]\n  if (functions[function_type] && $job.inputs.constant_nceil_a && $job.inputs.coefficient_nceil_b) {\n    return \"--n-ceil \".concat(value_list.join(\",\"))\n  }\n}"
+            }
+          },
+          {
+            "separate": true,
+            "valueFrom": {
+              "class": "Expression",
+              "engine": "#cwl-js-engine",
+              "script": "{\n  var functions = {\n    \"Constant\": \"C\",\n    \"Linear\": \"L\",\n    \"Square-root\": \"S\",\n    \"Natural log\": \"G\"\n  }\n  function_type = $job.inputs.function_score_min\n  \n  value_list = [functions[function_type], $job.inputs.constant_scoremin_a, $job.inputs.coefficient_scoremin_b]\n  if (functions[function_type] && $job.inputs.constant_scoremin_a && $job.inputs.coefficient_scoremin_b) {\n    return \"--score-min \".concat(value_list.join(\",\"))\n  }\n}"
+            }
+          },
+          {
+            "separate": true,
+            "valueFrom": {
+              "class": "Expression",
+              "engine": "#cwl-js-engine",
+              "script": "{\n  meta_qual=\"\";\n  if ($job.inputs.read_sequence[0].metadata){\n    if ($job.inputs.read_sequence[0].metadata.quality_scale){\n      meta_qual = $job.inputs.read_sequence[0].metadata.quality_scale\n    }\n  }\n  \n  if ($job.inputs.quality_scale == \"Phred+33\") {\n    return \"--phred33\"\n  }\n  else if ($job.inputs.quality_scale == \"Phred+64\") {\n    return \"--phred64\"\n  }\n  else if ($job.inputs.quality_scale == \"Solexa\") {\n    return \"--solexa-quals\"\n  }\n  else if ($job.inputs.quality_scale == \"Auto-detect\") {\n    if (meta_qual == \"solexa\") {\n      return \"--solexa-quals\"\n    }\n    else if (meta_qual == \"illumina13\" || meta_qual == \"illumina15\") {\n      return \"--phred64\"\n    }\n  }\n}"
+            }
+          },
+          {
+            "separate": true,
+            "position": 102,
+            "valueFrom": {
+              "class": "Expression",
+              "engine": "#cwl-js-engine",
+              "script": "{\n  function sharedStart(array){\n    var A= array.concat().sort(), \n        a1= A[0], a2= A[A.length-1], L= a1.length, i= 0;\n    while(i<L && a1.charAt(i)=== a2.charAt(i)) i++;\n    return a1.substring(0, i);\n  }\n  path_list = []\n  $job.inputs.read_sequence.forEach(function(f){return path_list.push(f.path.replace(/\\\\/g,'/').replace( /.*\\//, '' ))})\n  common_prefix = sharedStart(path_list)\n  \n  gzip = \"gzip compressed\"\n  bzip = \"bzip2 compressed\"\n  paired_aligned = $job.inputs.paired_aligned_reads\n  paired_unaligned = $job.inputs.paired_unaligned_reads\n  aligned_first = common_prefix.concat(\".paired_aligned.fastq.1\")\n  aligned_second = common_prefix.concat(\".paired_aligned.fastq.2\")\n  aligned_first_mv = common_prefix.concat(\".paired_aligned.1.fastq\")\n  aligned_second_mv = common_prefix.concat(\".paired_aligned.2.fastq\")\n  \n  unaligned_first = common_prefix.concat(\".paired_unaligned.fastq.1\")\n  unaligned_second = common_prefix.concat(\".paired_unaligned.fastq.2\")\n  unaligned_first_mv = common_prefix.concat(\".paired_unaligned.1.fastq\")\n  unaligned_second_mv = common_prefix.concat(\".paired_unaligned.2.fastq\")\n  \n  aligned = \"\"\n  unaligned = \"\"\n  \n  if (paired_aligned && paired_aligned == gzip) {\n    aligned = \"&& mv \".concat(aligned_first, \".gz \", aligned_first_mv, \".gz && mv \", aligned_second, \".gz \", aligned_second_mv, \".gz \") \n  }\n  else if (paired_aligned && paired_aligned == bzip) {\n    aligned = \"&& mv \".concat(aligned_first, \".bz2 \", aligned_first_mv, \".bz2 && mv \", aligned_second, \".bz2 \", aligned_second_mv, \".bz2 \")\n  }\n  if (paired_unaligned && paired_unaligned == gzip) {\n    unaligned = \"&& mv \".concat(unaligned_first, \".gz \", unaligned_first_mv, \".gz && mv \", unaligned_second, \".gz \", unaligned_second_mv, \".gz\")\n  }\n  else if (paired_unaligned && paired_unaligned == bzip) {\n    unaligned = \"&& mv \".concat(unaligned_first, \".bz2 \", unaligned_first_mv, \".bz2 && mv \", unaligned_second, \".bz2 \", unaligned_second_mv, \".bz2\")\n  }\n  \n  return aligned.concat(unaligned)\n}"
+            }
+          },
+          {
+            "separate": true,
+            "position": 101,
+            "valueFrom": {
+              "class": "Expression",
+              "engine": "#cwl-js-engine",
+              "script": "{\n\treturn \" 2>bowtie2.log\";\n}\n"
+            }
+          }
+        ],
+        "sbg:toolkitVersion": "2.2.6",
+        "sbg:validationErrors": [],
+        "sbg:createdBy": "dusan_randjelovic",
+        "label": "Bowtie2 Aligner",
+        "sbg:revision": 2,
+        "temporaryFailCodes": [],
+        "sbg:id": "mladenlSBG/mirna-quagmir/bowtie2-aligner/2",
+        "sbg:latestRevision": 2,
+        "y": 241.26953124999935,
+        "id": "mladenlSBG/mirna-quagmir/bowtie2-aligner/2",
+        "sbg:job": {
+          "inputs": {
+            "bowtie_index_archive": {
+              "class": "File",
+              "secondaryFiles": [],
+              "size": 0,
+              "path": "/demo/test-data/chr20_bowtie2-2.2.6.tar",
+              "metadata": {
+                "reference_genome": "chr20"
+              }
+            },
+            "allowed_mismatch_number": "0",
+            "platform": "ABI SOLiD",
+            "quality_scale": "Phred+33",
+            "disable_overlapping_alignments": false,
+            "constant_nceil_a": 3,
+            "reference_gap_penalties": [
+              0
+            ],
+            "disable_unpaired_alignments": false,
+            "function_score_min": "Linear",
+            "paired_aligned_reads": "gzip compressed",
+            "read_gap_penalties": [
+              0
+            ],
+            "read_sequence": [
+              {
+                "class": "File",
+                "secondaryFiles": [],
+                "size": 0,
+                "path": "/demo/test-data/mate1.fastq",
+                "metadata": {
+                  "quality_scale": "illumina15",
+                  "paired_end": "1",
+                  "file_format": "fastq"
+                }
+              },
+              {
+                "secondaryFiles": [],
+                "metadata": {
+                  "paired_end": "2",
+                  "qual_scale": "illumina15",
+                  "file_format": "fastq"
+                },
+                "path": "/demo/test-data/mate2.fastq"
+              }
+            ],
+            "coefficient_scoremin_b": 2,
+            "metrics": "metrics-string-value",
+            "constant_scoremin_a": 1,
+            "coefficient_i_b": 0,
+            "function_n_ceil": "Square-root",
+            "paired_unaligned_reads": "raw",
+            "alignment_mode": "Local",
+            "coefficient_nceil_b": 4,
+            "sample_id": "nn",
+            "function_i": "S",
+            "unpaired_aligned_reads": "gzip compressed",
+            "suppress_sam_records": true,
+            "preset_option": "Very fast",
+            "constant_i_a": 0,
+            "unpaired_unaligned_reads": "gzip compressed",
+            "mates_alignment_orientation": "--rf"
+          },
+          "allocatedResources": {
+            "cpu": 8,
+            "mem": 6000
+          }
+        },
+        "sbg:sbgMaintained": false,
+        "outputs": [
+          {
+            "label": "Unaligned reads only",
+            "description": "FASTQ file with reads that failed to align.",
+            "outputBinding": {
+              "glob": "*_unaligned*",
+              "sbg:metadata": {
+                "__inherit__": "fasta_reference"
+              },
+              "sbg:inheritMetadataFrom": "#read_sequence",
+              "streamable": false
+            },
+            "type": [
+              "null",
+              {
+                "items": "File",
+                "name": "unaligned_reads_only",
+                "type": "array"
+              }
+            ],
+            "id": "#unaligned_reads_only",
+            "sbg:fileTypes": "FASTQ, FASTQ.GZ, FASTQ.BZ2"
+          },
+          {
+            "label": "Result SAM file",
+            "description": "SAM file containing the results of the alignment. It contains both aligned and unaligned reads.",
+            "outputBinding": {
+              "glob": "*.sam",
+              "sbg:metadata": {
+                "__inherit__": "fasta_reference"
+              },
+              "sbg:inheritMetadataFrom": "#read_sequence",
+              "streamable": false
+            },
+            "type": [
+              "null",
+              "File"
+            ],
+            "id": "#result_sam_file",
+            "sbg:fileTypes": "SAM"
+          },
+          {
+            "label": "Metrics file",
+            "description": "Alignment metrics file.",
+            "outputBinding": {
+              "glob": "*.met",
+              "sbg:inheritMetadataFrom": "#read_sequence"
+            },
+            "type": [
+              "null",
+              "File"
+            ],
+            "id": "#metrics_file",
+            "sbg:fileTypes": "MET, TXT"
+          },
+          {
+            "label": "Log file",
+            "description": "Log file from stderr.",
+            "outputBinding": {
+              "glob": "bowtie2.log"
+            },
+            "type": [
+              "null",
+              "File"
+            ],
+            "id": "#log_file",
+            "sbg:fileTypes": "LOG, TXT"
+          },
+          {
+            "label": "Aligned reads only",
+            "description": "FASTQ file with reads that align at least once.",
+            "outputBinding": {
+              "glob": "*_aligned*",
+              "sbg:metadata": {
+                "__inherit__": "fasta_reference"
+              },
+              "sbg:inheritMetadataFrom": "#read_sequence",
+              "streamable": false
+            },
+            "type": [
+              "null",
+              {
+                "items": "File",
+                "name": "aligned_reads_only",
+                "type": "array"
+              }
+            ],
+            "id": "#aligned_reads_only",
+            "sbg:fileTypes": "FASTQ, FASTQ.GZ, FASTQ.BZ2"
+          }
+        ],
+        "sbg:links": [
+          {
+            "label": "Homepage",
+            "id": "http://bowtie-bio.sourceforge.net/bowtie2/index.shtml"
+          },
+          {
+            "label": "Download",
+            "id": "http://sourceforge.net/projects/bowtie-bio/files/bowtie2/2.2.6/"
+          },
+          {
+            "label": "Publication",
+            "id": "http://www.nature.com/nmeth/journal/v9/n4/full/nmeth.1923.html"
+          },
+          {
+            "label": "Manual",
+            "id": "http://bowtie-bio.sourceforge.net/bowtie2/manual.shtml"
+          },
+          {
+            "label": "Source Code",
+            "id": "https://github.com/BenLangmead/bowtie2"
+          }
+        ],
+        "baseCommand": [
+          {
+            "class": "Expression",
+            "engine": "#cwl-js-engine",
+            "script": "{\n  var archive_name = $job.inputs.bowtie_index_archive.path.split(\"/\").pop()\n  return \"tar -xvf \".concat(archive_name, \" && rm -rf \", archive_name, \" && \")\n}"
+          },
+          "/opt/bowtie2-2.2.6/bowtie2",
+          "-p",
+          {
+            "class": "Expression",
+            "engine": "#cwl-js-engine",
+            "script": "{\n  return $job.allocatedResources.cpu\n}"
+          }
+        ],
+        "sbg:cmdPreview": "tar -xvf chr20_bowtie2-2.2.6.tar && rm -rf chr20_bowtie2-2.2.6.tar &&  /opt/bowtie2-2.2.6/bowtie2 -p 8 -x chr20  --un mate.unpaired_unaligned.fastq.gz  --al mate.unpaired_aligned.fastq.gz  --un-conc mate.paired_unaligned.fastq  --al-conc mate.paired_aligned.fastq.gz    --n-ceil S,3,4  --score-min L,1,2  --phred33  -1 /demo/test-data/mate1.fastq -2 /demo/test-data/mate2.fastq -S ./mate.sam   2>bowtie2.log  && mv mate.paired_aligned.fastq.1.gz mate.paired_aligned.1.fastq.gz && mv mate.paired_aligned.fastq.2.gz mate.paired_aligned.2.fastq.gz",
+        "description": "Bowtie 2 is an ultrafast and memory-efficient tool for aligning sequencing reads to long reference sequences. It is particularly good at aligning reads of about 50 up to 100s or 1,000s of characters to relatively long (e.g. mammalian) genomes. Bowtie 2 indexes the genome with an [FM Index](http://portal.acm.org/citation.cfm?id=796543) (based on the [Burrows-Wheeler Transform](http://en.wikipedia.org/wiki/Burrows-Wheeler_transform) or [BWT](http://en.wikipedia.org/wiki/Burrows-Wheeler_transform)) to keep its memory footprint small: for the human genome, its memory footprint is typically around 3.2 gigabytes of RAM. In order to create needed index files, you should run [Bowtie2 Indexer](https://igor.sbgenomics.com/public/apps#tool/admin/sbg-public-data/bowtie2-indexer), which produces archived index files (containing 6 files with suffixes .1.bt2, .2.bt2, .3.bt2, .4.bt2, .rev.1.bt2, and .rev.2.bt2).\n\nBowtie 2 supports gapped, local, and paired-end alignment modes. Bowtie 2 outputs alignments in SAM format, enabling interoperation with a large number of other tools (e.g. [SAMtools](http://samtools.sourceforge.net/), [GATK](http://www.broadinstitute.org/gsa/wiki/index.php/The_Genome_Analysis_Toolkit)) that use SAM.\n\n###Common issues###\nNo issues have been reported.\n\n**Q&A:**\n\n***Q: What should I do if I already have Bowtie2 index files, not archived as tar bundle?***\n\n***A***: You can provide your *.bt2 files to [SBG Compressor](https://igor.sbgenomics.com/public/apps#admin/sbg-public-data/sbg-compressor-1-0/) app from our public apps and set \"TAR\" as your output format. After the task is finished, **you should assign common prefix of the index files to the `Reference genome` metadata field** and your TAR is ready for use.\n\n***Example:***\nIndexed files: chr20.1.bt2, chr20.2.bt2, chr20.3.bt2, chr20.4.bt2, chr20.rev.1.bt2, chr20.rev.2.bt2\n\nMetadata - `Reference genome`: **chr20**\n\n__Important note: In case of paired-end alignment it is crucial to set metadata 'paired-end' field to 1/2. Sequences specified as mate 1s must correspond file-for-file and read-for-read with those specified for mate 2s. Reads may be a mix of different lengths. In case of unpaired reads, the same metadata field should be set to '-'. Only one type of alignment can be performed at once, so all specified reads should be either paired or unpaired.__",
+        "sbg:projectName": "miRNA quagmir",
+        "class": "CommandLineTool",
+        "sbg:project": "mladenlSBG/mirna-quagmir",
+        "successCodes": [],
+        "sbg:contributors": [
+          "dusan_randjelovic"
+        ],
+        "stdin": "",
+        "sbg:revisionsInfo": [
+          {
+            "sbg:modifiedBy": "dusan_randjelovic",
+            "sbg:revisionNotes": "Copy of admin/sbg-public-data/bowtie2-aligner/8",
+            "sbg:modifiedOn": 1494401307,
+            "sbg:revision": 0
+          },
+          {
+            "sbg:modifiedBy": "dusan_randjelovic",
+            "sbg:revisionNotes": null,
+            "sbg:modifiedOn": 1494401554,
+            "sbg:revision": 1
+          },
+          {
+            "sbg:modifiedBy": "dusan_randjelovic",
+            "sbg:revisionNotes": null,
+            "sbg:modifiedOn": 1494405938,
+            "sbg:revision": 2
+          }
+        ],
+        "sbg:categories": [
+          "Alignment"
+        ],
+        "sbg:appVersion": [
+          "sbg:draft-2"
+        ],
+        "sbg:toolAuthor": "Ben Langmead/John Hopkins University",
+        "sbg:license": "GNU General Public License v3.0 only",
+        "sbg:toolkit": "Bowtie2",
+        "sbg:image_url": null,
+        "sbg:createdOn": 1494401307,
+        "hints": [
+          {
+            "class": "DockerRequirement",
+            "dockerPull": "images.sbgenomics.com/ana_d/bowtie2:2.2.6",
+            "dockerImageId": "029d3a264215"
+          },
+          {
+            "value": 6000,
+            "class": "sbg:MemRequirement"
+          },
+          {
+            "value": 8,
+            "class": "sbg:CPURequirement"
+          }
+        ]
+      },
+      "sbg:y": 241.26953124999935,
+      "id": "#Bowtie2_Aligner"
+    },
+    {
+      "inputs": [
+        {
+          "id": "#Samtools_idxstats_1.threads"
+        },
+        {
+          "id": "#Samtools_idxstats_1.memory"
+        },
+        {
+          "source": [
+            "#SAMtools_Index_BAM_CRAM.output_indexed_file"
+          ],
+          "id": "#Samtools_idxstats_1.input_bam"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "#Samtools_idxstats_1.idxstats_metrics"
+        }
+      ],
+      "sbg:x": 1218.7499999999968,
+      "run": {
+        "inputs": [
+          {
+            "label": "No of threads",
+            "description": "Number of threads.",
+            "sbg:category": "Execution",
+            "sbg:stageInput": null,
+            "id": "#threads",
+            "required": false,
+            "type": [
+              "null",
+              "int"
+            ]
+          },
+          {
+            "label": "Allocated memory [GB]",
+            "description": "Memory allocation for execution [GB].",
+            "sbg:category": "Execution",
+            "sbg:stageInput": null,
+            "id": "#memory",
+            "required": false,
+            "type": [
+              "null",
+              "int"
+            ]
+          },
+          {
+            "label": "Input files",
+            "description": "Input files for which metrics data shall be created.",
+            "sbg:category": "Input file",
+            "sbg:stageInput": "link",
+            "sbg:fileTypes": "BAM,SAM",
+            "inputBinding": {
+              "separate": true,
+              "sbg:cmdInclude": true,
+              "secondaryFiles": [
+                ".bai"
+              ],
+              "itemSeparator": null
+            },
+            "id": "#input_bam",
+            "required": false,
+            "type": [
+              "null",
+              "File"
+            ]
+          }
+        ],
+        "hints": [
+          {
+            "value": {
+              "class": "Expression",
+              "engine": "#cwl-js-engine",
+              "script": "{  \n\n  // Calculate suggested CPUs depending on the input BAM size\n  bam_size = $job.inputs.input_bam.size\n  \n  if(!bam_size) { bam_size = 0 }\n \n  GB_1 = 1024*1024*1024\n  \n  if(bam_size < GB_1)\n  { suggested_cpus = 1 }\n  else if(bam_size < 10 * GB_1)\n  { suggested_cpus = 8 }\n  else \n  { suggested_cpus = 30 }\n  \n  if($job.inputs.threads){  \t\n    return  $job.inputs.threads\n  } \n  else{  \t\n    return suggested_cpus  \n  }\n  \n}"
+            },
+            "class": "sbg:CPURequirement"
+          },
+          {
+            "class": "DockerRequirement",
+            "dockerPull": "images.sbgenomics.com/bogdang/samstat:1.5.1",
+            "dockerImageId": ""
+          },
+          {
+            "value": {
+              "class": "Expression",
+              "engine": "#cwl-js-engine",
+              "script": "{  \n\n  // Calculate suggested memory depending on the input BAM size\n  bam_size = $job.inputs.input_bam.size\n  \n  if(!bam_size) { bam_size = 0 }\n \n  GB_1 = 1024*1024*1024\n  if(bam_size < GB_1){ suggested_memory = 4 }\n  else if(bam_size < 10 * GB_1){ suggested_memory = 15 }\n  else { suggested_memory = 58 }\n  \n  if($job.inputs.memory){  \t\n    return  $job.inputs.memory* 1024  \n  } \n  else{  \t\n    return suggested_memory * 1024  \n  }\n}"
+            },
+            "class": "sbg:MemRequirement"
+          }
+        ],
+        "sbg:modifiedOn": 1494594571,
+        "stdout": "",
+        "cwlVersion": "sbg:draft-2",
+        "x": 1218.7499999999968,
+        "requirements": [
+          {
+            "class": "ExpressionEngineRequirement",
+            "id": "#cwl-js-engine",
+            "requirements": [
+              {
+                "class": "DockerRequirement",
+                "dockerPull": "rabix/js-engine"
+              }
+            ]
+          }
+        ],
+        "arguments": [
+          {
+            "separate": true,
+            "position": 15,
+            "valueFrom": {
+              "class": "Expression",
+              "engine": "#cwl-js-engine",
+              "script": "{\n\n  input_file_path = [].concat($job.inputs.input_bam)[0].path\n  input_file_name = input_file_path.replace(/^.*[\\\\\\/]/, '').split('.')\n  input_file_namebase = input_file_name[0]\n  \n  return \" > \" + input_file_namebase + \".idxstats.txt\"\n  \n}"
+            }
+          }
+        ],
+        "sbg:validationErrors": [],
+        "sbg:createdBy": "uros_sipetic",
+        "label": "Samtools idxstats",
+        "sbg:revision": 1,
+        "temporaryFailCodes": [],
+        "sbg:id": "uros_sipetic/viral-alignment/samtools-idxstats/1",
+        "sbg:latestRevision": 1,
+        "sbg:sbgMaintained": false,
+        "y": 48.020833333333016,
+        "id": "uros_sipetic/viral-alignment/samtools-idxstats/1",
+        "sbg:job": {
+          "inputs": {
+            "input_bam": {
+              "class": "File",
+              "secondaryFiles": [
+                {
+                  "path": ".bai"
+                }
+              ],
+              "size": 0,
+              "path": "/path/to/input_bam.ext"
+            },
+            "threads": 9,
+            "memory": 3
+          },
+          "allocatedResources": {
+            "cpu": 9,
+            "mem": 3072
+          }
+        },
+        "description": "",
+        "outputs": [
+          {
+            "label": "IdxStats metrics files",
+            "description": "Files containing metrics, one file for each input.",
+            "outputBinding": {
+              "glob": "*.txt",
+              "sbg:inheritMetadataFrom": "#input_bam"
+            },
+            "type": [
+              "null",
+              "File"
+            ],
+            "id": "#idxstats_metrics",
+            "sbg:fileTypes": "TXT"
+          }
+        ],
+        "sbg:modifiedBy": "uros_sipetic",
+        "baseCommand": [
+          "samtools",
+          "idxstats"
+        ],
+        "sbg:cmdPreview": "samtools idxstats   > input_bam.idxstats.txt",
+        "sbg:project": "uros_sipetic/viral-alignment",
+        "sbg:projectName": "Viral alignment",
+        "class": "CommandLineTool",
+        "sbg:image_url": null,
+        "successCodes": [],
+        "sbg:contributors": [
+          "uros_sipetic"
+        ],
+        "appUrl": "/u/uros_sipetic/viral-alignment/apps/#uros_sipetic/viral-alignment/samtools-idxstats/1",
+        "sbg:revisionsInfo": [
+          {
+            "sbg:modifiedBy": "uros_sipetic",
+            "sbg:revisionNotes": "Copy of uros_sipetic/bms-rna-tools/samtools-idxstats/2",
+            "sbg:modifiedOn": 1494594387,
+            "sbg:revision": 0
+          },
+          {
+            "sbg:modifiedBy": "uros_sipetic",
+            "sbg:revisionNotes": null,
+            "sbg:modifiedOn": 1494594571,
+            "sbg:revision": 1
+          }
+        ],
+        "sbg:categories": [
+          "Quantification"
+        ],
+        "sbg:appVersion": [
+          "sbg:draft-2"
+        ],
+        "sbg:license": "",
+        "stdin": "",
+        "sbg:createdOn": 1494594387
+      },
+      "sbg:y": 48.020833333333016,
+      "id": "#Samtools_idxstats_1"
+    },
+    {
+      "inputs": [
+        {
+          "id": "#Bowtie2_Indexer.suffixes_as_fraction"
+        },
+        {
+          "id": "#Bowtie2_Indexer.suffixes"
+        },
+        {
+          "id": "#Bowtie2_Indexer.seed"
+        },
+        {
+          "id": "#Bowtie2_Indexer.rows_to_mark"
+        },
+        {
+          "source": [
+            "#reference_file"
+          ],
+          "id": "#Bowtie2_Indexer.reference_or_index"
+        },
+        {
+          "id": "#Bowtie2_Indexer.packed_representation"
+        },
+        {
+          "id": "#Bowtie2_Indexer.only_bitpacked_files"
+        },
+        {
+          "id": "#Bowtie2_Indexer.large_index"
+        },
+        {
+          "id": "#Bowtie2_Indexer.ftab_lookup_table_size"
+        },
+        {
+          "id": "#Bowtie2_Indexer.discard_bitpacked_files"
+        },
+        {
+          "id": "#Bowtie2_Indexer.disable_diff_cover_sample"
+        },
+        {
+          "id": "#Bowtie2_Indexer.disable_default_parameters"
+        },
+        {
+          "id": "#Bowtie2_Indexer.difference_cover_period"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "#Bowtie2_Indexer.bowtie_index_archive"
+        }
+      ],
+      "sbg:x": 224.99999999999912,
+      "run": {
+        "inputs": [
+          {
+            "sbg:toolDefaultValue": "4",
+            "label": "Suffixes as fraction",
+            "description": "The maximum number of suffixes allowed in a block, expressed as a fraction of the length of the reference. Setting this option overrides any previous setting for \"Suffixes\", or \"Suffixes as fraction\". This is configured automatically by default; use \"Disable default parameters\" to configure manually.",
+            "sbg:category": "Advanced Options",
+            "inputBinding": {
+              "separate": false,
+              "sbg:cmdInclude": true,
+              "valueFrom": {
+                "class": "Expression",
+                "engine": "#cwl-js-engine",
+                "script": "{\n  var param = $job.inputs.suffixes_as_fraction\n  var ref_ext = $job.inputs.reference_or_index.path.split('.').pop(0).toUpperCase()\n  if ( param && (ref_ext == \"FASTA\" || ref_ext == \"FA\")){\n    if ($job.inputs.disable_default_parameters && $job.inputs.suffixes_as_fraction) {\n      return \"--bmaxdivn \".concat($job.inputs.suffixes_as_fraction)\n    }\n  }\n}"
+              }
+            },
+            "id": "#suffixes_as_fraction",
+            "type": [
+              "null",
+              "int"
+            ]
+          },
+          {
+            "sbg:toolDefaultValue": "-",
+            "label": "Suffixes",
+            "description": "The maximum number of suffixes allowed in a block. Allowing more suffixes per block makes indexing faster, but increases peak memory usage. Setting this option overrides any previous setting for \"Suffixes\", or \"Suffixes as fraction\". Default (in terms of the \"Suffixes (as fraction)\" parameter) is 4. This is configured automatically by default; use \"Disable default parameters\" to configure manually.",
+            "sbg:category": "Advanced Options",
+            "inputBinding": {
+              "separate": false,
+              "sbg:cmdInclude": true,
+              "valueFrom": {
+                "class": "Expression",
+                "engine": "#cwl-js-engine",
+                "script": "{\n  var param = $job.inputs.suffixes\n  var ref_ext = $job.inputs.reference_or_index.path.split('.').pop(0).toUpperCase()\n  if ( param && (ref_ext == \"FASTA\" || ref_ext == \"FA\")){\n    if ($job.inputs.disable_default_parameters && $job.inputs.suffixes) {\n      return \"--bmax \".concat($job.inputs.suffixes)\n    }\n  }\n}"
+              }
+            },
+            "id": "#suffixes",
+            "type": [
+              "null",
+              "int"
+            ]
+          },
+          {
+            "sbg:toolDefaultValue": "-",
+            "label": "Seed",
+            "description": "Set the seed for pseudo-random number generator.",
+            "sbg:category": "Basic Options",
+            "inputBinding": {
+              "separate": false,
+              "sbg:cmdInclude": true,
+              "valueFrom": {
+                "class": "Expression",
+                "engine": "#cwl-js-engine",
+                "script": "{\n  var param = $job.inputs.seed\n  var ref_ext = $job.inputs.reference_or_index.path.split('.').pop(0).toUpperCase()\n  if ( param && (ref_ext == \"FASTA\" || ref_ext == \"FA\")){\n    return \"--seed\"\n  }\n}"
+              }
+            },
+            "id": "#seed",
+            "type": [
+              "null",
+              "int"
+            ]
+          },
+          {
+            "sbg:toolDefaultValue": "5",
+            "label": "Rows to mark",
+            "description": "To map alignments back to positions on the reference sequences, it is necessary to annotate (\"mark\") some or all of the Burrows-Wheeler rows with their corresponding location on the genome. \"Rows to mark\" governs how many rows get marked: the indexer will mark every 2^(given number) rows. Marking more rows makes reference-position lookups faster, but requires more memory to hold the annotations at runtime. The default is 5 (every 32nd row is marked; for human genome, annotations occupy about 340 megabytes).",
+            "sbg:category": "Basic Options",
+            "inputBinding": {
+              "separate": false,
+              "sbg:cmdInclude": true,
+              "valueFrom": {
+                "class": "Expression",
+                "engine": "#cwl-js-engine",
+                "script": "{\n  var param = $job.inputs.rows_to_mark\n  var ref_ext = $job.inputs.reference_or_index.path.split('.').pop(0).toUpperCase()\n  if ( param && (ref_ext == \"FASTA\" || ref_ext == \"FA\")){\n    return \"--offrate\"\n  }\n}"
+              }
+            },
+            "id": "#rows_to_mark",
+            "type": [
+              "null",
+              "int"
+            ]
+          },
+          {
+            "label": "Reference/Index files",
+            "description": "Reference sequence to which to align the reads. If tar bundle with indexes provided, this file would just be passed to the output.",
+            "sbg:category": "Input files",
+            "sbg:stageInput": "link",
+            "sbg:fileTypes": "FASTA, FA, TAR",
+            "inputBinding": {
+              "separate": false,
+              "sbg:cmdInclude": true,
+              "streamable": false,
+              "position": 100,
+              "valueFrom": {
+                "class": "Expression",
+                "engine": "#cwl-js-engine",
+                "script": "{\n  var ref_ext = $job.inputs.reference_or_index.path.split('.').pop(0).toUpperCase()\n  if (ref_ext == \"FASTA\" || ref_ext == \"FA\"){\n    return $job.inputs.reference_or_index.path\n  }\n}"
+              }
+            },
+            "id": "#reference_or_index",
+            "required": true,
+            "type": [
+              "File"
+            ]
+          },
+          {
+            "sbg:toolDefaultValue": "False",
+            "label": "Packed representation",
+            "description": "Use a packed (2-bits-per-nucleotide) representation for DNA strings. This saves memory but makes indexing 2-3 times slower. This is configured automatically by default; set \"Disable default parameters\" to configure manually.",
+            "sbg:category": "Advanced Options",
+            "inputBinding": {
+              "separate": false,
+              "sbg:cmdInclude": true,
+              "valueFrom": {
+                "class": "Expression",
+                "engine": "#cwl-js-engine",
+                "script": "{\n  var param = $job.inputs.packed_representation\n  var ref_ext = $job.inputs.reference_or_index.path.split('.').pop(0).toUpperCase()\n  if ( param && (ref_ext == \"FASTA\" || ref_ext == \"FA\")){\n    if ($job.inputs.disable_default_parameters && $job.inputs.packed_representation){\n      return \"--packed \".concat($job.inputs.packed_representation)\n    }\n  }\n}"
+              }
+            },
+            "id": "#packed_representation",
+            "type": [
+              "null",
+              "boolean"
+            ]
+          },
+          {
+            "sbg:toolDefaultValue": "False",
+            "label": "Only bitpacked files",
+            "description": "Build only the NAME.3.bt2 and NAME.4.bt2 portions of the index, which contain a bitpacked version of the reference sequences and are used for paired-end alignment.",
+            "sbg:category": "Basic Options",
+            "inputBinding": {
+              "separate": false,
+              "sbg:cmdInclude": true,
+              "valueFrom": {
+                "class": "Expression",
+                "engine": "#cwl-js-engine",
+                "script": "{\n  var param = $job.inputs.only_bitpacked_files\n  var ref_ext = $job.inputs.reference_or_index.path.split('.').pop(0).toUpperCase()\n  if ( param && (ref_ext == \"FASTA\" || ref_ext == \"FA\")){\n    return \"--justref\"\n  }\n}"
+              }
+            },
+            "id": "#only_bitpacked_files",
+            "type": [
+              "null",
+              "boolean"
+            ]
+          },
+          {
+            "sbg:toolDefaultValue": "False",
+            "label": "Large index",
+            "description": "Force indexer to build a large index, even if the reference is less than ~ 4 billion nucleotides inlong.",
+            "sbg:category": "Basic Options",
+            "inputBinding": {
+              "separate": false,
+              "sbg:cmdInclude": true,
+              "valueFrom": {
+                "class": "Expression",
+                "engine": "#cwl-js-engine",
+                "script": "{\n  var param = $job.inputs.large_index\n  var ref_ext = $job.inputs.reference_or_index.path.split('.').pop(0).toUpperCase()\n  if ( param && (ref_ext == \"FASTA\" || ref_ext == \"FA\")){\n    return \"--large-index\"\n  }\n}"
+              }
+            },
+            "id": "#large_index",
+            "type": [
+              "null",
+              "boolean"
+            ]
+          },
+          {
+            "sbg:toolDefaultValue": "10",
+            "label": "Ftab lookup table size",
+            "description": "The ftab is the lookup table used to calculate an initial Burrows-Wheeler range with respect to the first given number of characters of the query. A larger number yields a larger lookup table but faster query times. The ftab has size 4^(given number + 1) bytes. The default setting is 10 (ftab is 4MB).",
+            "sbg:category": "Basic Options",
+            "inputBinding": {
+              "separate": false,
+              "sbg:cmdInclude": true,
+              "valueFrom": {
+                "class": "Expression",
+                "engine": "#cwl-js-engine",
+                "script": "{\n  var param = $job.inputs.ftab_lookup_table_size\n  var ref_ext = $job.inputs.reference_or_index.path.split('.').pop(0).toUpperCase()\n  if ( param && (ref_ext == \"FASTA\" || ref_ext == \"FA\")){\n    return \"--ftabchars\"\n  }\n}"
+              }
+            },
+            "id": "#ftab_lookup_table_size",
+            "type": [
+              "null",
+              "int"
+            ]
+          },
+          {
+            "sbg:toolDefaultValue": "False",
+            "label": "Discard bitpacked files",
+            "description": "Do not build the NAME.3.bt2 and NAME.4.bt2 portions of the index, which contain a bitpacked version of the reference sequences and are used for paired-end alignment.",
+            "sbg:category": "Basic Options",
+            "inputBinding": {
+              "separate": false,
+              "sbg:cmdInclude": true,
+              "valueFrom": {
+                "class": "Expression",
+                "engine": "#cwl-js-engine",
+                "script": "{\n  var param = $job.inputs.discard_bitpacked_files\n  var ref_ext = $job.inputs.reference_or_index.path.split('.').pop(0).toUpperCase()\n  if ( param && (ref_ext == \"FASTA\" || ref_ext == \"FA\")){\n    return \"--noref\"\n  }\n}"
+              }
+            },
+            "id": "#discard_bitpacked_files",
+            "type": [
+              "null",
+              "boolean"
+            ]
+          },
+          {
+            "sbg:toolDefaultValue": "False",
+            "label": "Disable diff-cover sample",
+            "description": "Disable use of the difference-cover sample. Suffix sorting becomes quadratic-time in the worst case (where the worst case is an extremely repetitive reference).",
+            "sbg:category": "Basic Options",
+            "inputBinding": {
+              "separate": false,
+              "sbg:cmdInclude": true,
+              "valueFrom": {
+                "class": "Expression",
+                "engine": "#cwl-js-engine",
+                "script": "{\n  var param = $job.inputs.disable_diff_cover_sample\n  var ref_ext = $job.inputs.reference_or_index.path.split('.').pop(0).toUpperCase()\n  if ( param && (ref_ext == \"FASTA\" || ref_ext == \"FA\")){\n    return \"--nodc\"\n  }\n}"
+              }
+            },
+            "id": "#disable_diff_cover_sample",
+            "type": [
+              "null",
+              "boolean"
+            ]
+          },
+          {
+            "sbg:toolDefaultValue": "False",
+            "label": "Disable default parameters",
+            "description": "Disable the default behavior whereby indexer automatically selects values for the parameters under \"Advanced Options\" according to available memory. Instead, user may specify values for those parameters. If memory is exhausted during indexing, an error message will be printed; it is up to the user to try new parameters.",
+            "sbg:category": "Basic Options",
+            "inputBinding": {
+              "separate": false,
+              "sbg:cmdInclude": true,
+              "valueFrom": {
+                "class": "Expression",
+                "engine": "#cwl-js-engine",
+                "script": "{\n  var param = $job.inputs.disable_default_parameters\n  var ref_ext = $job.inputs.reference_or_index.path.split('.').pop(0).toUpperCase()\n  if ( param && (ref_ext == \"FASTA\" || ref_ext == \"FA\")){\n    return \"--noauto\"\n  }\n}"
+              }
+            },
+            "id": "#disable_default_parameters",
+            "type": [
+              "null",
+              "boolean"
+            ]
+          },
+          {
+            "sbg:toolDefaultValue": "1024",
+            "label": "Difference-cover period",
+            "description": "Set the period for the difference-cover sample. A larger period yields less memory overhead, but may make suffix sorting slower, especially if repeats are present. Must be a power of 2 no greater than 4096. This is configured automatically by default; use \"Disable default parameters\" to configure manually.",
+            "sbg:category": "Advanced Options",
+            "inputBinding": {
+              "separate": false,
+              "sbg:cmdInclude": true,
+              "valueFrom": {
+                "class": "Expression",
+                "engine": "#cwl-js-engine",
+                "script": "{\n  var param = $job.inputs.difference_cover_period\n  var ref_ext = $job.inputs.reference_or_index.path.split('.').pop(0).toUpperCase()\n  if ( param && (ref_ext == \"FASTA\" || ref_ext == \"FA\")){\n    if ($job.inputs.disable_default_parameters && $job.inputs.difference_cover_period) {\n      return \"--dcv \".concat($job.inputs.difference_cover_period)\n    }\n  }\n}"
+              }
+            },
+            "id": "#difference_cover_period",
+            "type": [
+              "null",
+              "int"
+            ]
+          }
+        ],
+        "sbg:revisionNotes": "Copy of admin/sbg-public-data/bowtie2-indexer/3",
+        "sbg:modifiedOn": 1494602857,
+        "stdout": "",
+        "cwlVersion": "sbg:draft-2",
+        "x": 224.99999999999912,
+        "requirements": [
+          {
+            "class": "ExpressionEngineRequirement",
+            "engineCommand": "cwl-engine.js",
+            "id": "#cwl-js-engine",
+            "requirements": [
+              {
+                "class": "DockerRequirement",
+                "dockerPull": "rabix/js-engine"
+              }
+            ]
+          }
+        ],
+        "sbg:revision": 0,
+        "arguments": [
+          {
+            "separate": false,
+            "position": 101,
+            "valueFrom": {
+              "class": "Expression",
+              "engine": "#cwl-js-engine",
+              "script": "{\n  index_prefix = $job.inputs.reference_or_index.path.split('.').slice(0, $job.inputs.reference_or_index.path.split('.').length-1).join('.').replace(/^.*[\\\\\\/]/, '')\n  var ref_ext = $job.inputs.reference_or_index.path.split('.').pop(0).toUpperCase()\n  if (ref_ext == \"FASTA\" || ref_ext == \"FA\"){\n    return \"./\".concat(index_prefix)\n  }\n}"
+            }
+          },
+          {
+            "separate": false,
+            "position": 102,
+            "valueFrom": {
+              "class": "Expression",
+              "engine": "#cwl-js-engine",
+              "script": "{\n  var bt = \"bowtie2-2.2.6\"\n  var suffix_glob = \"\"\n  var ref = $job.inputs.reference_or_index.path\n  var ref_name = ref.split('/').pop(0).replace(/\\.[^/.]+$/, \"\")\n  var tar_name = ref_name.concat(\"_\", bt, '.tar')\n  var ref_ext = $job.inputs.reference_or_index.path.split('.').pop(0).toUpperCase()\n  \n  if ($job.inputs.large_index) {\n    suffix_glob = \" ./*.bt2l\"\n  } else {\n    suffix_glob = \" ./*.bt2\"\n  }\n  if (ref_ext == \"FASTA\" || ref_ext == \"FA\"){\n    return \" && tar -vcf \".concat(tar_name, suffix_glob)\n  }\n}"
+            }
+          }
+        ],
+        "sbg:toolkitVersion": "2.2.6",
+        "sbg:validationErrors": [],
+        "sbg:createdBy": "uros_sipetic",
+        "label": "Bowtie2 Indexer",
+        "sbg:copyOf": "admin/sbg-public-data/bowtie2-indexer/3",
+        "sbg:modifiedBy": "uros_sipetic",
+        "temporaryFailCodes": [],
+        "sbg:id": "uros_sipetic/viral-alignment/bowtie2-indexer/0",
+        "sbg:latestRevision": 0,
+        "y": 119.9218749999996,
+        "id": "uros_sipetic/viral-alignment/bowtie2-indexer/0",
+        "sbg:job": {
+          "inputs": {
+            "disable_default_parameters": true,
+            "reference_or_index": {
+              "secondaryFiles": [],
+              "metadata": {
+                "reference_genome": "test"
+              },
+              "path": "/test/human_g1k_v37_decoy_bowtie2-2.2.6.tar"
+            },
+            "difference_cover_period": 6,
+            "large_index": false
+          },
+          "allocatedResources": {
+            "cpu": 8,
+            "mem": 6000
+          }
+        },
+        "sbg:sbgMaintained": false,
+        "outputs": [
+          {
+            "label": "Bowtie index archive",
+            "description": "Archived Bowtie2 index files.",
+            "outputBinding": {
+              "glob": "*.tar",
+              "sbg:metadata": {
+                "reference_genome": {
+                  "class": "Expression",
+                  "engine": "#cwl-js-engine",
+                  "script": "{\n  var ref_name = $job.inputs.reference_or_index.path.split(\"/\").pop().replace(/\\.[^/.]+$/, \"\")\n//  var inherited_name = $job.inputs.reference_or_index.metadata.reference_genome\n  var ref_ext = $job.inputs.reference_or_index.path.split('.').pop(0).toUpperCase()\n  if (ref_ext == \"FASTA\" || ref_ext == \"FA\" ||\n      $job.inputs.reference_or_index.metadata == null ||\n      $job.inputs.reference_or_index.metadata.reference_genome == null ||\n      $job.inputs.reference_or_index.metadata.reference_genome == \"\"){\n    return ref_name\n  } else{\n    return $job.inputs.reference_or_index.metadata.reference_genome\n  }\n}"
+                },
+                "__inherit__": "fasta_reference"
+              },
+              "streamable": false
+            },
+            "type": [
+              "File"
+            ],
+            "id": "#bowtie_index_archive",
+            "sbg:fileTypes": "TAR"
+          }
+        ],
+        "sbg:links": [
+          {
+            "label": "Homepage",
+            "id": "http://bowtie-bio.sourceforge.net/bowtie2/index.shtml"
+          },
+          {
+            "label": "Download",
+            "id": "http://sourceforge.net/projects/bowtie-bio/files/bowtie2/2.2.6/"
+          },
+          {
+            "label": "Manual",
+            "id": "http://bowtie-bio.sourceforge.net/bowtie2/manual.shtml"
+          },
+          {
+            "label": "Publication",
+            "id": "http://www.nature.com/nmeth/journal/v9/n4/full/nmeth.1923.html"
+          }
+        ],
+        "baseCommand": [
+          {
+            "class": "Expression",
+            "engine": "#cwl-js-engine",
+            "script": "{\n  var ref_ext = $job.inputs.reference_or_index.path.split('.').pop(0).toUpperCase()\n  if (ref_ext == \"FASTA\" || ref_ext == \"FA\"){\n    return \"/opt/bowtie2-2.2.6/bowtie2-build -f\"\n  } else {\n    return \"echo 'Archive provided on the input, no indexing.'\"\n  }\n}"
+          }
+        ],
+        "sbg:cmdPreview": "echo 'Archive provided on the input, no indexing.'",
+        "description": "Bowtie2 Indexer is a tool for indexing reference genomes of any size used in an alignment. It was built from `bowtie2-build` script and used for reference genome indexing aimed at assisting Bowtie2 in fast and memory-efficient alignment. It outputs an archive which consists of 6 files with suffixes .1.bt2, .2.bt2, .3.bt2, .4.bt2, .rev.1.bt2, and .rev.2.bt2. This archive constitutes the index and should be provided when aligning the reads (either with [Bowtie2 Aligner](https://igor.sbgenomics.com/public/apps#tool/admin/sbg-public-data/bowtie2-aligner) or [TopHat2](https://igor.sbgenomics.com/public/apps#tool/admin/sbg-public-data/tophat2)). \n\n###Common issues###\nNo issues have been reported.",
+        "sbg:projectName": "Viral alignment",
+        "class": "CommandLineTool",
+        "sbg:image_url": null,
+        "successCodes": [],
+        "sbg:contributors": [
+          "uros_sipetic"
+        ],
+        "sbg:project": "uros_sipetic/viral-alignment",
+        "sbg:revisionsInfo": [
+          {
+            "sbg:modifiedBy": "uros_sipetic",
+            "sbg:revisionNotes": "Copy of admin/sbg-public-data/bowtie2-indexer/3",
+            "sbg:modifiedOn": 1494602857,
+            "sbg:revision": 0
+          }
+        ],
+        "sbg:categories": [
+          "Alignment",
+          "Indexing"
+        ],
+        "sbg:appVersion": [
+          "sbg:draft-2"
+        ],
+        "sbg:toolAuthor": "Ben Langmead/John Hopkins University",
+        "sbg:license": "GNU General Public License v3.0 only",
+        "sbg:toolkit": "Bowtie2",
+        "stdin": "",
+        "sbg:createdOn": 1494602857,
+        "hints": [
+          {
+            "class": "DockerRequirement",
+            "dockerPull": "images.sbgenomics.com/ana_d/bowtie2:2.2.6",
+            "dockerImageId": "029d3a264215"
+          },
+          {
+            "value": 8,
+            "class": "sbg:CPURequirement"
+          },
+          {
+            "value": 6000,
+            "class": "sbg:MemRequirement"
+          }
+        ]
+      },
+      "sbg:y": 119.9218749999996,
+      "id": "#Bowtie2_Indexer"
+    },
+    {
+      "inputs": [
+        {
+          "id": "#Sambamba_Sort.uncompressed_chunks"
+        },
+        {
+          "id": "#Sambamba_Sort.sort_by_name"
+        },
+        {
+          "id": "#Sambamba_Sort.nthreads"
+        },
+        {
+          "id": "#Sambamba_Sort.natural_sort"
+        },
+        {
+          "id": "#Sambamba_Sort.memory_limit"
+        },
+        {
+          "source": [
+            "#SAMtools_BAM_CRAM_____SAM_convertor.output_bam_or_sam_or_cram_file"
+          ],
+          "id": "#Sambamba_Sort.input"
+        },
+        {
+          "id": "#Sambamba_Sort.filter"
+        },
+        {
+          "id": "#Sambamba_Sort.compression_level"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "#Sambamba_Sort.sorted"
+        }
+      ],
+      "sbg:x": 919.9999999999976,
+      "run": {
+        "sbg:modifiedBy": "admin",
+        "inputs": [
+          {
+            "label": "Uncompressed chunks",
+            "id": "#uncompressed_chunks",
+            "description": "Write sorted chunks as uncompressed BAM (default is writing with compression level 1), that might be faster in some cases but uses more disk space.",
+            "sbg:category": "Execution",
+            "inputBinding": {
+              "separate": true,
+              "sbg:cmdInclude": true,
+              "prefix": "--uncompressed-chunks"
+            },
+            "sbg:altPrefix": "u",
+            "type": [
+              "null",
+              "boolean"
+            ]
+          },
+          {
+            "label": "Sort by name",
+            "id": "#sort_by_name",
+            "description": "Sort by read name instead of coordinate (lexicographical order).",
+            "sbg:category": "Execution",
+            "inputBinding": {
+              "separate": true,
+              "sbg:cmdInclude": true,
+              "prefix": "--sort-by-name"
+            },
+            "sbg:altPrefix": "n",
+            "type": [
+              "null",
+              "boolean"
+            ]
+          },
+          {
+            "sbg:toolDefaultValue": "8",
+            "label": "Number of threads",
+            "id": "#nthreads",
+            "description": "Number of threads to use.",
+            "sbg:category": "Execution",
+            "inputBinding": {
+              "separate": false,
+              "sbg:cmdInclude": true,
+              "prefix": "--nthreads=",
+              "valueFrom": {
+                "class": "Expression",
+                "engine": "#cwl-js-engine",
+                "script": "{\n  if ($job.inputs.nthreads)\n    return $job.inputs.nthreads\n  else\n    return 8\n}"
+              }
+            },
+            "sbg:altPrefix": "-t",
+            "type": [
+              "null",
+              "int"
+            ]
+          },
+          {
+            "label": "Natural sort",
+            "id": "#natural_sort",
+            "description": "Sort by read name instead of coordinate (so-called 'natural' sort as in samtools).",
+            "sbg:category": "Execution",
+            "inputBinding": {
+              "separate": true,
+              "sbg:cmdInclude": true,
+              "prefix": "--natural-sort"
+            },
+            "sbg:altPrefix": "N",
+            "type": [
+              "null",
+              "boolean"
+            ]
+          },
+          {
+            "sbg:toolDefaultValue": "2",
+            "label": "Memory limit [GB]",
+            "id": "#memory_limit",
+            "description": "Approximate total memory limit for all threads in GB.",
+            "sbg:category": "Execution",
+            "inputBinding": {
+              "separate": false,
+              "sbg:cmdInclude": true,
+              "prefix": "--memory-limit=",
+              "valueFrom": {
+                "class": "Expression",
+                "engine": "#cwl-js-engine",
+                "script": "{\n  if($job.inputs.memory_limit) \n    return $job.inputs.memory_limit + 'GiB'\n  else \n    return '2GiB'\n\n}"
+              }
+            },
+            "sbg:altPrefix": "m",
+            "type": [
+              "null",
+              "int"
+            ]
+          },
+          {
+            "label": "Input BAM",
+            "description": "BAM file.",
+            "sbg:category": "File inputs",
+            "sbg:stageInput": "link",
+            "sbg:fileTypes": "BAM",
+            "inputBinding": {
+              "separate": true,
+              "sbg:cmdInclude": true,
+              "position": 100,
+              "itemSeparator": " "
+            },
+            "id": "#input",
+            "required": true,
+            "type": [
+              "File"
+            ]
+          },
+          {
+            "label": "Filter",
+            "id": "#filter",
+            "description": "Set custom filter for alignments.",
+            "sbg:category": "Basic Options",
+            "inputBinding": {
+              "separate": true,
+              "sbg:cmdInclude": true,
+              "prefix": "--filter",
+              "itemSeparator": " ",
+              "valueFrom": {
+                "class": "Expression",
+                "engine": "#cwl-js-engine",
+                "script": "{\n  if ($job.inputs.filter)\n  {\n  \treturn '\"'.concat($job.inputs.filter, '\"')\n  }\n}"
+              }
+            },
+            "sbg:altPrefix": "-F",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          {
+            "label": "Compression level",
+            "id": "#compression_level",
+            "description": "Specify compression level (from 0 to 9, works only for BAM output).",
+            "sbg:category": "Execution",
+            "inputBinding": {
+              "separate": true,
+              "sbg:cmdInclude": true,
+              "prefix": "--compression-level"
+            },
+            "sbg:altPrefix": "l",
+            "type": [
+              "null",
+              "int"
+            ]
+          }
+        ],
+        "sbg:modifiedOn": 1481308801,
+        "stdout": "",
+        "requirements": [
+          {
+            "class": "ExpressionEngineRequirement",
+            "id": "#cwl-js-engine",
+            "requirements": [
+              {
+                "class": "DockerRequirement",
+                "dockerPull": "rabix/js-engine"
+              }
+            ]
+          }
+        ],
+        "x": 919.9999999999976,
+        "sbg:revisionNotes": "Corrected error from last modification",
+        "arguments": [
+          {
+            "position": 3,
+            "separate": false,
+            "prefix": "--out=",
+            "valueFrom": {
+              "class": "Expression",
+              "engine": "#cwl-js-engine",
+              "script": "{\n  if ($job.inputs.input)\n  {\n    file = [].concat($job.inputs.input)\n    filename = file[0].path\n\n    return filename.split('.').slice(0, -1).concat(\"sorted.bam\").join(\".\").replace(/^.*[\\\\\\/]/, '')\n  }\n}"
+            }
+          }
+        ],
+        "sbg:toolkitVersion": "0.5.9",
+        "sbg:validationErrors": [],
+        "cwlVersion": "sbg:draft-2",
+        "sbg:createdBy": "mladenlSBG",
+        "label": "Sambamba Sort",
+        "sbg:revision": 11,
+        "temporaryFailCodes": [],
+        "sbg:id": "admin/sbg-public-data/sambamba-sort-0-5-9/11",
+        "sbg:latestRevision": 11,
+        "y": 376.1718749999991,
+        "id": "admin/sbg-public-data/sambamba-sort-0-5-9/11",
+        "sbg:job": {
+          "inputs": {
+            "memory_limit": 4,
+            "natural_sort": "natural_sort",
+            "nthreads": 0,
+            "compression_level": 0,
+            "sort_by_name": true,
+            "uncompressed_chunks": true,
+            "filter": "",
+            "input": {
+              "path": "/root/dir/example.bam"
+            }
+          },
+          "allocatedResources": {
+            "cpu": 1,
+            "mem": 4096
+          }
+        },
+        "sbg:sbgMaintained": false,
+        "outputs": [
+          {
+            "label": "Sorted BAM",
+            "description": "Output sorted BAM file.",
+            "outputBinding": {
+              "glob": {
+                "class": "Expression",
+                "engine": "#cwl-js-engine",
+                "script": "{\n  if ($job.inputs.input)\n  {\n   filename = $job.inputs.input.path\n\n    return filename.split('.').slice(0, -1).concat(\"sorted.bam\").join(\".\").replace(/^.*[\\\\\\/]/, '')\n  }\n}"
+              },
+              "secondaryFiles": [
+                ".bai"
+              ],
+              "sbg:inheritMetadataFrom": "#input"
+            },
+            "type": [
+              "null",
+              "File"
+            ],
+            "id": "#sorted",
+            "sbg:fileTypes": "BAM"
+          }
+        ],
+        "sbg:links": [
+          {
+            "label": "Homepage",
+            "id": "http://lomereiter.github.io/sambamba/docs/sambamba-sort.html"
+          },
+          {
+            "label": "Source code",
+            "id": "https://github.com/lomereiter/sambamba"
+          },
+          {
+            "label": "Wiki",
+            "id": "https://github.com/lomereiter/sambamba/wiki"
+          },
+          {
+            "label": "Download",
+            "id": "https://github.com/lomereiter/sambamba/releases/tag/v0.5.9"
+          },
+          {
+            "label": "Publication",
+            "id": "http://lomereiter.github.io/sambamba/docs/sambamba-sort.html"
+          }
+        ],
+        "baseCommand": [
+          "/opt/sambamba_0.5.9/sambamba_v0.5.9",
+          "sort"
+        ],
+        "sbg:cmdPreview": "/opt/sambamba_0.5.9/sambamba_v0.5.9 sort --out=example.sorted.bam  /root/dir/example.bam",
+        "description": "Sambamba Sort does an external sort on the input file. It reads the source BAM file in chunks that fit into its memory, sorts them, writes them to a temporary directory, and then merges them. After merging, the temporary files are automatically removed. The sort is stable, and efforts have been made to make it multithreaded.\n\nBAM files have either 'coordinate' or 'qname' sort order. The former sorts the file by (integer) reference ID. and sorts corresponding reads by its start coordinate. The latter sorts reads lexicographically by their names.\n\nSambamba Sort supports both sorting orders. The default sort order is 'coordinate,' because this is the one used for building index later. In order to switch to 'qname' sorting order, use the -n|--sort-by-name flag.",
+        "sbg:projectName": "SBG Public data",
+        "class": "CommandLineTool",
+        "sbg:image_url": null,
+        "successCodes": [],
+        "sbg:contributors": [
+          "admin",
+          "mladenlSBG",
+          "djordje_klisic"
+        ],
+        "sbg:project": "admin/sbg-public-data",
+        "sbg:revisionsInfo": [
+          {
+            "sbg:modifiedBy": "mladenlSBG",
+            "sbg:revisionNotes": null,
+            "sbg:modifiedOn": 1447773761,
+            "sbg:revision": 0
+          },
+          {
+            "sbg:modifiedBy": "mladenlSBG",
+            "sbg:revisionNotes": null,
+            "sbg:modifiedOn": 1448360694,
+            "sbg:revision": 1
+          },
+          {
+            "sbg:modifiedBy": "djordje_klisic",
+            "sbg:revisionNotes": null,
+            "sbg:modifiedOn": 1457686532,
+            "sbg:revision": 2
+          },
+          {
+            "sbg:modifiedBy": "djordje_klisic",
+            "sbg:revisionNotes": null,
+            "sbg:modifiedOn": 1457686532,
+            "sbg:revision": 3
+          },
+          {
+            "sbg:modifiedBy": "djordje_klisic",
+            "sbg:revisionNotes": null,
+            "sbg:modifiedOn": 1464422199,
+            "sbg:revision": 4
+          },
+          {
+            "sbg:modifiedBy": "admin",
+            "sbg:revisionNotes": null,
+            "sbg:modifiedOn": 1471953007,
+            "sbg:revision": 5
+          },
+          {
+            "sbg:modifiedBy": "admin",
+            "sbg:revisionNotes": "Changed Memory(MB) requirements.",
+            "sbg:modifiedOn": 1471953007,
+            "sbg:revision": 6
+          },
+          {
+            "sbg:modifiedBy": "admin",
+            "sbg:revisionNotes": null,
+            "sbg:modifiedOn": 1471953007,
+            "sbg:revision": 7
+          },
+          {
+            "sbg:modifiedBy": "admin",
+            "sbg:revisionNotes": "Edited GiB input",
+            "sbg:modifiedOn": 1476440182,
+            "sbg:revision": 8
+          },
+          {
+            "sbg:modifiedBy": "admin",
+            "sbg:revisionNotes": "Edited glob",
+            "sbg:modifiedOn": 1479155661,
+            "sbg:revision": 9
+          },
+          {
+            "sbg:modifiedBy": "admin",
+            "sbg:revisionNotes": "Guard for output file name was missing",
+            "sbg:modifiedOn": 1481308801,
+            "sbg:revision": 10
+          },
+          {
+            "sbg:modifiedBy": "admin",
+            "sbg:revisionNotes": "Corrected error from last modification",
+            "sbg:modifiedOn": 1481308801,
+            "sbg:revision": 11
+          }
+        ],
+        "sbg:categories": [
+          "SAM/BAM-Processing"
+        ],
+        "sbg:appVersion": [
+          "sbg:draft-2"
+        ],
+        "sbg:toolAuthor": "Artem Tarasov",
+        "sbg:license": "GNU General Public License v2.0 only",
+        "sbg:toolkit": "Sambamba",
+        "stdin": "",
+        "sbg:createdOn": 1447773761,
+        "hints": [
+          {
+            "class": "DockerRequirement",
+            "dockerPull": "images.sbgenomics.com/mladenlsbg/sambamba:0.5.9",
+            "dockerImageId": "59e577b13d5d"
+          },
+          {
+            "value": {
+              "class": "Expression",
+              "engine": "#cwl-js-engine",
+              "script": "{\nif($job.inputs.nthreads) {return $job.inputs.nthreads}\nelse {return 1}\n}"
+            },
+            "class": "sbg:CPURequirement"
+          },
+          {
+            "value": {
+              "class": "Expression",
+              "engine": "#cwl-js-engine",
+              "script": "{\n  if($job.inputs.memory_limit) return $job.inputs.memory_limit*1024\n  else return 2048\n}"
+            },
+            "class": "sbg:MemRequirement"
+          }
+        ]
+      },
+      "sbg:y": 376.1718749999991,
+      "id": "#Sambamba_Sort"
+    },
+    {
+      "inputs": [
+        {
+          "id": "#SAMtools_BAM_CRAM_____SAM_convertor.total_memory_GB"
+        },
+        {
+          "id": "#SAMtools_BAM_CRAM_____SAM_convertor.skip_alignements"
+        },
+        {
+          "id": "#SAMtools_BAM_CRAM_____SAM_convertor.regions_array"
+        },
+        {
+          "id": "#SAMtools_BAM_CRAM_____SAM_convertor.reference_file_list"
+        },
+        {
+          "id": "#SAMtools_BAM_CRAM_____SAM_convertor.reference_file"
+        },
+        {
+          "id": "#SAMtools_BAM_CRAM_____SAM_convertor.read_group"
+        },
+        {
+          "id": "#SAMtools_BAM_CRAM_____SAM_convertor.output_overlapped_BED"
+        },
+        {
+          "id": "#SAMtools_BAM_CRAM_____SAM_convertor.output_format",
+          "default": "BAM"
+        },
+        {
+          "id": "#SAMtools_BAM_CRAM_____SAM_convertor.output_alignemets_cigar"
+        },
+        {
+          "id": "#SAMtools_BAM_CRAM_____SAM_convertor.out_alignments_read_group_list"
+        },
+        {
+          "source": [
+            "#Bowtie2_Aligner.result_sam_file"
+          ],
+          "id": "#SAMtools_BAM_CRAM_____SAM_convertor.input_file"
+        },
+        {
+          "id": "#SAMtools_BAM_CRAM_____SAM_convertor.include_header_in_output"
+        },
+        {
+          "id": "#SAMtools_BAM_CRAM_____SAM_convertor.BAM_compression_threads"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "#SAMtools_BAM_CRAM_____SAM_convertor.output_bam_or_sam_or_cram_file"
+        }
+      ],
+      "sbg:x": 666.2499999999982,
+      "run": {
+        "sbg:modifiedBy": "admin",
+        "inputs": [
+          {
+            "label": "Total memory in Gigabytes",
+            "description": "Total memory in Gigabytes.",
+            "sbg:category": "execution",
+            "sbg:stageInput": null,
+            "id": "#total_memory_GB",
+            "type": [
+              "null",
+              "int"
+            ]
+          },
+          {
+            "label": "Skip alignments smaller than int",
+            "description": "Skip alignments with MAPQ smaller than.",
+            "sbg:category": "configuration",
+            "sbg:stageInput": null,
+            "inputBinding": {
+              "separate": true,
+              "sbg:cmdInclude": true,
+              "prefix": "-q"
+            },
+            "id": "#skip_alignements",
+            "type": [
+              "null",
+              "int"
+            ]
+          },
+          {
+            "label": "Regions_array",
+            "description": "If no region is specified, all the alignments will be printed; otherwise only alignments overlapping the specified regions will be output. An alignment may be given multiple times if it is overlapping several regions. A region can be presented, for example, in the following format: `chr2' (the whole chr2), `chr2:1000000' (region starting from 1,000,000bp) or `chr2:1,000,000-2,000,000' (region between 1,000,000 and 2,000,000bp including the end points). The coordinate is 1-based.",
+            "sbg:category": "configuration",
+            "sbg:stageInput": null,
+            "inputBinding": {
+              "separate": true,
+              "sbg:cmdInclude": true,
+              "position": 2,
+              "itemSeparator": null
+            },
+            "id": "#regions_array",
+            "type": [
+              "null",
+              {
+                "items": "string",
+                "name": "regions_array",
+                "type": "array"
+              }
+            ]
+          },
+          {
+            "label": "List of reference names and lengths",
+            "description": "List of reference names and lengths (force -S). This file is TAB-delimited. Each line must contain the reference name and the length of the reference, one line for each distinct reference; additional fields are ignored. This file also defines the order of the reference sequences in sorting. If you run `samtools faidx <ref.fa>', the resultant index file <ref.fa>.fai can be used as this <in.ref_list> file.",
+            "sbg:category": "File input",
+            "sbg:fileTypes": "FAI",
+            "inputBinding": {
+              "loadContents": false,
+              "separate": true,
+              "sbg:cmdInclude": true,
+              "prefix": "-t"
+            },
+            "id": "#reference_file_list",
+            "required": false,
+            "type": [
+              "null",
+              "File"
+            ]
+          },
+          {
+            "label": "FASTA ref file",
+            "description": "A FASTA format reference FILE, optionally compressed by bgzip and ideally indexed by samtools faidx. If an index is not present, one will be generated for you.",
+            "sbg:category": "File input",
+            "sbg:stageInput": "link",
+            "sbg:fileTypes": "FA,FASTA,GZ",
+            "inputBinding": {
+              "separate": true,
+              "sbg:cmdInclude": true,
+              "prefix": "-T"
+            },
+            "id": "#reference_file",
+            "required": false,
+            "type": [
+              "null",
+              "File"
+            ]
+          },
+          {
+            "label": "Read group",
+            "description": "Only output reads in the specified read group.",
+            "sbg:category": "configuration",
+            "inputBinding": {
+              "separate": true,
+              "sbg:cmdInclude": true,
+              "prefix": "-r"
+            },
+            "id": "#read_group",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          {
+            "label": "Output alignements overlapped with BED",
+            "description": "Only output alignments overlapping the input BED FILE [null].",
+            "sbg:category": "File input",
+            "sbg:stageInput": "link",
+            "sbg:fileTypes": "BED",
+            "inputBinding": {
+              "separate": true,
+              "sbg:cmdInclude": true,
+              "prefix": "-L"
+            },
+            "id": "#output_overlapped_BED",
+            "required": false,
+            "type": [
+              "null",
+              "File"
+            ]
+          },
+          {
+            "label": "Output file format",
+            "description": "Output file format",
+            "type": [
+              {
+                "symbols": [
+                  "SAM",
+                  "CRAM",
+                  "UNCOMPRESSED_BAM",
+                  "FAST_COMPRESSED_BAM",
+                  "BAM"
+                ],
+                "name": "output_format",
+                "type": "enum"
+              }
+            ],
+            "id": "#output_format",
+            "sbg:category": "Configuration"
+          },
+          {
+            "label": "Output only alignments with number of cigar bases consuming query sequence  \u2265 int",
+            "description": "Only output alignments with number of CIGAR bases consuming query sequence  \u2265 INT [0].",
+            "sbg:category": "configuration",
+            "sbg:stageInput": null,
+            "inputBinding": {
+              "separate": true,
+              "sbg:cmdInclude": true,
+              "prefix": "-m"
+            },
+            "id": "#output_alignemets_cigar",
+            "type": [
+              "null",
+              "int"
+            ]
+          },
+          {
+            "label": "Output alignement in read groups list",
+            "description": "Output alignments in read groups listed in FILE [null].",
+            "sbg:category": "File input",
+            "sbg:fileTypes": "TXT",
+            "inputBinding": {
+              "separate": true,
+              "sbg:cmdInclude": true,
+              "prefix": "-R"
+            },
+            "id": "#out_alignments_read_group_list",
+            "required": false,
+            "type": [
+              "null",
+              "File"
+            ]
+          },
+          {
+            "label": "BAM or SAM input file",
+            "description": "BAM or SAM input file.",
+            "sbg:category": "File input",
+            "sbg:fileTypes": "BAM,SAM",
+            "inputBinding": {
+              "separate": true,
+              "sbg:cmdInclude": true,
+              "position": 1
+            },
+            "id": "#input_file",
+            "required": true,
+            "type": [
+              "File"
+            ]
+          },
+          {
+            "label": "Include header in the output",
+            "description": "Include the header in the output.",
+            "sbg:category": "configuration",
+            "sbg:stageInput": null,
+            "inputBinding": {
+              "separate": true,
+              "sbg:cmdInclude": true,
+              "prefix": "-h"
+            },
+            "id": "#include_header_in_output",
+            "type": [
+              "null",
+              "boolean"
+            ]
+          },
+          {
+            "label": "BAM compression threads",
+            "description": "Number of BAM compression threads to use in addition to main thread.",
+            "sbg:category": "configuration",
+            "sbg:stageInput": null,
+            "inputBinding": {
+              "separate": true,
+              "sbg:cmdInclude": true,
+              "prefix": "-@"
+            },
+            "id": "#BAM_compression_threads",
+            "type": [
+              "null",
+              "int"
+            ]
+          }
+        ],
+        "sbg:modifiedOn": 1473947365,
+        "stdout": "",
+        "requirements": [
+          {
+            "class": "ExpressionEngineRequirement",
+            "id": "#cwl-js-engine",
+            "requirements": [
+              {
+                "class": "DockerRequirement",
+                "dockerPull": "rabix/js-engine"
+              }
+            ]
+          }
+        ],
+        "x": 666.2499999999982,
+        "sbg:revisionNotes": "Peer review",
+        "arguments": [
+          {
+            "separate": true,
+            "prefix": "",
+            "valueFrom": {
+              "class": "Expression",
+              "engine": "#cwl-js-engine",
+              "script": "{\n filepath = $job.inputs.input_file.path\n filename = filepath.split(\"/\").pop()\n file_dot_sep = filename.split(\".\")\n file_ext = file_dot_sep[file_dot_sep.length-1]\n new_filename = filename.substr(0,filename.lastIndexOf(\".\"))\n \n command = \"\"\n\n if ($job.inputs.output_format == \"BAM\")\n {\n   extension = '.bam'\n   command = \" -b \"\n    \n }  \n else if ($job.inputs.output_format == \"CRAM\")\n {\n   extension = '.cram'\n   command = \" -C \"\n }  \n else if ($job.inputs.output_format == \"UNCOMPRESSED_BAM\")\n {\n   extension = '.txt'\n   command  = \" -b -u \"\n   \n }  \n else if ($job.inputs.output_format == \"FAST_COMPRESSED_BAM\")\n {\n   extension = '.bam'\n   command = \" -b -1  \"\n }   \n else\n {\n\t extension = '.sam'\n }\n  \n return command + \" -o \" + new_filename + extension\n \n \n}"
+            }
+          }
+        ],
+        "sbg:toolkitVersion": "v1.3",
+        "sbg:validationErrors": [],
+        "cwlVersion": "sbg:draft-2",
+        "sbg:createdBy": "djordje_klisic",
+        "label": "SAMtools BAM/CRAM <-> SAM convertor",
+        "sbg:revision": 16,
+        "temporaryFailCodes": [],
+        "sbg:id": "admin/sbg-public-data/samtools-bam-sam-converter-1-3/16",
+        "sbg:latestRevision": 16,
+        "y": 94.92187499999903,
+        "id": "admin/sbg-public-data/samtools-bam-sam-converter-1-3/16",
+        "sbg:job": {
+          "inputs": {
+            "regions_array": null,
+            "input_file": {
+              "class": "File",
+              "secondaryFiles": [],
+              "size": 0,
+              "path": "input_bam_or_sam_file.bam"
+            },
+            "out_alignments_read_group_list": {
+              "class": "File",
+              "secondaryFiles": [],
+              "size": 0,
+              "path": "out_alignements_read_group_list.txt"
+            },
+            "BAM_compression_threads": null,
+            "output_format": "BAM",
+            "total_memory_GB": 5,
+            "skip_alignements": 8,
+            "output_alignemets_cigar": 7,
+            "read_group": "read_group-string",
+            "include_header_in_output": false
+          },
+          "allocatedResources": {
+            "cpu": 1,
+            "mem": 5000
+          }
+        },
+        "sbg:sbgMaintained": false,
+        "outputs": [
+          {
+            "label": "Output BAM, SAM, or cRAM file",
+            "description": "The output file.",
+            "outputBinding": {
+              "glob": "{*.bam,*.sam,*.cram}",
+              "sbg:inheritMetadataFrom": "#input_file"
+            },
+            "type": [
+              "File"
+            ],
+            "id": "#output_bam_or_sam_or_cram_file",
+            "sbg:fileTypes": "BAM,SAM,CRAM"
+          }
+        ],
+        "sbg:links": [
+          {
+            "label": "Homepage",
+            "id": "http://www.htslib.org"
+          },
+          {
+            "label": "Source code",
+            "id": "https://github.com/samtools/"
+          },
+          {
+            "label": "Download",
+            "id": "https://sourceforge.net/projects/samtools/files/samtools/"
+          },
+          {
+            "label": "Publication",
+            "id": "http://www.ncbi.nlm.nih.gov/pubmed/19505943"
+          },
+          {
+            "label": "Documentation",
+            "id": "http://www.htslib.org/doc/samtools.html"
+          },
+          {
+            "label": "Wiki",
+            "id": "http://www.htslib.org"
+          }
+        ],
+        "baseCommand": [
+          "/opt/samtools-1.3/samtools",
+          "view"
+        ],
+        "sbg:cmdPreview": "/opt/samtools-1.3/samtools view   -b  -o input_bam_or_sam_file.bam  input_bam_or_sam_file.bam",
+        "description": "SAMtools BAM<->SAM Converter is used for conversion from BAM/CRAM to SAM file formats and vice versa.\nThis is customized usage of samtools view command. The view command filters SAM or BAM formatted data. Using options and arguments it understands what data to select (possibly all of it) and passes only that data through. Input is usually a sam or bam file specified as an argument, but could be sam or bam data piped from any other command. Possible uses include extracting a subset of data into a new file, converting between BAM and SAM formats, and just looking at the raw file contents. The order of extracted reads is preserved. Additionally, a cRAM file (another compressed version of the alignments) could be produced by this command.",
+        "sbg:projectName": "SBG Public data",
+        "class": "CommandLineTool",
+        "sbg:image_url": null,
+        "successCodes": [],
+        "sbg:contributors": [
+          "admin",
+          "djordje_klisic"
+        ],
+        "sbg:project": "admin/sbg-public-data",
+        "sbg:revisionsInfo": [
+          {
+            "sbg:modifiedBy": "djordje_klisic",
+            "sbg:revisionNotes": null,
+            "sbg:modifiedOn": 1460640126,
+            "sbg:revision": 0
+          },
+          {
+            "sbg:modifiedBy": "djordje_klisic",
+            "sbg:revisionNotes": null,
+            "sbg:modifiedOn": 1460640126,
+            "sbg:revision": 1
+          },
+          {
+            "sbg:modifiedBy": "djordje_klisic",
+            "sbg:revisionNotes": null,
+            "sbg:modifiedOn": 1460640126,
+            "sbg:revision": 2
+          },
+          {
+            "sbg:modifiedBy": "djordje_klisic",
+            "sbg:revisionNotes": null,
+            "sbg:modifiedOn": 1460640126,
+            "sbg:revision": 3
+          },
+          {
+            "sbg:modifiedBy": "djordje_klisic",
+            "sbg:revisionNotes": null,
+            "sbg:modifiedOn": 1460640126,
+            "sbg:revision": 4
+          },
+          {
+            "sbg:modifiedBy": "djordje_klisic",
+            "sbg:revisionNotes": null,
+            "sbg:modifiedOn": 1460640126,
+            "sbg:revision": 5
+          },
+          {
+            "sbg:modifiedBy": "djordje_klisic",
+            "sbg:revisionNotes": null,
+            "sbg:modifiedOn": 1460640126,
+            "sbg:revision": 6
+          },
+          {
+            "sbg:modifiedBy": "djordje_klisic",
+            "sbg:revisionNotes": null,
+            "sbg:modifiedOn": 1460640126,
+            "sbg:revision": 7
+          },
+          {
+            "sbg:modifiedBy": "djordje_klisic",
+            "sbg:revisionNotes": null,
+            "sbg:modifiedOn": 1460640126,
+            "sbg:revision": 8
+          },
+          {
+            "sbg:modifiedBy": "djordje_klisic",
+            "sbg:revisionNotes": null,
+            "sbg:modifiedOn": 1460640126,
+            "sbg:revision": 9
+          },
+          {
+            "sbg:modifiedBy": "djordje_klisic",
+            "sbg:revisionNotes": null,
+            "sbg:modifiedOn": 1460640126,
+            "sbg:revision": 10
+          },
+          {
+            "sbg:modifiedBy": "djordje_klisic",
+            "sbg:revisionNotes": null,
+            "sbg:modifiedOn": 1460640126,
+            "sbg:revision": 11
+          },
+          {
+            "sbg:modifiedBy": "djordje_klisic",
+            "sbg:revisionNotes": null,
+            "sbg:modifiedOn": 1462904351,
+            "sbg:revision": 12
+          },
+          {
+            "sbg:modifiedBy": "djordje_klisic",
+            "sbg:revisionNotes": null,
+            "sbg:modifiedOn": 1462904351,
+            "sbg:revision": 13
+          },
+          {
+            "sbg:modifiedBy": "admin",
+            "sbg:revisionNotes": null,
+            "sbg:modifiedOn": 1471953006,
+            "sbg:revision": 14
+          },
+          {
+            "sbg:modifiedBy": "admin",
+            "sbg:revisionNotes": "Peer review",
+            "sbg:modifiedOn": 1473947365,
+            "sbg:revision": 15
+          },
+          {
+            "sbg:modifiedBy": "admin",
+            "sbg:revisionNotes": "Peer review",
+            "sbg:modifiedOn": 1473947365,
+            "sbg:revision": 16
+          }
+        ],
+        "sbg:categories": [
+          "SAM/BAM-Processing"
+        ],
+        "sbg:appVersion": [
+          "sbg:draft-2"
+        ],
+        "sbg:toolAuthor": "Heng Li/Sanger Institute,  Bob Handsaker/Broad Institute, James Bonfield/Sanger Institute,",
+        "sbg:license": "BSD License, MIT License",
+        "sbg:toolkit": "SAMtools",
+        "stdin": "",
+        "sbg:createdOn": 1460640126,
+        "hints": [
+          {
+            "value": 1,
+            "class": "sbg:CPURequirement"
+          },
+          {
+            "value": {
+              "class": "Expression",
+              "engine": "#cwl-js-engine",
+              "script": "{\n\n\tif($job.inputs.total_memory_GB)\n    {\n    \treturn $job.inputs.total_memory_GB*1000\n    \n    }\n   else\n   {\n  \t    return 1000\n   } \n\n\n}"
+            },
+            "class": "sbg:MemRequirement"
+          },
+          {
+            "class": "DockerRequirement",
+            "dockerPull": "images.sbgenomics.com/marouf/samtools:1.3",
+            "dockerImageId": ""
+          },
+          {
+            "value": "c3.8xlarge",
+            "class": "sbg:AWSInstanceType"
+          }
+        ]
+      },
+      "sbg:y": 94.92187499999903,
+      "id": "#SAMtools_BAM_CRAM_____SAM_convertor"
+    },
+    {
+      "inputs": [
+        {
+          "source": [
+            "#input_archive_file"
+          ],
+          "id": "#SBG_Unpack_FASTQs.input_archive_file"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "#SBG_Unpack_FASTQs.output_fastq_files"
+        }
+      ],
+      "sbg:x": 233.7499999999995,
+      "run": {
+        "inputs": [
+          {
+            "label": "Input archive file",
+            "description": "The input archive file, containing FASTQ files, to be unpacked.",
+            "sbg:category": "",
+            "sbg:fileTypes": "TAR, TAR.GZ, TGZ, TAR.BZ2, TBZ2,  GZ, BZ2, ZIP",
+            "inputBinding": {
+              "separate": true,
+              "sbg:cmdInclude": true,
+              "prefix": "--input_archive_file",
+              "position": 0
+            },
+            "id": "#input_archive_file",
+            "required": true,
+            "type": [
+              "File"
+            ]
+          }
+        ],
+        "sbg:revisionNotes": "Copy of admin/sbg-public-data/sbg-unpack-fastqs-1-0/4",
+        "sbg:modifiedOn": 1496413644,
+        "stdout": "out.txt",
+        "cwlVersion": "sbg:draft-2",
+        "x": 233.7499999999995,
+        "requirements": [
+          {
+            "class": "ExpressionEngineRequirement",
+            "id": "#cwl-js-engine",
+            "requirements": [
+              {
+                "class": "DockerRequirement",
+                "dockerPull": "rabix/js-engine"
+              }
+            ]
+          }
+        ],
+        "arguments": [],
+        "sbg:toolkitVersion": "v1.0",
+        "sbg:validationErrors": [],
+        "sbg:createdBy": "elehnert",
+        "label": "SBG Unpack FASTQs",
+        "sbg:copyOf": "admin/sbg-public-data/sbg-unpack-fastqs-1-0/4",
+        "sbg:revision": 0,
+        "temporaryFailCodes": [],
+        "sbg:id": "YUGUSEV/va-georgetown-weseq/sbg-unpack-fastqs-1-0/0",
+        "sbg:latestRevision": 0,
+        "y": 391.5885416666658,
+        "sbg:homepage": "https://igor.sbgenomics.com/",
+        "id": "YUGUSEV/va-georgetown-weseq/sbg-unpack-fastqs-1-0/0",
+        "sbg:job": {
+          "inputs": {
+            "input_archive_file": {
+              "class": "File",
+              "secondaryFiles": [],
+              "size": 0,
+              "path": "input_file.tar"
+            }
+          },
+          "allocatedResources": {
+            "cpu": 1,
+            "mem": 1000
+          }
+        },
+        "sbg:sbgMaintained": false,
+        "outputs": [
+          {
+            "label": "Output FASTQ files",
+            "description": "Output FASTQ files.",
+            "outputBinding": {
+              "glob": "decompressed_files/*.fastq",
+              "sbg:metadata": {
+                "paired_end": {
+                  "class": "Expression",
+                  "engine": "#cwl-js-engine",
+                  "script": "{\n  filepath = $self.path\n  filename = filepath.split(\"/\").pop();\n  if (filename.lastIndexOf(\".fastq\") !== 0)\n  \tp = filename[filename.lastIndexOf(\".fastq\") - 1 ]\n  if ((p == 1) || (p == 2))\n    return p\n  else\n    return \"\"\n}"
+                }
+              },
+              "sbg:inheritMetadataFrom": "#input_archive_file"
+            },
+            "type": [
+              {
+                "items": "File",
+                "name": "output_fastq_files",
+                "type": "array"
+              }
+            ],
+            "id": "#output_fastq_files",
+            "sbg:fileTypes": "FASTQ"
+          }
+        ],
+        "sbg:modifiedBy": "elehnert",
+        "baseCommand": [
+          "/opt/sbg_unpack_fastqs.py"
+        ],
+        "sbg:cmdPreview": "/opt/sbg_unpack_fastqs.py --input_archive_file input_file.tar > out.txt",
+        "description": "**SBG Unpack FASTQs** performs the extraction of the input archive, containing FASTQ files. \nThis tool also sets the \"paired_end\" metadata field. It assumes that FASTQ file names are formatted in this manner:\nfirst pair reads FASTQ file        -  *1.fastq\nsecond pair reads FASTQ file  -  * 2.fastq. \nwhere * represents any string.\n**This tool is designed to be used for paired-end metadata with above mentioned name formatting only.**\nSupported formats are:\n1. TAR\n2. TAR.GZ (TGZ)\n3. TAR.BZ2 (TBZ2)\n4. GZ\n5. BZ2\n6. ZIP",
+        "sbg:projectName": "VA_Georgetown WEseq",
+        "class": "CommandLineTool",
+        "sbg:image_url": null,
+        "successCodes": [],
+        "sbg:contributors": [
+          "elehnert"
+        ],
+        "sbg:project": "YUGUSEV/va-georgetown-weseq",
+        "sbg:revisionsInfo": [
+          {
+            "sbg:modifiedBy": "elehnert",
+            "sbg:revisionNotes": "Copy of admin/sbg-public-data/sbg-unpack-fastqs-1-0/4",
+            "sbg:modifiedOn": 1496413644,
+            "sbg:revision": 0
+          }
+        ],
+        "sbg:categories": [
+          "Other"
+        ],
+        "sbg:appVersion": [
+          "sbg:draft-2"
+        ],
+        "sbg:toolAuthor": "Marko Petkovic, Seven Bridges Genomics",
+        "sbg:license": "Apache License 2.0",
+        "sbg:toolkit": "SBGTools",
+        "stdin": "",
+        "sbg:createdOn": 1496413644,
+        "hints": [
+          {
+            "class": "DockerRequirement",
+            "dockerPull": "images.sbgenomics.com/markop/sbg-unpack-fastqs:1.0",
+            "dockerImageId": "df9e1c169beb"
+          },
+          {
+            "value": 1,
+            "class": "sbg:CPURequirement"
+          },
+          {
+            "value": 1000,
+            "class": "sbg:MemRequirement"
+          }
+        ]
+      },
+      "sbg:y": 391.5885416666658,
+      "id": "#SBG_Unpack_FASTQs"
+    }
+  ],
+  "cwlVersion": "sbg:draft-2",
+  "sbg:canvas_y": 46,
+  "sbg:revisionsInfo": [
+    {
+      "sbg:revision": 0,
+      "sbg:modifiedBy": "kb472",
+      "sbg:modifiedOn": 1499357793,
+      "sbg:revisionNotes": "Copy of kb472/viral-cervival-cancer/viral-alignment/8"
+    },
+    {
+      "sbg:revision": 1,
+      "sbg:modifiedBy": "kb472",
+      "sbg:modifiedOn": 1499357881,
+      "sbg:revisionNotes": null
+    },
+    {
+      "sbg:revision": 2,
+      "sbg:modifiedBy": "kb472",
+      "sbg:modifiedOn": 1499367256,
+      "sbg:revisionNotes": null
+    },
+    {
+      "sbg:revision": 3,
+      "sbg:modifiedBy": "kb472",
+      "sbg:modifiedOn": 1500057801,
+      "sbg:revisionNotes": "upgrade instance from 2x to 8x"
+    },
+    {
+      "sbg:revision": 4,
+      "sbg:modifiedBy": "kb472",
+      "sbg:modifiedOn": 1500059758,
+      "sbg:revisionNotes": null
+    }
+  ],
+  "hints": [
+    {
+      "value": "c4.8xlarge;ebs-gp2;2048",
+      "class": "sbg:AWSInstanceType"
+    },
+    {
+      "value": "4",
+      "class": "sbg:maxNumberOfParallelInstances"
+    }
+  ],
+  "$namespaces": {
+    "sbg": "https://sevenbridges.com"
+  },
+  "sbg:appVersion": [
+    "sbg:draft-2"
+  ],
+  "id": "https://cgc-api.sbgenomics.com/v2/apps/kb472/viral-cervival-cancer/viral-alignment2/4/raw/",
+  "sbg:id": "kb472/viral-cervival-cancer/viral-alignment2/4",
+  "sbg:revision": 4,
+  "sbg:revisionNotes": null,
+  "sbg:modifiedOn": 1500059758,
+  "sbg:modifiedBy": "kb472",
+  "sbg:createdOn": 1499357793,
+  "sbg:createdBy": "kb472",
+  "sbg:project": "kb472/viral-cervival-cancer",
+  "sbg:sbgMaintained": false,
+  "sbg:validationErrors": [],
+  "sbg:contributors": [
+    "kb472"
+  ],
+  "sbg:latestRevision": 4,
+  "sbg:publisher": "sbg",
+  "sbg:content_hash": null
+}

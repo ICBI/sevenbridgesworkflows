@@ -1,0 +1,1160 @@
+{
+  "inputs": [
+    {
+      "label": "fastq_file",
+      "sbg:x": 183,
+      "sbg:y": 447,
+      "sbg:fileTypes": "FASTQ, FASTQ.GZ",
+      "sbg:includeInPorts": true,
+      "id": "#fastq_file",
+      "type": [
+        {
+          "items": "File",
+          "type": "array"
+        }
+      ]
+    },
+    {
+      "sbg:toolDefaultValue": "DNA",
+      "label": "Sequencing data type",
+      "id": "#sequencing_data_type",
+      "description": "Sequencing data type (DNA or RNA).Please note RNA option is EXPERIMENTAL. Use with caution.",
+      "type": [
+        {
+          "symbols": [
+            "DNA",
+            "RNA"
+          ],
+          "name": "sequencing_data_type",
+          "type": "enum"
+        }
+      ]
+    },
+    {
+      "label": "Sequencing data",
+      "id": "#sequencing_data",
+      "type": [
+        {
+          "symbols": [
+            "--dna",
+            "--rna"
+          ],
+          "name": "sequencing_data",
+          "type": "enum"
+        }
+      ],
+      "description": "Set it accordingly by the type of the input sequencing data on which the tool is being run.",
+      "sbg:category": "Options"
+    },
+    {
+      "label": "Verbose",
+      "sbg:altPrefix": "-v",
+      "description": "Set verbose mode on.",
+      "sbg:category": "Options",
+      "id": "#verbose",
+      "type": [
+        "null",
+        "boolean"
+      ]
+    },
+    {
+      "sbg:toolDefaultValue": "0.009",
+      "label": "Beta",
+      "sbg:altPrefix": "-b",
+      "description": "The beta value for for homozygosity detection (see paper). Default: 0.009. Handle with care.",
+      "sbg:category": "Options",
+      "id": "#beta",
+      "type": [
+        "null",
+        "float"
+      ]
+    },
+    {
+      "sbg:toolDefaultValue": "1",
+      "label": "Enumerate",
+      "sbg:altPrefix": "-e",
+      "description": "Number of enumerations. OptiType will output the                         optimal solution and the top N-1 suboptimal solutions in the results CSV. Default: 1",
+      "sbg:category": "Options",
+      "id": "#enumerate",
+      "type": [
+        "null",
+        "int"
+      ]
+    },
+    {
+      "sbg:toolDefaultValue": "16",
+      "label": "Number of threads for mapping",
+      "description": "Number of threads to use for read mapping (RazerS3).",
+      "sbg:category": "Config file",
+      "id": "#threads_read_mapping",
+      "type": [
+        "null",
+        "int"
+      ]
+    },
+    {
+      "sbg:toolDefaultValue": "False",
+      "label": "Delete intermediate bam",
+      "description": "Delete intermediate bam files produced by RazerS3 after OptiType finished loading them. If you plan to re-analyze your samples with different settings disabling this option can be a time-saver, as you'll be able to pass the bam files to OptiType directly as input and spare the expensive read mapping step.",
+      "sbg:category": "Config file",
+      "id": "#delete_bam",
+      "type": [
+        "null",
+        "boolean"
+      ]
+    },
+    {
+      "sbg:toolDefaultValue": "0",
+      "label": "Use reads with only one pair mapped",
+      "description": "In paired-end mode one might want to use reads with just one mapped end (e.g., the other end falls outside the reference region). This setting allows the user to keep them with an optionally reduced weight. A value of 0 means they are discarded for typing, 0.2 means single reads are \"worth\" 20% of paired reads, and a value of 1 means they are treated as valuable as properly mapped read pairs. Note: unpaired reads will be reported on the result coverage plots for completeness, regardless of this setting.",
+      "sbg:category": "Config file",
+      "sbg:stageInput": null,
+      "id": "#reads_with_only_one_mapped_pair",
+      "type": [
+        "null",
+        "float"
+      ]
+    },
+    {
+      "sbg:toolDefaultValue": "False",
+      "label": "Use discordant read pairs",
+      "description": "We call a read pair discordant if its two ends best-map to two disjoint sets of alleles. Such reads can be either omitted or either of their ends treated as unpaired hits. Note: discordant read pairs are reported on the coverage plots as unpaired reads, regardless of this setting.",
+      "sbg:category": "Config file",
+      "id": "#use_discordant",
+      "type": [
+        "null",
+        "boolean"
+      ]
+    },
+    {
+      "sbg:toolDefaultValue": "1",
+      "label": "Number of threads for ILP solver",
+      "description": "Number of threads to use for GLPK solver.",
+      "sbg:category": "Config file",
+      "id": "#threads_solver",
+      "type": [
+        "null",
+        "int"
+      ]
+    }
+  ],
+  "outputs": [
+    {
+      "label": "log_file",
+      "sbg:x": 942,
+      "sbg:y": 214,
+      "source": [
+        "#OptiType_adjusted.log_file"
+      ],
+      "sbg:fileTypes": "TXT",
+      "sbg:includeInPorts": true,
+      "id": "#log_file",
+      "required": false,
+      "type": [
+        "null",
+        "File"
+      ]
+    },
+    {
+      "label": "hla_types",
+      "sbg:x": 1088,
+      "sbg:y": 219,
+      "source": [
+        "#OptiType_adjusted.hla_types"
+      ],
+      "sbg:includeInPorts": true,
+      "id": "#hla_types",
+      "required": false,
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    {
+      "label": "hla_results",
+      "sbg:x": 1078,
+      "sbg:y": 347,
+      "source": [
+        "#OptiType_adjusted.hla_results"
+      ],
+      "sbg:fileTypes": "TSV",
+      "sbg:includeInPorts": true,
+      "id": "#hla_results",
+      "required": false,
+      "type": [
+        "null",
+        "File"
+      ]
+    },
+    {
+      "label": "full_hla_types",
+      "sbg:x": 1084,
+      "sbg:y": 476,
+      "source": [
+        "#OptiType_adjusted.full_hla_types"
+      ],
+      "sbg:fileTypes": "TSV",
+      "sbg:includeInPorts": true,
+      "id": "#full_hla_types",
+      "required": false,
+      "type": [
+        "null",
+        "File"
+      ]
+    },
+    {
+      "label": "coverage_plot",
+      "sbg:x": 1075,
+      "sbg:y": 604,
+      "source": [
+        "#OptiType_adjusted.coverage_plot"
+      ],
+      "sbg:fileTypes": "PDF",
+      "sbg:includeInPorts": true,
+      "id": "#coverage_plot",
+      "required": false,
+      "type": [
+        "null",
+        "File"
+      ]
+    },
+    {
+      "label": "config_output",
+      "sbg:x": 1068,
+      "sbg:y": 736,
+      "source": [
+        "#OptiType_adjusted.config_output"
+      ],
+      "sbg:fileTypes": "INI",
+      "sbg:includeInPorts": true,
+      "id": "#config_output",
+      "required": false,
+      "type": [
+        "null",
+        "File"
+      ]
+    },
+    {
+      "label": "bam_files",
+      "sbg:x": 939,
+      "sbg:y": 733,
+      "source": [
+        "#OptiType_adjusted.bam_files"
+      ],
+      "sbg:fileTypes": "BAM",
+      "sbg:includeInPorts": true,
+      "id": "#bam_files",
+      "required": false,
+      "type": [
+        "null",
+        {
+          "items": "File",
+          "type": "array"
+        }
+      ]
+    }
+  ],
+  "sbg:canvas_zoom": 1,
+  "description": "",
+  "sbg:projectName": "G-DOC v3 Transplant_ RNAseq",
+  "label": "Yara + Optitype",
+  "class": "Workflow",
+  "sbg:image_url": "https://cgc.sbgenomics.com/ns/brood/images/YUGUSEV/transplant-rejection-rnaseq/yara-optitype/2.png",
+  "requirements": [],
+  "sbg:canvas_x": -78,
+  "steps": [
+    {
+      "inputs": [
+        {
+          "source": [
+            "#verbose"
+          ],
+          "id": "#OptiType_adjusted.verbose"
+        },
+        {
+          "source": [
+            "#use_discordant"
+          ],
+          "id": "#OptiType_adjusted.use_discordant"
+        },
+        {
+          "source": [
+            "#threads_solver"
+          ],
+          "id": "#OptiType_adjusted.threads_solver"
+        },
+        {
+          "source": [
+            "#threads_read_mapping"
+          ],
+          "id": "#OptiType_adjusted.threads_read_mapping"
+        },
+        {
+          "source": [
+            "#sequencing_data"
+          ],
+          "id": "#OptiType_adjusted.sequencing_data"
+        },
+        {
+          "source": [
+            "#reads_with_only_one_mapped_pair"
+          ],
+          "id": "#OptiType_adjusted.reads_with_only_one_mapped_pair"
+        },
+        {
+          "source": [
+            "#Yara_0_9_9.output_bam"
+          ],
+          "id": "#OptiType_adjusted.input"
+        },
+        {
+          "source": [
+            "#enumerate"
+          ],
+          "id": "#OptiType_adjusted.enumerate"
+        },
+        {
+          "source": [
+            "#delete_bam"
+          ],
+          "id": "#OptiType_adjusted.delete_bam"
+        },
+        {
+          "source": [
+            "#beta"
+          ],
+          "id": "#OptiType_adjusted.beta"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "#OptiType_adjusted.log_file"
+        },
+        {
+          "id": "#OptiType_adjusted.hla_types"
+        },
+        {
+          "id": "#OptiType_adjusted.hla_results"
+        },
+        {
+          "id": "#OptiType_adjusted.full_hla_types"
+        },
+        {
+          "id": "#OptiType_adjusted.coverage_plot"
+        },
+        {
+          "id": "#OptiType_adjusted.config_output"
+        },
+        {
+          "id": "#OptiType_adjusted.bam_files"
+        }
+      ],
+      "sbg:x": 672,
+      "run": {
+        "sbg:modifiedBy": "mladenlSBG",
+        "inputs": [
+          {
+            "label": "Verbose",
+            "sbg:altPrefix": "-v",
+            "description": "Set verbose mode on.",
+            "sbg:category": "Options",
+            "inputBinding": {
+              "separate": true,
+              "sbg:cmdInclude": true,
+              "prefix": "--verbose",
+              "position": 4
+            },
+            "id": "#verbose",
+            "required": false,
+            "type": [
+              "null",
+              "boolean"
+            ]
+          },
+          {
+            "sbg:toolDefaultValue": "False",
+            "label": "Use discordant read pairs",
+            "description": "We call a read pair discordant if its two ends best-map to two disjoint sets of alleles. Such reads can be either omitted or either of their ends treated as unpaired hits. Note: discordant read pairs are reported on the coverage plots as unpaired reads, regardless of this setting.",
+            "sbg:category": "Config file",
+            "id": "#use_discordant",
+            "required": false,
+            "type": [
+              "null",
+              "boolean"
+            ]
+          },
+          {
+            "sbg:toolDefaultValue": "1",
+            "label": "Number of threads for ILP solver",
+            "description": "Number of threads to use for GLPK solver.",
+            "sbg:category": "Config file",
+            "id": "#threads_solver",
+            "required": false,
+            "type": [
+              "null",
+              "int"
+            ]
+          },
+          {
+            "sbg:toolDefaultValue": "16",
+            "label": "Number of threads for mapping",
+            "description": "Number of threads to use for read mapping (RazerS3).",
+            "sbg:category": "Config file",
+            "id": "#threads_read_mapping",
+            "required": false,
+            "type": [
+              "null",
+              "int"
+            ]
+          },
+          {
+            "label": "Sequencing data",
+            "description": "Set it accordingly by the type of the input sequencing data on which the tool is being run.",
+            "sbg:category": "Options",
+            "inputBinding": {
+              "separate": false,
+              "sbg:cmdInclude": true,
+              "position": 1
+            },
+            "id": "#sequencing_data",
+            "required": true,
+            "type": [
+              {
+                "symbols": [
+                  "--dna",
+                  "--rna"
+                ],
+                "name": "sequencing_data",
+                "type": "enum"
+              }
+            ]
+          },
+          {
+            "sbg:toolDefaultValue": "0",
+            "label": "Use reads with only one pair mapped",
+            "description": "In paired-end mode one might want to use reads with just one mapped end (e.g., the other end falls outside the reference region). This setting allows the user to keep them with an optionally reduced weight. A value of 0 means they are discarded for typing, 0.2 means single reads are \"worth\" 20% of paired reads, and a value of 1 means they are treated as valuable as properly mapped read pairs. Note: unpaired reads will be reported on the result coverage plots for completeness, regardless of this setting.",
+            "sbg:category": "Config file",
+            "sbg:stageInput": null,
+            "id": "#reads_with_only_one_mapped_pair",
+            "required": false,
+            "type": [
+              "null",
+              "float"
+            ]
+          },
+          {
+            "label": "Input files",
+            "sbg:altPrefix": "-i",
+            "description": "Fastq file(s) (fished or raw) or .bam files stored for re-use, generated by an earlier OptiType run. One file: single-end mode, two files: paired-end mode",
+            "sbg:category": "File inputs",
+            "sbg:fileTypes": "FASTQ, FQ, BAM, FAST.GZ, FQ.GZ",
+            "inputBinding": {
+              "sbg:cmdInclude": true,
+              "valueFrom": {
+                "class": "Expression",
+                "engine": "#cwl-js-engine",
+                "script": "{\n  input_files = [].concat($job.inputs.input)\n  var first, second;\n  \n  if (input_files.length > 1)\n  {\n    if (input_files[0].metadata && input_files[0].metadata.paired_end && input_files[1].metadata.paired_end && input_files[0].metadata.paired_end == 2 && input_files[1].metadata.paired_end == 1)\n    {\n      //we check if first file is actually second pair\n        first = input_files[1].path\n        second = input_files[0].path\n    }\n    //if metadata for both ends is present, then only option that had left is that first file is first and second is second of pair\n    //if metadata is nor present for one of the pairs, then we order them same as in input list also\n    else\n    {\n        first = input_files[0].path\n        second = input_files[1].path\n    }\n    return first + \" \" + second;\n  }\n  else \n  {\n    return input_files[0].path;\n  }\n  \n}"
+              },
+              "prefix": "--input",
+              "separate": true,
+              "itemSeparator": " ",
+              "position": 0
+            },
+            "id": "#input",
+            "required": false,
+            "type": [
+              "null",
+              {
+                "items": "File",
+                "type": "array"
+              }
+            ]
+          },
+          {
+            "sbg:toolDefaultValue": "1",
+            "label": "Enumerate",
+            "sbg:altPrefix": "-e",
+            "description": "Number of enumerations. OptiType will output the                         optimal solution and the top N-1 suboptimal solutions in the results CSV. Default: 1",
+            "sbg:category": "Options",
+            "inputBinding": {
+              "separate": true,
+              "sbg:cmdInclude": true,
+              "prefix": "--enumerate",
+              "position": 3
+            },
+            "id": "#enumerate",
+            "required": false,
+            "type": [
+              "null",
+              "int"
+            ]
+          },
+          {
+            "sbg:toolDefaultValue": "False",
+            "label": "Delete intermediate bam",
+            "description": "Delete intermediate bam files produced by RazerS3 after OptiType finished loading them. If you plan to re-analyze your samples with different settings disabling this option can be a time-saver, as you'll be able to pass the bam files to OptiType directly as input and spare the expensive read mapping step.",
+            "sbg:category": "Config file",
+            "id": "#delete_bam",
+            "required": false,
+            "type": [
+              "null",
+              "boolean"
+            ]
+          },
+          {
+            "sbg:toolDefaultValue": "0.009",
+            "label": "Beta",
+            "sbg:altPrefix": "-b",
+            "description": "The beta value for for homozygosity detection (see paper). Default: 0.009. Handle with care.",
+            "sbg:category": "Options",
+            "inputBinding": {
+              "separate": true,
+              "sbg:cmdInclude": true,
+              "prefix": "--beta",
+              "position": 2
+            },
+            "id": "#beta",
+            "required": false,
+            "type": [
+              "null",
+              "float"
+            ]
+          }
+        ],
+        "sbg:modifiedOn": 1519400939,
+        "stdout": "",
+        "cwlVersion": "sbg:draft-2",
+        "x": 672,
+        "requirements": [
+          {
+            "class": "ExpressionEngineRequirement",
+            "id": "#cwl-js-engine",
+            "requirements": [
+              {
+                "class": "DockerRequirement",
+                "dockerPull": "rabix/js-engine"
+              }
+            ]
+          },
+          {
+            "class": "CreateFileRequirement",
+            "fileDef": [
+              {
+                "fileContent": {
+                  "class": "Expression",
+                  "engine": "#cwl-js-engine",
+                  "script": "{\n\nthreads_read_mapping = $job.inputs.threads_read_mapping ? $job.inputs.threads_read_mapping : 16\nthreads_solver = $job.inputs.threads_solver ? $job.inputs.threads_solver : 1\ndelete_bam = $job.inputs.delete_bam ? $job.inputs.delete_bam : false\nunpaired_weight = $job.inputs.unpaired_weight ? $job.inputs.unpaired_weight  : 0\nuse_discordant = $job.inputs.use_discordant ? $job.inputs.use_discordant : false \n\n\ndata = \"[mapping] \\n\\n\" +\n\n\"#Absolute path to RazerS3 binary, and number of threads to use for mapping \\n\\n\" + \n\n\"razers3=/opt/razers3-3.4.0-Linux-x86_64/bin/razers3\" + \"\\n\" +\n\"threads=\" + threads_read_mapping + \"\\n\\n\" +\n\n\"[ilp] \\n\\n\" +\n\n\"# A Pyomo-supported ILP solver. The solver must be globally accessible in the \\n\\\n# environment OptiType is run, so make sure to include it in PATH. \\n\\\n# Note: this is NOT a path to the solver binary, but a keyword argument for\\n\\\n# Pyomo. Examples: glpk, cplex, cbc.\\n\\n\"  +\n\n\n\"solver=glpk \\n\" +\n\"threads=\" + threads_solver + \"\\n\\n\" +\n\n\"[behavior] \\n\\n\" +\n\n\"# tempdir=/path/to/tempdir  # we may enable this setting later. Not used now.\\n\\n\" +\n\n\"# Delete intermediate bam files produced by RazerS3 after OptiType finished\\n\\\n# loading them. If you plan to re-analyze your samples with different settings\\n\\\n# disabling this option can be a time-saver, as you'll be able to pass the bam\\n\\\n# files to OptiType directly as input and spare the expensive read mapping\\n\\\n# step.\\n\\n\" +\n  \n\"deletebam=\" + delete_bam + \"\\n\\n\" +\n\n\"# In paired-end mode one might want to use reads with just one mapped end (e.g., \\n\\\n# the other end falls outside the reference region). This setting allows the \\n\\\n# user to keep them with an optionally reduced weight. A value of 0 means they \\n\\\n# are discarded for typing, 0.2 means single reads are 'worth' 20% of paired \\n\\\n# reads, and a value of 1 means they are treated as valuable as properly mapped \\n\\\n# read pairs. Note: unpaired reads will be reported on the result coverage plots \\n\\\n# for completeness, regardless of this setting.\\n\\n\" +\n  \n\"unpaired_weight=\" + unpaired_weight + \"\\n\\n\" +\n\n\"# We call a read pair discordant if its two ends best-map to two disjoint sets\\n\\\n# of alleles. Such reads can be either omitted or either of their ends treated\\n\\\n# as unpaired hits. Note: discordant read pairs are reported on the coverage\\n\\\n# plots as unpaired reads, regardless of this setting.\\n\\n\" +\n\n\"use_discordant=\" + use_discordant + \"\\n\\n\"\n\nreturn data\n\n\n}"
+                },
+                "filename": "opt/OptiType-1.2/config.ini"
+              }
+            ]
+          }
+        ],
+        "arguments": [
+          {
+            "separate": true,
+            "position": 10,
+            "valueFrom": {
+              "class": "Expression",
+              "engine": "#cwl-js-engine",
+              "script": "{return '-o ./temp/'}"
+            }
+          },
+          {
+            "separate": true,
+            "position": 1000,
+            "valueFrom": {
+              "class": "Expression",
+              "engine": "#cwl-js-engine",
+              "script": "{\n  \n  input_files = [].concat($job.inputs.input)\n  if (input_files[0].metadata && input_files[0].metadata.sample_id)\n  {\n    filebase = input_files[0].metadata.sample_id\n  }\n  else\n  { \n    filebase = \"sample_unknown\" \n  } \n  \n  filename = input_files[0].path\n  ext = filename.split('.').slice(-1)[0]\n  \n  \n  var first_bam = \"mv ./temp/*/*_1.bam \" +filebase+\"_1.bam\"\n  var types = \"mv ./temp/*/*_result_type.tsv \" + filebase+\".result_type.tsv\"\n  var coveradge = \"mv ./temp/*/*_coverage_plot.pdf \" + filebase+\".coverage_plot.pdf\"\n  var result = \"mv ./temp/*/*_result.tsv \" + filebase+\".result.tsv\"\n  var result_id = \"mv ./temp/*/*_result_id.tsv \" + filebase+\".result_id.tsv\"\n  \n  var move = ''\n  \n  if (input_files.length == 1) {\n    \n    if (ext != 'bam'){\n    \tmove = '&& '+[first_bam, types, coveradge, result, result_id].join(' && ')\n    }\n    \n    else {\n    \tmove = '&& '+[types, coveradge, result, result_id].join(' && ')\n    }\n    return move\n  }\n  \n  else if (input_files.length == 2) {\n    \n    var second_bam = \"mv ./temp/*/*_2.bam \" + filebase+\"_2.bam\"\n\n    if (ext != 'bam'){\n        move = '&& '+[first_bam, second_bam, types, coveradge, result, result_id].join(' && ')\n    }\n    \n    else {\n        move = '&& '+[types, coveradge, result, result_id].join(' && ')\n    }\n  \treturn move\n  }\n  \n}"
+            }
+          },
+          {
+            "separate": true,
+            "prefix": ">",
+            "valueFrom": {
+              "class": "Expression",
+              "engine": "#cwl-js-engine",
+              "script": "{input_files = [].concat($job.inputs.input)\n  if (input_files[0].metadata && input_files[0].metadata.sample_id)\n  {\n    filebase = input_files[0].metadata.sample_id\n  }\n  else\n  { \n    filebase = \"sample_unknown\" \n  }\n return filebase+\".command_log.txt\"\n}"
+            },
+            "position": 11
+          },
+          {
+            "separate": true,
+            "position": 1001,
+            "valueFrom": {
+              "class": "Expression",
+              "engine": "#cwl-js-engine",
+              "script": "{\n\nreturn ' && mv opt/OptiType-1.2/config.ini . ' \n\n}"
+            }
+          }
+        ],
+        "sbg:toolkitVersion": "1.2",
+        "sbg:validationErrors": [],
+        "sbg:createdBy": "kb472",
+        "label": "OptiType adjusted",
+        "temporaryFailCodes": [],
+        "y": 448,
+        "sbg:id": "YUGUSEV/transplant-rejection-rnaseq/optitype-adjusted-1-2/1",
+        "sbg:cmdPreview": "python /opt/OptiType-1.2/OptiTypePipeline2.py --dna  -o ./temp/ > SRR100021.command_log.txt  && mv ./temp/*/*_1.bam SRR100021_1.bam && mv ./temp/*/*_2.bam SRR100021_2.bam && mv ./temp/*/*_result_type.tsv SRR100021.result_type.tsv && mv ./temp/*/*_coverage_plot.pdf SRR100021.coverage_plot.pdf && mv ./temp/*/*_result.tsv SRR100021.result.tsv && mv ./temp/*/*_result_id.tsv SRR100021.result_id.tsv   && mv opt/OptiType-1.2/config.ini .",
+        "baseCommand": [
+          "python",
+          "/opt/OptiType-1.2/OptiTypePipeline2.py"
+        ],
+        "id": "YUGUSEV/transplant-rejection-rnaseq/optitype-adjusted-1-2/1",
+        "successCodes": [],
+        "description": "OptiType is a novel HLA genotyping algorithm based on integer linear programming, capable of producing accurate 4-digit HLA genotyping predictions from NGS data by simultaneously selecting all major and minor HLA Class I alleles. \n\nIt receives FASTQ files as inputs and outputs sample HLA types. Adjustment to the tool has been made, so both 4-digit and 8-digit HLA type resolutions are available.\n\n\n### Common Issues ###\n\n**Tool automatization**\n\nOptiType depends on RazerS 3 for read mapping. RazerS 3 is designed in such way that it loads all reads into the memory. This was the most often reason for the tool failure when working with larger files. Because of this, automatization had been added to the tool's CWL wrapper. Now, depending on the input file size, tool will require necessary amount of memory in order to perform well. This is usually size of the larger FASTQ file on input or for gunzipped files 5 times the size of the larger file (because of the compression).\n\n\n**Exome kit hadn't captured any reads from HLA region**\n\nDepending on the exome kit/experiment, it might cause the tool failure. Some exome kit's wont capture reads from HLA region, and after the  filtering which comes after the alignment step, it might result missing/empty BAM files. This will cause the tool to break, since there are no reads that will go to the second step.",
+        "outputs": [
+          {
+            "label": "Log file",
+            "description": "File containing tool logs which were outputted to the standard output.",
+            "sbg:fileTypes": "TXT",
+            "type": [
+              "null",
+              "File"
+            ],
+            "id": "#log_file",
+            "outputBinding": {
+              "glob": "*.txt",
+              "sbg:inheritMetadataFrom": "#input"
+            }
+          },
+          {
+            "label": "HLA Types",
+            "id": "#hla_types",
+            "description": "List of strings containing 4-digit HLA type.",
+            "outputBinding": {
+              "glob": {
+                "class": "Expression",
+                "engine": "#cwl-js-engine",
+                "script": "{return '*result.tsv'}"
+              },
+              "loadContents": true,
+              "outputEval": {
+                "class": "Expression",
+                "engine": "#cwl-js-engine",
+                "script": "{ \n  rows = $self[0].contents.split(/\\r?\\n/).slice(0,-1);\n  columns = rows[1].split(\"\\t\");\n  types = columns.slice(1, -2);\n  out_str = [];\n  for (i=0; i < types.length; i++){ \n    if (types[i].length > 0)\n\t  out_str.push('HLA-'.concat(types[i]));\n  }\n  return out_str;\n}"
+              }
+            },
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          {
+            "label": "HLA results",
+            "description": "Output file with the predicted optimal (and if enumerated, sub-optimal) HLA genotype in 4-digit resolution.",
+            "sbg:fileTypes": "TSV",
+            "type": [
+              "null",
+              "File"
+            ],
+            "id": "#hla_results",
+            "outputBinding": {
+              "glob": {
+                "class": "Expression",
+                "engine": "#cwl-js-engine",
+                "script": "{return '*result.tsv'}"
+              },
+              "sbg:inheritMetadataFrom": "#input"
+            }
+          },
+          {
+            "label": "Full HLA types",
+            "description": "Output file containing output HLA types up to the 8-digit resolution.",
+            "sbg:fileTypes": "TSV",
+            "type": [
+              "null",
+              "File"
+            ],
+            "id": "#full_hla_types",
+            "outputBinding": {
+              "glob": {
+                "class": "Expression",
+                "engine": "#cwl-js-engine",
+                "script": "{return '*result_type.tsv'}"
+              },
+              "sbg:inheritMetadataFrom": "#input"
+            }
+          },
+          {
+            "label": "Coverage plot",
+            "description": "A pdf file containing a coverage plot of the predicted alleles for diagnostic purposes.",
+            "sbg:fileTypes": "PDF",
+            "type": [
+              "null",
+              "File"
+            ],
+            "id": "#coverage_plot",
+            "outputBinding": {
+              "glob": {
+                "class": "Expression",
+                "engine": "#cwl-js-engine",
+                "script": "{return '*.pdf'}"
+              },
+              "sbg:inheritMetadataFrom": "#input"
+            }
+          },
+          {
+            "label": "Config output",
+            "description": "Config file content.",
+            "sbg:fileTypes": "INI",
+            "type": [
+              "null",
+              "File"
+            ],
+            "id": "#config_output",
+            "outputBinding": {
+              "glob": "*.ini"
+            }
+          },
+          {
+            "label": "BAM files",
+            "description": "BAM files produces in the preprocessing step by aligning and filtering reads on the HLA FASTA.",
+            "sbg:fileTypes": "BAM",
+            "type": [
+              "null",
+              {
+                "items": "File",
+                "type": "array"
+              }
+            ],
+            "id": "#bam_files",
+            "outputBinding": {
+              "glob": {
+                "class": "Expression",
+                "engine": "#cwl-js-engine",
+                "script": "{return '*.bam'}"
+              },
+              "sbg:inheritMetadataFrom": "#input"
+            }
+          }
+        ],
+        "sbg:links": [
+          {
+            "label": "Homepage",
+            "id": "https://github.com/FRED-2/OptiType"
+          },
+          {
+            "label": "Source Code",
+            "id": "https://github.com/FRED-2/OptiType"
+          },
+          {
+            "label": "Download",
+            "id": "https://github.com/FRED-2/OptiType/releases/tag/v1.2.1"
+          },
+          {
+            "label": "Publication",
+            "id": "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4441069/"
+          }
+        ],
+        "sbg:revision": 1,
+        "sbg:latestRevision": 1,
+        "sbg:sbgMaintained": false,
+        "sbg:project": "YUGUSEV/transplant-rejection-rnaseq",
+        "class": "CommandLineTool",
+        "sbg:image_url": null,
+        "sbg:createdOn": 1518543281,
+        "sbg:appVersion": [
+          "sbg:draft-2"
+        ],
+        "sbg:revisionNotes": "set instance to c4.4xlarge",
+        "appUrl": "/u/YUGUSEV/transplant-rejection-rnaseq/apps/#YUGUSEV/transplant-rejection-rnaseq/optitype-adjusted-1-2/1",
+        "sbg:contributors": [
+          "mladenlSBG",
+          "kb472"
+        ],
+        "sbg:categories": [
+          "Other",
+          "HLA-typing"
+        ],
+        "sbg:projectName": "G-DOC v3 Transplant_ RNAseq",
+        "sbg:job": {
+          "inputs": {
+            "enumerate": 2,
+            "sequencing_data": "--dna",
+            "reads_with_only_one_mapped_pair": 2.3428572599621384,
+            "threads_read_mapping": 16,
+            "verbose": true,
+            "threads_solver": 1,
+            "beta": 0.9098507845484773,
+            "delete_bam": true,
+            "use_discordant": true,
+            "input": [
+              {
+                "class": "File",
+                "secondaryFiles": [],
+                "size": 0,
+                "path": "/sbgenomics/Projects/2ff1bcd9-3dbf-4d2c-856a-317034024b77/SRR100021_1.fastq.gz",
+                "metadata": {
+                  "sample_id": "SRR100021",
+                  "paired_end": "2"
+                }
+              },
+              {
+                "class": "File",
+                "secondaryFiles": [],
+                "size": 0,
+                "path": "/sbgenomics/Projects/2ff1bcd9-3dbf-4d2c-856a-317034024b77/SRR100021_2.fastq.gz",
+                "metadata": {
+                  "sample_id": "SRR100021",
+                  "paired_end": "0"
+                }
+              }
+            ]
+          },
+          "allocatedResources": {
+            "cpu": 16,
+            "mem": ""
+          }
+        },
+        "sbg:toolAuthor": "Andr\u00e1s Szolek, Benjamin Schubert, Christopher Mohr",
+        "sbg:license": "BSD 3-clause Clear License",
+        "sbg:toolkit": "OptiType",
+        "sbg:publisher": "sbg",
+        "stdin": "",
+        "sbg:revisionsInfo": [
+          {
+            "sbg:modifiedBy": "kb472",
+            "sbg:revisionNotes": "Copy of admin/sbg-public-data/optitype-adjusted-1-2/4",
+            "sbg:modifiedOn": 1518543281,
+            "sbg:revision": 0
+          },
+          {
+            "sbg:modifiedBy": "mladenlSBG",
+            "sbg:revisionNotes": "set instance to c4.4xlarge",
+            "sbg:modifiedOn": 1519400939,
+            "sbg:revision": 1
+          }
+        ],
+        "hints": [
+          {
+            "value": {
+              "class": "Expression",
+              "engine": "#cwl-js-engine",
+              "script": "{\n  if ($job.inputs.threads_read_mapping) {\n  \tcpu = $job.inputs.threads_read_mapping\n    return cpu\n  }\n  \n  else{\n  \tinput_files = [].concat($job.inputs.input)\n    \n    if (input_files.length == 1) {\n      \n      \tfile_name = input_files[0].name.split('/')[input_files[0].name.split('/').length - 1]\n        file_ext = file_name.split('.')[file_name.split('.').length - 1] \n        \n        if (file_ext == 'gz') {\n        \tinput_file_size = Math.ceil((input_files[0].size/(1024*1024*1024))*5)\n        }\n      \n      \telse {\n      \t\tinput_file_size = Math.ceil((input_files[0].size/(1024*1024*1024)))\n        }\n    }\n  \n  \telse if (input_files.length == 2) {\n      \n      \tfile_name = input_files[0].name.split('/')[input_files[0].name.split('/').length - 1]\n        file_ext = file_name.split('.')[file_name.split('.').length - 1] \n        \n        if (file_ext == 'gz') {\n          input_file_1 = Math.ceil((input_files[0].size/(1024*1024*1024)) * 5)\n          input_file_2 = Math.ceil((input_files[1].size/(1024*1024*1024)) * 5)\n\n          input_file_size = Math.max(input_file_1, input_file_2)\n        }\n      \n      \telse {\n          input_file_1 = Math.ceil((input_files[0].size/(1024*1024*1024)))\n          input_file_2 = Math.ceil((input_files[1].size/(1024*1024*1024)))\n\n          input_file_size = Math.max(input_file_1, input_file_2)\n          \n        }\n    } \n     \n    if (input_file_size < 28) {\n      \tcpu = 8\n    \treturn cpu\n    }\n    \n    else {\n        cpu = 15\n    \treturn cpu\n    }\n  }\n}"
+            },
+            "class": "sbg:CPURequirement"
+          },
+          {
+            "class": "DockerRequirement",
+            "dockerImageId": "",
+            "dockerPull": "images.sbgenomics.com/mladenlsbg/optitype:1.0--t3"
+          },
+          {
+            "value": {
+              "class": "Expression",
+              "engine": "#cwl-js-engine",
+              "script": "{\n\n  \tinput_files = [].concat($job.inputs.input)\n    \n    if (input_files.length == 1) {\n      \n\t\tfile_name = input_files[0].name.split('/')[input_files[0].name.split('/').length - 1]\n        file_ext = file_name.split('.')[file_name.split('.').length - 1] \n        \n        if (file_ext.toLowerCase() == 'gz') {\n          \t//byte->gigabyte (added 1GB more and multiplicated by 5 because it's .gz file)\n        \tinput_file_size = Math.ceil(((input_files[0].size + 1073741824)/(1024*1024)) * 5)   \n        }\n        \n        else {\n      \t\t//byte->gigabyte (added 1GB more)\n    \t\tinput_file_size = Math.ceil(((input_files[0].size + 1073741824)/(1024*1024)))\n        }\n    }\n  \n  \telse if (input_files.length == 2) {\n        file_name = input_files[0].name.split('/')[input_files[0].name.split('/').length - 1]\n        file_ext = file_name.split('.')[file_name.split('.').length - 1]\n        \n        if (file_ext.toLowerCase() == 'gz') {\n        \n          input_file_1 = Math.ceil(((input_files[0].size + 1073741824)/(1024*1024)) * 5)\n          input_file_2 = Math.ceil(((input_files[1].size + 1073741824)/(1024*1024)) * 5)\n\n          input_file_size = Math.max(input_file_1, input_file_2)\n        \n        }\n      \n      \telse {\n\n          input_file_1 = Math.ceil(((input_files[0].size + 1073741824)/(1024*1024)))\n          input_file_2 = Math.ceil(((input_files[1].size + 1073741824)/(1024*1024)))\n\n          input_file_size = Math.max(input_file_1, input_file_2)\n\n        }\n    } \n    \n  \n    if (input_file_size > 4000) {\n  \t\tmem = input_file_size  \n    }\n  \n    else {\n    \tmem = 4000\n    }\n   \treturn mem\n    \n}"
+            },
+            "class": "sbg:MemRequirement"
+          },
+          {
+            "value": "c4.4xlarge;ebs-gp2;500",
+            "class": "sbg:AWSInstanceType"
+          }
+        ]
+      },
+      "sbg:y": 448,
+      "id": "#OptiType_adjusted"
+    },
+    {
+      "inputs": [
+        {
+          "source": [
+            "#sequencing_data_type"
+          ],
+          "id": "#Yara_0_9_9.sequencing_data_type"
+        },
+        {
+          "source": [
+            "#fastq_file"
+          ],
+          "id": "#Yara_0_9_9.fastq_file"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "#Yara_0_9_9.output_bam"
+        }
+      ],
+      "scatter": "#Yara_0_9_9.fastq_file",
+      "sbg:x": 448,
+      "run": {
+        "sbg:modifiedBy": "jelena_randjelovic",
+        "sbg:revisionNotes": "increased default RAM slightly",
+        "sbg:modifiedOn": 1519399764,
+        "stdout": "",
+        "cwlVersion": "sbg:draft-2",
+        "x": 448,
+        "requirements": [
+          {
+            "class": "ExpressionEngineRequirement",
+            "id": "#cwl-js-engine",
+            "requirements": [
+              {
+                "class": "DockerRequirement",
+                "dockerPull": "rabix/js-engine"
+              }
+            ]
+          }
+        ],
+        "arguments": [
+          {
+            "separate": true,
+            "position": 2,
+            "valueFrom": {
+              "class": "Expression",
+              "engine": "#cwl-js-engine",
+              "script": "{ \n  name = $job.inputs.fastq_file.path.split('/').slice(-1)[0]\n  basename = name.split('.').slice(0,-1).join('.')\n\n  \n  return '|samtools view -h -F 4 -b1 - > ' + basename + '.bam'\n}"
+            }
+          }
+        ],
+        "sbg:toolkitVersion": "2.3.1",
+        "sbg:validationErrors": [],
+        "sbg:createdBy": "mladenlSBG",
+        "label": "Yara 0.9.9",
+        "temporaryFailCodes": [],
+        "y": 447,
+        "sbg:id": "mladenlSBG/customer-support/yara/6",
+        "sbg:cmdPreview": "/opt/yara_mapper -e 3 -f bam  -u /opt/dna_index/hla_reference_dna.index   /path/to/input_fastq_file.ext  |samtools view -h -F 4 -b1 - > input_fastq_file.bam",
+        "baseCommand": [
+          "/opt/yara_mapper",
+          "-e",
+          "3",
+          "-f",
+          "bam",
+          {
+            "class": "Expression",
+            "engine": "#cwl-js-engine",
+            "script": "{\n  if ($job.inputs.sequencing_data_type == 'DNA')\n  {\n    return \" -u /opt/dna_index/hla_reference_dna.index \"\n  }\n  else if ($job.inputs.sequencing_data_type == 'RNA')\n  {\n    return \" -u /opt/rna_index/optitype_rna.index \"\n  }\n  else\n  {\n    return \" -u /opt/dna_index/hla_reference_dna.index \"\n  }\n}"
+          }
+        ],
+        "id": "mladenlSBG/customer-support/yara/6",
+        "sbg:job": {
+          "inputs": {
+            "fastq_file": {
+              "class": "File",
+              "secondaryFiles": [],
+              "size": 0,
+              "path": "/path/to/input_fastq_file.ext"
+            },
+            "sequencing_data_type": "DNA"
+          },
+          "allocatedResources": {
+            "cpu": 2,
+            "mem": 7000
+          }
+        },
+        "description": "**Yara** is an exact tool for aligning DNA sequencing reads to reference genomes.\n\n#### Important ####\nThis version of Yara comes with SAMtools and is specialy wrapped for using with OptiType.\n#### Main features ####\n\n- Exhaustive enumeration of sub-optimal end-to-end alignments under the edit distance.\n- Excellent speed, memory footprint and accuracy.\n- Accurate mapping quality computation.\n- Support for reference genomes consisiting of million of contigs.\n- Direct output in SAM/BAM format.\n\n#### Supported data ####\n\nYara has been tested on DNA reads (i.e., Whole Genome, Exome, ChIP-seq, MeDIP-seq) produced by the following sequencing platforms:\n\n- Illumina GA II, HiSeq and MiSeq (single-end and paired-end).\n- Life Technologies Ion Torrent Proton and PGM.\n- Quality trimming is necessary for Ion Torrent reads and recommended for Illumina reads.\n\n#### Unsupported data ####\n\n- RNA-seq reads spanning splicing sites.\n- Long noisy reads (e.g., Pacific Biosciences RSII, Oxford Nanopore MinION).",
+        "outputs": [
+          {
+            "label": "Output BAM file",
+            "description": "Output file in BAM format.",
+            "sbg:fileTypes": "BAM",
+            "type": [
+              "null",
+              "File"
+            ],
+            "id": "#output_bam",
+            "outputBinding": {
+              "glob": "*.bam",
+              "sbg:inheritMetadataFrom": "#fastq_file"
+            }
+          }
+        ],
+        "sbg:links": [
+          {
+            "label": "Homepage",
+            "id": "https://github.com/seqan/seqan/tree/master/apps/yara"
+          },
+          {
+            "label": "Source Code",
+            "id": "https://github.com/seqan/seqan/tree/master/apps/yara"
+          },
+          {
+            "label": "Download",
+            "id": "https://github.com/seqan/seqan.git"
+          },
+          {
+            "label": "Publication",
+            "id": "http://www.diss.fu-berlin.de/diss/servlets/MCRFileNodeServlet/FUDISS_derivate_000000017479/Diss_EnricoSiragusa_NoCV.pdf?hosts="
+          }
+        ],
+        "sbg:revision": 6,
+        "sbg:latestRevision": 6,
+        "sbg:sbgMaintained": false,
+        "sbg:project": "mladenlSBG/customer-support",
+        "class": "CommandLineTool",
+        "sbg:image_url": null,
+        "inputs": [
+          {
+            "sbg:toolDefaultValue": "DNA",
+            "label": "Sequencing data type",
+            "description": "Sequencing data type (DNA or RNA).Please note RNA option is EXPERIMENTAL. Use with caution.",
+            "id": "#sequencing_data_type",
+            "required": true,
+            "type": [
+              {
+                "symbols": [
+                  "DNA",
+                  "RNA"
+                ],
+                "name": "sequencing_data_type",
+                "type": "enum"
+              }
+            ]
+          },
+          {
+            "label": "Input FASTQ file",
+            "description": "Input DNA reads (Whole Genome, Exome, ChIP-seq, MeDIP-seq).",
+            "sbg:category": "Input file",
+            "sbg:fileTypes": "FASTQ, FASTQ.GZ",
+            "inputBinding": {
+              "separate": true,
+              "sbg:cmdInclude": true
+            },
+            "id": "#fastq_file",
+            "required": true,
+            "type": [
+              "File"
+            ]
+          }
+        ],
+        "sbg:appVersion": [
+          "sbg:draft-2"
+        ],
+        "appUrl": "/u/mladenlSBG/customer-support/apps/#mladenlSBG/customer-support/yara/6",
+        "sbg:revisionsInfo": [
+          {
+            "sbg:modifiedBy": "mladenlSBG",
+            "sbg:revisionNotes": null,
+            "sbg:modifiedOn": 1519117372,
+            "sbg:revision": 0
+          },
+          {
+            "sbg:modifiedBy": "mladenlSBG",
+            "sbg:revisionNotes": null,
+            "sbg:modifiedOn": 1519117387,
+            "sbg:revision": 1
+          },
+          {
+            "sbg:modifiedBy": "jelena_randjelovic",
+            "sbg:revisionNotes": "changed Docker image, added toggle-able DNA/RNA data type input parameter",
+            "sbg:modifiedOn": 1519143996,
+            "sbg:revision": 2
+          },
+          {
+            "sbg:modifiedBy": "jelena_randjelovic",
+            "sbg:revisionNotes": "fixed typo in docker image",
+            "sbg:modifiedOn": 1519144016,
+            "sbg:revision": 3
+          },
+          {
+            "sbg:modifiedBy": "jelena_randjelovic",
+            "sbg:revisionNotes": "fixed yara_mapper path",
+            "sbg:modifiedOn": 1519162442,
+            "sbg:revision": 4
+          },
+          {
+            "sbg:modifiedBy": "jelena_randjelovic",
+            "sbg:revisionNotes": "sequencing data type set as required input",
+            "sbg:modifiedOn": 1519384443,
+            "sbg:revision": 5
+          },
+          {
+            "sbg:modifiedBy": "jelena_randjelovic",
+            "sbg:revisionNotes": "increased default RAM slightly",
+            "sbg:modifiedOn": 1519399764,
+            "sbg:revision": 6
+          }
+        ],
+        "sbg:categories": [
+          "Alignment"
+        ],
+        "sbg:projectName": "customer_support",
+        "sbg:contributors": [
+          "jelena_randjelovic",
+          "mladenlSBG"
+        ],
+        "sbg:toolAuthor": "Enrico Siragusa",
+        "sbg:license": "BSD 3-clause 'New' or 'Revised' License",
+        "sbg:createdOn": 1519117372,
+        "sbg:toolkit": "SeqAn",
+        "sbg:publisher": "sbg",
+        "stdin": "",
+        "successCodes": [],
+        "hints": [
+          {
+            "class": "DockerRequirement",
+            "dockerImageId": "",
+            "dockerPull": "images.sbgenomics.com/jrandjelovic/yara:v0.1r"
+          },
+          {
+            "value": 2,
+            "class": "sbg:CPURequirement"
+          },
+          {
+            "value": 7000,
+            "class": "sbg:MemRequirement"
+          }
+        ]
+      },
+      "sbg:y": 447,
+      "id": "#Yara_0_9_9",
+      "hints": [
+        {
+          "value": "c4.4xlarge;ebs-gp2;1024",
+          "class": "sbg:AWSInstanceType"
+        }
+      ]
+    }
+  ],
+  "cwlVersion": "sbg:draft-2",
+  "sbg:canvas_y": -91,
+  "sbg:publisher": "sbg",
+  "sbg:revisionsInfo": [
+    {
+      "sbg:revision": 0,
+      "sbg:modifiedBy": "mladenlSBG",
+      "sbg:modifiedOn": 1519385410,
+      "sbg:revisionNotes": "Copy of mladenlSBG/customer-support/yara-optitype/2"
+    },
+    {
+      "sbg:revision": 1,
+      "sbg:modifiedBy": "mladenlSBG",
+      "sbg:modifiedOn": 1519401135,
+      "sbg:revisionNotes": "replaced public Optitype with Optitype from this project (which has been updated to use an instance with 30GB RAM)"
+    },
+    {
+      "sbg:revision": 2,
+      "sbg:modifiedBy": "kb472",
+      "sbg:modifiedOn": 1519431806,
+      "sbg:revisionNotes": null
+    }
+  ],
+  "hints": [],
+  "$namespaces": {
+    "sbg": "https://sevenbridges.com"
+  },
+  "sbg:appVersion": [
+    "sbg:draft-2"
+  ],
+  "id": "https://cgc-api.sbgenomics.com/v2/apps/YUGUSEV/transplant-rejection-rnaseq/yara-optitype/2/raw/",
+  "sbg:id": "YUGUSEV/transplant-rejection-rnaseq/yara-optitype/2",
+  "sbg:revision": 2,
+  "sbg:revisionNotes": null,
+  "sbg:modifiedOn": 1519431806,
+  "sbg:modifiedBy": "kb472",
+  "sbg:createdOn": 1519385410,
+  "sbg:createdBy": "mladenlSBG",
+  "sbg:project": "YUGUSEV/transplant-rejection-rnaseq",
+  "sbg:sbgMaintained": false,
+  "sbg:validationErrors": [],
+  "sbg:contributors": [
+    "kb472",
+    "mladenlSBG"
+  ],
+  "sbg:latestRevision": 2,
+  "sbg:content_hash": null
+}
