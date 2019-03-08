@@ -22,5 +22,4 @@
     Approximately 20% of human cancer types are associated with viral infection that is routinely detected in blood samples. However, the     extent and biological significance of viral presence/infection in actual tumor samples is generally unknown but could be measured using     existing Human RNA-seq data from tumor samples. We have developed a bioinformatics pipeline viGEN combining existing and novel RNAseq   tools that allows for detection and quantification of viral RNA in human RNAseq data. Part of this viGEN pipeline (that performs viral      detection) has been implemented on the Seven Bridges platform. Link to the viGEN pipeline: https://github.com/ICBI/viGEN
     
 ## Citation/Acknowledgements
-This work was possible thanks to the NIH Cloud Credits Pilot funded through the Seven Bridges Platform
-
+This work benefited from the use of credits from the National Institutes of Health (NIH) Cloud Credits Model Pilot, a component of the NIH Big Data to Knowledge (BD2K) program
